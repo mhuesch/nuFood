@@ -1,0 +1,4 @@
+db_settings.yml
+secret_key.yml
+*.DS_STORE
+*.pyc
