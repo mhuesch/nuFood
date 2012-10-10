@@ -1,0 +1,39 @@
+CREATE TABLE public.cafe (
+  id INTEGER DEFAULT nextval('cafe_index_id_seq'::regclass) NOT NULL, 
+  "LastUpdated" TIME WITHOUT TIME ZONE DEFAULT '12:00:00'::time without time zone NOT NULL, 
+  code VARCHAR[], 
+  "FullName" VARCHAR[], 
+  "Location" VARCHAR[], 
+  "Tel" CHAR(11)[], 
+  "Email" VARCHAR[], 
+  CONSTRAINT cafe_pkey PRIMARY KEY(id)
+) WITHOUT OIDS;
+
+CREATE TABLE public.hours (
+  id INTEGER DEFAULT nextval('"Hours_id_seq"'::regclass) NOT NULL, 
+  cafe_code VARCHAR[], 
+  breakfast VARCHAR[], 
+  lunch VARCHAR[], 
+  supper VARCHAR[], 
+  brunch VARCHAR[], 
+  CONSTRAINT "Hours_pkey" PRIMARY KEY(id), 
+  CONSTRAINT "Hours_fk" FOREIGN KEY (cafe_code)
+    REFERENCES public.cafe(code)
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION
+    NOT DEFERRABLE
+) WITHOUT OIDS;
+
+CREATE TABLE public.food (
+  id SERIAL, 
+  category VARCHAR[] NOT NULL, 
+  "Name" VARCHAR[], 
+  bls CHAR(1), 
+  CONSTRAINT food_pkey PRIMARY KEY(id)
+) WITHOUT OIDS;
+
+COMMENT ON COLUMN public.food.bls
+IS '''b'' for breakfast
+''l'' for lunch
+''s'' for supper
+''o'' for other';
