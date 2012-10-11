@@ -10,20 +10,15 @@ ADMINS = (
 
 MANAGERS = ADMINS
 
-### For security reasons, Database config info is stored in /config/db_settings.yml
-f = open('config/db_settings.yml')
-db_data = yaml.load(f)
-f.close()
-###
-#
+# We use Heroku to host, so database info is stored in config vars.
 DATABASES = {
     'default': {
-        'ENGINE':   db_data['engine'],      # Add 'postgresql_psycopg2', 'mysql', 'sqlite3' or 'oracle'.
-        'NAME':     db_data['name'],        # Or path to database file if using sqlite3.
-        'USER':     db_data['user'],        # Not used with sqlite3.
-        'PASSWORD': db_data['password'],    # Not used with sqlite3.
-        'HOST':     db_data['host'],        # Set to empty string for localhost. Not used with sqlite3.
-        'PORT':     db_data['port'],        # Set to empty string for default. Not used with sqlite3.
+        'ENGINE':   os.environ['DJANGO_DB_ENGINE'],   # Add 'postgresql_psycopg2', 'mysql', 'sqlite3' or 'oracle'.
+        'NAME':     os.environ['DJANGO_DB_NAME'],      # Or path to database file if using sqlite3.
+        'USER':     os.environ['DJANGO_DB_USER'],     # Not used with sqlite3.
+        'PASSWORD': os.environ['DJANGO_DB_PASSWORD'], # Not used with sqlite3.
+        'HOST':     os.environ['DJANGO_DB_HOST'],     # Set to empty string for localhost. Not used with sqlite3.
+        'PORT':     os.environ['DJANGO_DB_PORT'],     # Set to empty string for default. Not used with sqlite3.
     }
 }
 
@@ -84,13 +79,8 @@ STATICFILES_FINDERS = (
 #    'django.contrib.staticfiles.finders.DefaultStorageFinder',
 )
 
-### For security reasons, secret key is stored in /config/secret_key.yml
-f = open('config/secret_key.yml')
-key_data = yaml.load(f)
-f.close()
-###
-#
-SECRET_KEY = key_data['key']
+# We use Heroku to host, so the secret key is stored in a config var.
+SECRET_KEY = os.environ['DJANGO_SECRET_KEY']
 
 # List of callables that know how to import templates from various sources.
 TEMPLATE_LOADERS = (

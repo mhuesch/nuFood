@@ -1,6 +1,0 @@
-engine: "your database engine"
-name: "your database name"
-user: "your username"
-password: "your password"
-host: "your host"
-port: "your post"
