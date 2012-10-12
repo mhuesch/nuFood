@@ -6,8 +6,9 @@ from django.contrib import admin
 admin.autodiscover()
 
 urlpatterns = patterns('',
+    url(r'^$', 'halls.views.index'),
+
     # Examples:
-    # url(r'^$', 'nuFood.views.home', name='home'),
     # url(r'^nuFood/', include('nuFood.foo.urls')),
 
     # Uncomment the admin/doc line below to enable admin documentation:
