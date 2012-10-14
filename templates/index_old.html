@@ -1,0 +1,7 @@
+<h1>List of Halls</h1>
+<h2>It is now {{ date.isoformat }}</h2>
+<ul>
+    {% for hall in Halls %}
+    <li>{{ hall.name }}</li>
+    {% endfor %}
+</ul>
