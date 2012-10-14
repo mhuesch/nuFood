@@ -92,6 +92,8 @@ button,
 input {
   *overflow: visible;
   line-height: normal;
+    width: 50%;
+    height: 5%;
 }
 
 button::-moz-focus-inner,

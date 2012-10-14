@@ -6,10 +6,16 @@ from datetime import datetime
 def index(request):
     halls = Hall.objects.all()
     d = datetime.now()
+    now_day = d.weekday()
+    now_hour = d.hour
+    now_minute = d.minute
+    #open = Hour.objects.filter(day=now_day)
+    #.extra(select={(start_hour*60+start_minute) > (now_hour*60+now_minute)}.distinct('host_hall')
+    
     t = loader.get_template('index.html')
     c = Context({
                 'Halls': halls,
-                'date': d
+                'date': d,
                 })
     return HttpResponse(t.render(c))
 #return HttpResponse("Hello, world. You're at the nuFood index.")
