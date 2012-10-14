@@ -5,6 +5,7 @@ class Hall(models.Model):
     lat = models.FloatField()
     lon = models.FloatField()
     address = models.CharField(max_length=60)
+    visible = models.BooleanField()
     def __unicode__(self):
         return self.name
 
