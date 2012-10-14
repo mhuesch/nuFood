@@ -18,17 +18,17 @@ class Hour(models.Model):
     )
 
     DAY_CHOICES = (
-        ('MON', 'Monday'),
-        ('TUE', 'Tuesday'),
-        ('WED', 'Wednesday'),
-        ('THU', 'Thursday'),
-        ('FRI', 'Friday'),
-        ('SAT', 'Saturday'),
-        ('SUN', 'Sunday'),
+        (0, 'Monday'),
+        (1, 'Tuesday'),
+        (2, 'Wednesday'),
+        (3, 'Thursday'),
+        (4, 'Friday'),
+        (5, 'Saturday'),
+        (6, 'Sunday'),
     )
 
     host_hall = models.ForeignKey(Hall)
-    day = models.CharField(max_length=10, choices=DAY_CHOICES)
+    day = models.IntegerField(choices=DAY_CHOICES)
     meal_type = models.CharField(max_length=3, choices=MEAL_TYPES)
     start_hour = models.IntegerField()
     start_minute = models.IntegerField()
