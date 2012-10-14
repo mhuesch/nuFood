@@ -15,6 +15,7 @@ class Hour(models.Model):
         ('LUN', 'Lunch'),
         ('DIN', 'Dinner'),
         ('LAT', 'Late Night'),
+        ('RET', 'Retail'),
     )
 
     DAY_CHOICES = (
