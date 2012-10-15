@@ -104,16 +104,25 @@ h1 {font-size: 18pt;}
         <h1>Dining Locations</h1>
         <p>
             {% for hall in Halls %}
-            <div class="hall-listing"> <a class="btn btn-hall btn-large">
+            <div class="hall-listing">
+            <a class="btn btn-hall btn-large">
+            <table><tr>
+            <td width="400px">
             {{ hall.name }}
-            
+            </td>
+            <td class="hours-info">
+            Opens at…/ Closes at…
+            </td>
+            </tr>
+            </table>
             <!--
             // if currently open, display
             <span class="hours-info"> Open until: (closing time) </span>
             // if currently closed, display
             Opens: (opening day/time)
             --> 
-            </a> </div> 
+            </a>
+            </div> 
             {% endfor %}
         </p>
     </div> <!-- /container -->
