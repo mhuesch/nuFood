@@ -136,6 +136,13 @@ h1 {font-size: 18pt;}
             {% endfor %}
        </p> -->
         
+        </p><br><br>
+        <p>
+        {% for hour in open %}
+        <button>{{ hour.host_hall }} closes {{ hour.end_hour }}:{{ hour.end_minute }}</button><br>
+        {% endfor %}
+        </p>
+        Today is {{ day }}
     </div> <!-- /container -->
     
         

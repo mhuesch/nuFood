@@ -40,7 +40,6 @@ class Hour(models.Model):
 
 
 
-
 '''
 class Meal(models.Model):
     MEAL_TYPES = (
