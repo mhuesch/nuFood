@@ -51,11 +51,11 @@ body { padding-top: 60px; /* 60px to make the container go all the way to the bo
 
 h1 {font-size: 18pt;}
 
-.hall-listing {padding: 2px; margin: 0 auto;}
+/*.hall-listing {padding: 2px; margin: 0 auto;}*/
 
-.hall-name {width: 400px;}
+.hall-name {width: 65%; display:inline-block; }
 
-.hours-info {text-align: right }      
+.hours-info {text-align: right; font-size: 9pt }      
 
 
       
@@ -105,7 +105,7 @@ h1 {font-size: 18pt;}
             // if currently closed, display
             Opens: (opening day/time)
            -->
-        <p>
+        <!-- <p>
         {% for hour in open %}
         <div class="hall-listing">
         <a class="btn btn-hall btn-large">
@@ -118,6 +118,20 @@ h1 {font-size: 18pt;}
         </td>
         </tr>
         </table>
+        </a>
+        </div> 
+        {% endfor %}
+        </p>
+        -->
+        
+        <p>
+        {% for hour in open %}
+        <div class="hall-listing">
+        <a class="btn btn-hall btn-large">
+        <span class="hall-name"> {{ hour.host_hall }} </span>
+        <span class="hours-info">
+        closes {{ hour.end_hour }}:{{ hour.end_minute }}
+        </span>
         </a>
         </div> 
         {% endfor %}
