@@ -17,6 +17,7 @@
 .btn-hall {
     display: block;
     width: 75%;
+    font-size: 14px;
 
     color: #ffffff;
     text-shadow: 0 -1px 0 rgba(0, 0, 0, 0.25);
@@ -61,7 +62,7 @@
 
 h1 {font-size: 18pt;}
       
-.hours-info {text-align: right; }      
+.hours-info {text-align: right }      
       
     </style>
     <link href="/static/bootstrap/css/bootstrap-responsive.css" rel="stylesheet">
@@ -100,12 +101,18 @@ h1 {font-size: 18pt;}
 
     <!-- Dining hall list -->
     <div class="container">
-        <h3>Dining Locations</h3>
+        <h1>Dining Locations</h1>
         <p>
             {% for hall in Halls %}
             <div class="hall-listing"> <a class="btn btn-hall btn-large">
             {{ hall.name }}
-            <span class="hours-info"> Open until: </span>
+            
+            <!--
+            // if currently open, display
+            <span class="hours-info"> Open until: (closing time) </span>
+            // if currently closed, display
+            Opens: (opening day/time)
+            --> 
             </a> </div> 
             {% endfor %}
         </p>
