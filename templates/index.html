@@ -13,6 +13,50 @@
       body {
         padding-top: 60px; /* 60px to make the container go all the way to the bottom of the topbar */
       }
+      
+.btn-hall {
+    display: block;
+    width: 75%;
+
+  color: #ffffff;
+  text-shadow: 0 -1px 0 rgba(0, 0, 0, 0.25);
+  background-color: #49afcd;
+  *background-color: #2f96b4;
+  background-image: -webkit-gradient(linear, 0 0, 0 100%, from(#5bc0de), to(#2f96b4));
+  background-image: -webkit-linear-gradient(top, #5bc0de, #2f96b4);
+  background-image: -o-linear-gradient(top, #5bc0de, #2f96b4);
+  background-image: linear-gradient(to bottom, #5bc0de, #2f96b4);
+  background-image: -moz-linear-gradient(top, #5bc0de, #2f96b4);
+  background-repeat: repeat-x;
+  border-color: #2f96b4 #2f96b4 #1f6377;
+  border-color: rgba(0, 0, 0, 0.1) rgba(0, 0, 0, 0.1) rgba(0, 0, 0, 0.25);
+  filter: progid:dximagetransform.microsoft.gradient(startColorstr='#ff5bc0de', endColorstr='#ff2f96b4', GradientType=0);
+  filter: progid:dximagetransform.microsoft.gradient(enabled=false);
+}
+
+
+.btn-hall:hover,
+.btn-hall:active,
+.btn-hall.active,
+.btn-hall.disabled,
+.btn-hall[disabled] {
+  color: #ffffff;
+  background-color: #2f96b4;
+  *background-color: #2a85a0;
+}
+
+.btn-hall:active,
+.btn-hall.active {
+  background-color: #24748c \9;
+}
+
+.hall-listing
+{
+    padding: 2px;
+}
+      
+      
+      
     </style>
     <link href="/static/bootstrap/css/bootstrap-responsive.css" rel="stylesheet">
 
@@ -53,7 +97,7 @@
         <h1>Dining Locations</h1>
         <p>
             {% for hall in Halls %}
-            <button>{{ hall.name }}</button><br>
+            <div class="hall-listing"><a class="btn btn-hall btn-large">{{ hall.name }}</a></div> <!-- br-->
             {% endfor %}
         </p>
     </div> <!-- /container -->
