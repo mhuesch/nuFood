@@ -97,50 +97,32 @@ h1 {font-size: 18pt;}
     <!-- Dining hall list -->
     <div class="container">
         <h1>Dining Locations</h1>
-        <p>
-            {% for hall in Halls %}
-            <div class="hall-listing">
-            <a class="btn btn-hall btn-large">
-            <table><tr>
-            <td class="hall-name">
-            {{ hall.name }}
-            </td>
-            <td class="hours-info">
-            Opens at…/ Closes at…
-            </td>
-            </tr>
-            </table>
+        <h5>Today is {{ day }}</h5>
+        
             <!--
             // if currently open, display
             <span class="hours-info"> Open until: (closing time) </span>
             // if currently closed, display
             Opens: (opening day/time)
            -->
-            </a>
-            </div> 
-            {% endfor %}
-        </p> 
-        
-        <!--    <p>
-            {% for hour in open %}
-            <div class="hall-listing">
-            <a class="btn btn-hall btn-large">
-            <table><tr>
-            <td class="hall-name"> {{ hour.host_hall }} </td>
-            <td class="hours-info"> closes {{ hour.end_hour }}{ hour.end_minute }} </td>
-            </tr></table>
-            </a>
-            </div> 
-            {% endfor %}
-       </p> -->
-        
-        </p><br><br>
         <p>
         {% for hour in open %}
-        <button>{{ hour.host_hall }} closes {{ hour.end_hour }}:{{ hour.end_minute }}</button><br>
+        <div class="hall-listing">
+        <a class="btn btn-hall btn-large">
+        <table><tr>
+        <td class="hall-name">
+        {{ hour.host_hall }}
+        </td>
+        <td class="hours-info">
+        closes {{ hour.end_hour }}:{{ hour.end_minute }}
+        </td>
+        </tr>
+        </table>
+        </a>
+        </div> 
         {% endfor %}
         </p>
-        Today is {{ day }}
+        
     </div> <!-- /container -->
     
         
