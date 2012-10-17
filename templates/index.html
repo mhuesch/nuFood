@@ -67,6 +67,14 @@ h1 {font-size: 18pt;}
     font-size: 9pt;
 }      
 
+.open { 
+    background-color: green;
+}
+
+.closed {
+    background-color: red;
+}
+
 
       
     </style>
@@ -122,10 +130,15 @@ h1 {font-size: 18pt;}
         <p>
         {% for hour in open %}
         <div class="hall-listing">
-        <a class="btn btn-hall btn-large">
+        <a class="btn btn-hall btn-large open">
         <span class="hall-name"> {{ hour.host_hall }} </span>
         <span class="hours-info">
-        open until {{ hour.end_hour|stringformat:"02d" }}:{{ hour.end_minute|stringformat:"02d" }}
+        closes 
+        {% if hour.end_hour > 12 %}
+        {{hour.end_hour|add:"-12"}}:{{hour.end_minute|stringformat:"02d"}} pm
+        {% else %}
+        {{ hour.end_hour|stringformat:"02d" }}:{{ hour.end_minute|stringformat:"02d"}} am
+        {% endif %}
         </span>
         </a>
         </div> 
@@ -135,15 +148,22 @@ h1 {font-size: 18pt;}
         <p>
         {% for hour in closed %}
         <div class="hall-listing">
-        <a class="btn btn-hall btn-large">
+        <a class="btn btn-hall btn-large closed">
         <span class="hall-name"> {{ hour.host_hall }} </span>
         <span class="hours-info">
-        opens at {{ hour.start_hour|stringformat:"02d" }}:{{ hour.start_minute|stringformat:"02d" }}
+        opens at
+        {% if hour.start_hour > 12 %}
+        {{hour.start_hour|add:"-12"}}:{{hour.start_minute|stringformat:"02d"}} pm
+        {% else %}
+        {{ hour.start_hour|stringformat:"02d" }}:{{ hour.start_minute|stringformat:"02d"}} am
+        {% endif %}
         </span>
         </a>
         </div> 
         {% endfor %}
         </p>
+        
+        <!-- <div id="test"> test div </div> -->
         
     </div> <!-- /container -->
     
