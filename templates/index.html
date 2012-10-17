@@ -130,7 +130,7 @@ h1 {font-size: 18pt;}
         <a class="btn btn-hall btn-large">
         <span class="hall-name"> {{ hour.host_hall }} </span>
         <span class="hours-info">
-        closes {{ hour.end_hour }}:{{ hour.end_minute }}
+        closes {{ hour.end_hour|stringformat:"02d" }}:{{ hour.end_minute|stringformat:"02d" }}
         </span>
         </a>
         </div> 
