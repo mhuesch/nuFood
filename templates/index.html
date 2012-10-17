@@ -100,29 +100,14 @@ h1 {font-size: 18pt;}
         <!--<h5>Today is {{ day }}</h5> -->
         
             <!--
+            if the time left open (or left until a place opens) is less than
+            an hour, display the time in minutes instead
             // if currently open, display
             <span class="hours-info"> Open until: (closing time) </span>
             // if currently closed, display
             Opens: (opening day/time)
            -->
-        <!-- <p>
-        {% for hour in open %}
-        <div class="hall-listing">
-        <a class="btn btn-hall btn-large">
-        <table><tr>
-        <td class="hall-name">
-        {{ hour.host_hall }}
-        </td>
-        <td class="hours-info">
-        closes {{ hour.end_hour }}:{{ hour.end_minute }}
-        </td>
-        </tr>
-        </table>
-        </a>
-        </div> 
-        {% endfor %}
-        </p>
-        -->
+
         
         <p>
         {% for hour in open %}
@@ -130,7 +115,20 @@ h1 {font-size: 18pt;}
         <a class="btn btn-hall btn-large">
         <span class="hall-name"> {{ hour.host_hall }} </span>
         <span class="hours-info">
-        closes {{ hour.end_hour|stringformat:"02d" }}:{{ hour.end_minute|stringformat:"02d" }}
+        open until {{ hour.end_hour|stringformat:"02d" }}:{{ hour.end_minute|stringformat:"02d" }}
+        </span>
+        </a>
+        </div> 
+        {% endfor %}
+        </p>
+        
+        <p>
+        {% for hour in closed %}
+        <div class="hall-listing">
+        <a class="btn btn-hall btn-large">
+        <span class="hall-name"> {{ hour.host_hall }} </span>
+        <span class="hours-info">
+        opens at {{ hour.start_hour|stringformat:"02d" }}:{{ hour.start_minute|stringformat:"02d" }}
         </span>
         </a>
         </div> 
