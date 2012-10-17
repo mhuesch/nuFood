@@ -10,9 +10,7 @@ def index(request):
     Day = d.weekday()
     now_hour = d.hour       # put test hour here
     now_minute = d.minute   # put test minute here
-    #Open = Hour.objects.filter(day=Day).filter(end_hour__gt=now_hour).filter(start_hour__lt=now_hour) | Hour.objects.filter(day=Day).filter(end_hour=now_hour).filter(end_minute__gt=now_minute)
-    
-    
+
     
     Open = Hour.objects.filter(
                 Q(end_hour__gt=now_hour) | (Q(end_hour=now_hour) & Q(end_minute__gt=now_minute))).filter(
