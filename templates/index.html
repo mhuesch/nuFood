@@ -79,7 +79,14 @@ h1 {font-size: 18pt;}
       
     </style>
     <link href="/static/bootstrap/css/bootstrap-responsive.css" rel="stylesheet">
+<script>
+function displayTime(hour, min) {
 
+
+
+}
+
+</script>
     <!-- Le fav and touch icons
     <link rel="shortcut icon" href="../assets/ico/favicon.ico">
     <link rel="apple-touch-icon-precomposed" sizes="144x144" href="../assets/ico/apple-touch-icon-144-precomposed.png">
@@ -115,18 +122,7 @@ h1 {font-size: 18pt;}
     <!-- Dining hall list -->
     <div class="container">
         <h1>Dining Locations</h1>
-        <!--<h5>Today is {{ day }}</h5> -->
-        
-            <!--
-            if the time left open (or left until a place opens) is less than
-            an hour, display the time in minutes instead
-            // if currently open, display
-            <span class="hours-info"> Open until: (closing time) </span>
-            // if currently closed, display
-            Opens: (opening day/time)
-           -->
 
-        
         <p>
         {% for hour in open %}
         <div class="hall-listing">

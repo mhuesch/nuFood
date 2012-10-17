@@ -17,7 +17,9 @@ def index(request):
                 Q(start_hour__lt=now_hour) | (Q(start_hour=now_hour) & Q(start_minute__lt=now_minute))).filter(
                 day=Day)
     
-    
+    # values list returns list of tuples of selected values
+    # flat makes it a list instead of tuples
+    open_halls = Open.values_list('host_hall', flat=True)
     
     ##This query block will return the next time that a hall opens on a day.
     #---------
@@ -30,8 +32,8 @@ def index(request):
     #choose the first time for each hall
     Closed = Closed.distinct('host_hall')
    
-    # exclude halls that are currently open (not working yet)
-    Closed = exclude(Open)
+    # exclude halls that are currently open 
+    Closed = Closed.exclude(host_hall__in=list(open_halls))
     #---------
     
 
