@@ -39,18 +39,3 @@ class Hour(models.Model):
         return u'%s hours on %s for %s' % (self.host_hall, self.day, self.meal_type)
 
 
-
-'''
-class Meal(models.Model):
-    MEAL_TYPES = (
-        ('BRK', 'Breakfast'),
-        ('BRU', 'Brunch'),
-        ('LUN', 'LUNCH'),
-        ('DIN', 'Dinner'),
-        ('LAT', 'Late Night'),
-    )
-
-    host_hall = models.ForeignKey(Hall)
-    meal_type = models.CharField(max_length=3, choices=MEAL_TYPES)
-    day = models.CharField(max_length=10, )
-    '''

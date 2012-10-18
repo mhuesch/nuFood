@@ -80,9 +80,40 @@ h1 {font-size: 18pt;}
     </style>
     <link href="/static/bootstrap/css/bootstrap-responsive.css" rel="stylesheet">
 <script>
-function displayTime(hour, min) {
+function displayTime(hour, min, isOpen) {
+    var now = new Date();
+    var hourNow = {{nowHr}}; //now.getHours();
+    var minNow ={{nowMin}}; //now.getMinutes();
+    
+    timeLabelStr = "closes at ";
+    if (!isOpen) timeLabelStr = "opens in ";
+    
+    // calculate remaining time differently if currently open
+    // (ountdown to close
+    // vs currently closed (countdown  to open)
+    var timeDiff = (hour*60+min)-(hourNow*60+minNow);
+    
+    if( timeDiff < 30 & timeDiff>0 & !isOpen)
+        return "opens in "+timeDiff+" minutes";
+        
+    timeDiff = (hourNow*60+minNow)-(hour*60+min);
 
-
+    if ( timeDiff < 30 & timeDiff>0 & isOpen)
+        return "closes in "+timeDiff+" minutes";
+    
+   // var minString = "0";
+   // if (min < 10) minString = minString+min;
+   
+    if (min < 10) min = "0"+min; 
+    
+    if (hour > 12) {
+        hour = hour-12;
+        return  timeLabelStr+hour+":"+min+"pm";
+    }
+    
+    if (hour==0) { hour = 12; }
+    
+    return timeLabelStr+hour+":"+min+"am";
 
 }
 
@@ -123,19 +154,22 @@ function displayTime(hour, min) {
     <!-- Dining hall list -->
     <div class="container">
         <h1>Dining Locations</h1>
-
+        Current time: {{nowHr}}:{{nowMin}} 
         <p>
-        {% for hour in open %}
-        <div class="hall-listing">
-        <a class="btn btn-hall btn-large open">
+        {% for hour in openHalls %}
+        <!-- somehow create int i = 0… or have a hall id? -->
+        <div class="hall-listing"> 
+        <a class="btn btn-hall btn-large open"> 
+        <!-- if hour.mealtype == ret, then add an id or something -->
         <span class="hall-name"> {{ hour.host_hall }} </span>
-        <span class="hours-info">
-        closes 
-        {% if hour.end_hour > 12 %}
-        {{hour.end_hour|add:"-12"}}:{{hour.end_minute|stringformat:"02d"}} pm
-        {% else %}
-        {{ hour.end_hour|stringformat:"02d" }}:{{ hour.end_minute|stringformat:"02d"}} am
-        {% endif %}
+        <span class="hours-info"> <!--id="hall+i"-->
+        <!--
+        closes at
+        -->
+        <!-- i think this is poor form (embedding script inside the main html, but i don't know how to call this function properly… i think if we had unique id #'s for halls, we would have unique document id's to write to, and could do that in an initialize function onload…? -->
+        <script>
+        document.write(displayTime({{hour.end_hour}}, {{hour.end_minute}}, true));
+        </script>
         </span>
         </a>
         </div> 
@@ -143,17 +177,17 @@ function displayTime(hour, min) {
         </p>
         
         <p>
-        {% for hour in closed %}
+        {% for hour in closedHalls %}
         <div class="hall-listing">
         <a class="btn btn-hall btn-large closed">
         <span class="hall-name"> {{ hour.host_hall }} </span>
         <span class="hours-info">
+        <!--
         opens at
-        {% if hour.start_hour > 12 %}
-        {{hour.start_hour|add:"-12"}}:{{hour.start_minute|stringformat:"02d"}} pm
-        {% else %}
-        {{ hour.start_hour|stringformat:"02d" }}:{{ hour.start_minute|stringformat:"02d"}} am
-        {% endif %}
+        -->
+        <script>
+        document.write(displayTime({{hour.start_hour}}, {{hour.start_minute}}, false));
+        </script>
         </span>
         </a>
         </div> 

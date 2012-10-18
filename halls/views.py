@@ -8,7 +8,7 @@ def index(request):
     halls = Hall.objects.all()
     d = datetime.now()
     Day = d.weekday()
-    now_hour = d.hour       # put test hour here
+    now_hour = d.hour       # put test hour here 7 45
     now_minute = d.minute   # put test minute here
 
     
@@ -43,9 +43,11 @@ def index(request):
     c = Context({
                 'Halls': halls,
                 'date': d,
-                'open': Open,
-                'closed': Closed,
+                'openHalls': Open,
+                'closedHalls': Closed,
                 'day': Day,
+                'nowMin': now_minute,
+                'nowHr': now_hour,
                 })
     return HttpResponse(t.render(c))
 
