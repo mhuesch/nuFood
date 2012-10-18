@@ -5,12 +5,12 @@ from halls.models import Hall, Hour
 from datetime import datetime
 
 def index(request):
-    halls = Hall.objects.all()
     d = datetime.now()
     Day = d.weekday()
     now_hour = d.hour       # put test hour here 7 45
     now_minute = d.minute   # put test minute here
 
+    halls = Hall.objects.all()
     
     Open = Hour.objects.filter(day=Day).filter(Q(end_hour__gt=now_hour) | (Q(end_hour=now_hour) & Q(end_minute__gt=now_minute))).filter(Q(start_hour__lt=now_hour) | (Q(start_hour=now_hour) & Q(start_minute__lt=now_minute)))
     
@@ -47,5 +47,3 @@ def index(request):
                 'nowHr': now_hour,
                 })
     return HttpResponse(t.render(c))
-
-#return HttpResponse("Hello, world. You're at the nuFood index.")
