@@ -12,10 +12,7 @@ def index(request):
     now_minute = d.minute   # put test minute here
 
     
-    Open = Hour.objects.filter(
-                Q(end_hour__gt=now_hour) | (Q(end_hour=now_hour) & Q(end_minute__gt=now_minute))).filter(
-                Q(start_hour__lt=now_hour) | (Q(start_hour=now_hour) & Q(start_minute__lt=now_minute))).filter(
-                day=Day)
+    Open = Hour.objects.filter(day=Day).filter(Q(end_hour__gt=now_hour) | (Q(end_hour=now_hour) & Q(end_minute__gt=now_minute))).filter(Q(start_hour__lt=now_hour) | (Q(start_hour=now_hour) & Q(start_minute__lt=now_minute)))
     
     # values list returns list of tuples of selected values
     # flat makes it a list instead of tuples
