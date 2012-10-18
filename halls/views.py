@@ -7,7 +7,7 @@ from datetime import datetime
 def index(request):
     d = datetime.now()
     Day = d.weekday()
-    now_hour = d.hour       # put test hour here 7 45
+    now_hour = d.hour       # put test hour here    example test times: 745, 1249
     now_minute = d.minute   # put test minute here
 
     halls = Hall.objects.all()

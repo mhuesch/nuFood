@@ -75,49 +75,63 @@ h1 {font-size: 18pt;}
     background-color: red;
 }
 
-
-      
-    </style>
+</style>
     <link href="/static/bootstrap/css/bootstrap-responsive.css" rel="stylesheet">
+    
 <script>
+/* Name:    displayTime
+ * Purpose: display the opening/closing time of a dining location in 12hr format
+            if dining location is opening/closing soon, displays minutes left
+ * Params:  an int hour and min, whether the dining location is open now
+ * Returns: the time in string format
+ */
 function displayTime(hour, min, isOpen) {
-    var now = new Date();
-    var hourNow = {{nowHr}}; //now.getHours();
-    var minNow ={{nowMin}}; //now.getMinutes();
+    
+    // If time left open/close is less than this many minutes,
+    // the hall is deemed to be changing state "soon"
+    var soonLimit = 30;
+    
+    // getting this from .py file for testing for now
+    // var now = new Date(); 
+    
+    var hourNow = {{nowHr}}; // now.getHours();
+    var minNow ={{nowMin}};  // now.getMinutes();
     
     timeLabelStr = "closes at ";
-    if (!isOpen) timeLabelStr = "opens in ";
+    if (!isOpen) timeLabelStr = "opens at ";
     
-    // calculate remaining time differently if currently open
-    // (ountdown to close
-    // vs currently closed (countdown  to open)
+    // calculate difference between current time and given time
+    // diff = given-current  to calculate time left open
+    // diff = current-given  to calculate time until open (or x -1)
     var timeDiff = (hour*60+min)-(hourNow*60+minNow);
     
-    if( timeDiff < 30 & timeDiff>0 & !isOpen)
-        return "opens in "+timeDiff+" minutes";
+    // dining location is closing soon
+    if( isOpen & timeDiff>0 & timeDiff<soonLimit )
+        return "closes in "+timeDiff+" min";
         
-    timeDiff = (hourNow*60+minNow)-(hour*60+min);
+    timeDiff = timeDiff*-1;
 
-    if ( timeDiff < 30 & timeDiff>0 & isOpen)
-        return "closes in "+timeDiff+" minutes";
-    
-   // var minString = "0";
-   // if (min < 10) minString = minString+min;
+    // dining location is opening soon
+    if ( !isOpen & timeDiff>0 & timeDiff<soonLimit)
+        return "opens in "+timeDiff+" min";
    
-    if (min < 10) min = "0"+min; 
+   // Javascript allows you to change variable type, int to string here
+    if (min < 10) min = "0"+min;     
     
+    // Subtract 12 for 12 hour display, instead of 24hr 
     if (hour > 12) {
         hour = hour-12;
         return  timeLabelStr+hour+":"+min+"pm";
     }
     
+    // Display midnight correctly
     if (hour==0) { hour = 12; }
     
     return timeLabelStr+hour+":"+min+"am";
-
 }
 
 </script>
+
     <!-- Le fav and touch icons
     <link rel="shortcut icon" href="../assets/ico/favicon.ico">
     <link rel="apple-touch-icon-precomposed" sizes="144x144" href="../assets/ico/apple-touch-icon-144-precomposed.png">
@@ -153,8 +167,23 @@ function displayTime(hour, min, isOpen) {
 
     <!-- Dining hall list -->
     <div class="container">
-        <h1>Dining Locations</h1>
-        Current time: {{nowHr}}:{{nowMin}} 
+    
+        <!-- <h1>Dining Locations</h1> 
+        
+        <div id="test1"> test div 1</div>
+        <div id="test2"> test div 2</div> -->
+        <h5>
+        Current time: <!--{{nowHr}}:{{nowMin|stringformat:"02d"}}-->
+        {% if nowHr > 12 %}
+        {{nowHr|add:"-12"}}:{{nowMin|stringformat:"02d"}} pm
+        {% elif nowHr == 12 %}
+        {{nowHr}}:{{nowMin|stringformat:"02d"}} pm
+        {% elif nowHr == 0 %}
+        {{nowHr}}:{{nowMin|stringformat:"02d"}} am
+        {% else %}
+        {{ nowHr|stringformat:"02d" }}:{{ nowMin|stringformat:"02d"}} am
+        {% endif %}
+        </h5>
         <p>
         {% for hour in openHalls %}
         <!-- somehow create int i = 0… or have a hall id? -->
@@ -194,7 +223,7 @@ function displayTime(hour, min, isOpen) {
         {% endfor %}
         </p>
         
-        <!-- <div id="test"> test div </div> -->
+        
         
     </div> <!-- /container -->
     
