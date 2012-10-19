@@ -115,9 +115,12 @@ function displayTime(hour, min, isOpen) {
     if ( !isOpen & timeDiff>0 & timeDiff<soonLimit)
         return "opens in "+timeDiff+" min";
    
-   // Javascript allows you to change variable type, int to string here
-    if (min < 10) min = "0"+min;     
-    
+    // Javascript allows you to change variable type, int to string here
+    if (min < 10) min = "0"+min;
+
+    // Modulo operator in case hour is 24 or above.
+    hour = hour % 24;
+
     // Subtract 12 for 12 hour display, instead of 24hr 
     if (hour > 12) {
         hour = hour-12;
