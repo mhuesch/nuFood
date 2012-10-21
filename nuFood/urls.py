@@ -7,6 +7,9 @@ admin.autodiscover()
 
 urlpatterns = patterns('',
     url(r'^$', 'halls.views.index'),
+    url(r'^menu/(?<hall_name>\d+)/$', 'halls.views.hall-menu'),
+
+    # Admin
     url(r'^admin/', include(admin.site.urls)),
 
     # Uncomment the admin/doc line below to enable admin documentation:
