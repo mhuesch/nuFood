@@ -133,7 +133,6 @@ function displayTime(hour, min, isOpen) {
     return timeLabelStr+hour+":"+min+"am";
 }
 
-
 function displayCurrentDayTime() {
     var string="Current Time: ";
     var currMin = {{nowMin|stringformat:"02d"}};
@@ -231,7 +230,12 @@ function displayCurrentDayTime() {
     <!-- Dining hall list -->
     <div class="container">
     
-        <!-- <h1>Dining Locations</h1> 
+    Host hall:
+    Day:
+    Meal name:
+    Meal hours:
+    Menu/food items:
+
         
         <div id="test1"> test div 1</div>
         <div id="test2"> test div 2</div> -->
@@ -239,37 +243,18 @@ function displayCurrentDayTime() {
         <script> document.write(displayCurrentDayTime());</script>
         </h5>
         <p>
-        {% for hour in openHalls %}
-        <!-- somehow create int i = 0… or have a hall id? -->
+        <!-- {% for food in mealMenu %} -->
         <div class="hall-listing"> 
         <a class="btn btn-hall btn-large open"> 
-        <!-- if hour.mealtype == ret, then add an id or something -->
-        <span class="hall-name"> {{ hour.host_hall }} </span>
-        <span class="hours-info"> <!--id="hall+i"-->
-        <!-- i think this is poor form (embedding script inside the main html, but i don't know how to call this function properly… i think if we had unique id #'s for halls, we would have unique document id's to write to, and could do that in an initialize function onload…? -->
-        <script>
-        document.write(displayTime({{hour.end_hour}}, {{hour.end_minute}}, true));
-        </script>
-        </span>
+        <span class="hall-name">  </span>
+        <span class="hours-info"> </span>
         </a>
         </div> 
-        {% endfor %}
+        <!--{% endfor %}-->
         </p>
         
-        <p>
-        {% for hour in closedHalls %}
-        <div class="hall-listing">
-        <a class="btn btn-hall btn-large closed">
-        <span class="hall-name"> {{ hour.host_hall }} </span>
-        <span class="hours-info">
-        <script>
-        document.write(displayTime({{hour.start_hour}}, {{hour.start_minute}}, false));
-        </script>
-        </span>
-        </a>
-        </div> 
-        {% endfor %}
-        </p>
+
+
         
         
         
