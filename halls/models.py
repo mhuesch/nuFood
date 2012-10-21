@@ -42,13 +42,13 @@ class Hour(models.Model):
 class MealMenu(models.Model):
     meal_time = models.ForeignKey(Hour)
     date = models.DateField()
-    food_items = models.ManyToManyField(FoodItem)
+    food_items = models.ManyToManyField('FoodItem')
 
 class FoodItem(models.Model):
     meal_menu = models.ManyToManyField(MealMenu)
     name = models.CharField(max_length=80)
-    category = models.ForeignKey(FoodCategory)
-    attributes = models.ManyToManyField(FoodAttribute)
+    category = models.ForeignKey('FoodCategory')
+    attributes = models.ManyToManyField('FoodAttribute')
 
 class FoodCategory(models.Model):
     name = models.CharField(max_length=40)
