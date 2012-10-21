@@ -40,7 +40,7 @@ class Hour(models.Model):
 
 
 '''
-class Meal(models.Model):
+class Food(models.Model):
     MEAL_TYPES = (
         ('BRK', 'Breakfast'),
         ('BRU', 'Brunch'),
@@ -49,10 +49,10 @@ class Meal(models.Model):
         ('LAT', 'Late Night'),
     )
 
-    meal_name = models.CharField(max_length=50)
+    food_name = models.CharField(max_length=50)
     meal_type = models.CharField(max_length=3, choices=MEAL_TYPES)
     def __unicode__(self):
-        return u'%s' % self.meal_name
+        return u'%s' % self.food_name
 
 class Menu(models.Model):
     DAY_CHOICES = (
@@ -64,7 +64,7 @@ class Menu(models.Model):
         (5, 'Saturday'),
         (6, 'Sunday'),
         )
-    meal_id = models.ForeignKey(Meal)
+    meal_id = models.ForeignKey(Food)
     host_hall = models.ForeignKey(Hall)
     day = models.IntegerField(choices=DAY_CHOICES)
 
