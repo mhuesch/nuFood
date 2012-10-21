@@ -1,7 +1,7 @@
 from django.template import Context, loader
 from django.http import HttpResponse
 from django.db.models import Q
-from halls.models import Hall, Hour
+from halls.models import Hall, Hour, FoodItem, MealMenu
 from datetime import datetime
 
 
@@ -84,3 +84,12 @@ def index(request):
                 'nowHr': now_hour,
                 })
     return HttpResponse(t.render(c))
+'''
+def menu(request, Hall, Day, Meal_type):
+	food_items = FoodItem.filter(meal_menu__meal_time__day=Day).filter(meal_menu__meal_time__host_hall=Hall).filter(meal_menu__meal_time__meal_type=Meal_type).filter(meal_menu.date=date.today())
+	t = loader.get_template('menu.html')
+    c = Context({
+                'FoodItems': food_items,
+                })
+        return HttpResponse(t.render(c))
+'''
