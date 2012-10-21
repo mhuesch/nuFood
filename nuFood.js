@@ -1,84 +1,3 @@
-<!DOCTYPE html>
-<html lang="en">
-  <head>
-    <meta charset="utf-8">
-    <title>nuFood</title>
-    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=0"/>
-    <meta name="description" content="Northwestern students: find dining hall food near you.">
-    <meta name="author" content="">
-
-    <!-- Styles -->
-    <link href="/static/bootstrap/css/bootstrap.css" rel="stylesheet">
-    <style>
-    
-body { padding-top: 60px; /* 60px to make the container go all the way to the bottom of the topbar */ }
-      
-.btn-hall {
-    display: block;
-    width: 90%;
-    font-size: 14px;
-    padding-left: 7px;
-    padding-right: 7px;
-   /* padding: 0px; */
-    
-    color: #ffffff;
-    text-shadow: 0 -1px 0 rgba(0, 0, 0, 0.25);
-    background-color: #49afcd;
-    *background-color: #2f96b4;
-    background-image: -webkit-gradient(linear, 0 0, 0 100%, from(#5bc0de), to(#2f96b4));
-    background-image: -webkit-linear-gradient(top, #5bc0de, #2f96b4);
-    background-image: -o-linear-gradient(top, #5bc0de, #2f96b4);
-    background-image: linear-gradient(to bottom, #5bc0de, #2f96b4);
-    background-image: -moz-linear-gradient(top, #5bc0de, #2f96b4);
-    background-repeat: repeat-x;
-    border-color: #2f96b4 #2f96b4 #1f6377;
-    border-color: rgba(0, 0, 0, 0.1) rgba(0, 0, 0, 0.1) rgba(0, 0, 0, 0.25);
-    filter: progid:dximagetransform.microsoft.gradient(startColorstr='#ff5bc0de', endColorstr='#ff2f96b4', GradientType=0);
-    filter: progid:dximagetransform.microsoft.gradient(enabled=false);
-}
-
-
-.btn-hall:hover,
-.btn-hall:active,
-.btn-hall.active,
-.btn-hall.disabled,
-.btn-hall[disabled] {
-    color: #ffffff;
-    background-color: #2f96b4;
-    *background-color: #2a85a0;
-}
-
-
-.btn-hall.active { background-color: #24748c \9; }
-
-
-h1 {font-size: 18pt;}
-
-/*.hall-listing {padding: 2px; margin: 0 auto;}*/
-
-.hall-name {
-    width: 60%;
-    display:inline-block;
-    text-align: left;
-}
-
-.hours-info {
-    text-align: right;
-    font-size: 9pt;
-}      
-
-.open { 
-    background-color: green;
-}
-
-.closed {
-    background-color: red;
-}
-
-</style>
-    <link href="/static/bootstrap/css/bootstrap-responsive.css" rel="stylesheet">
-    
-<script>
 /* Name:    displayTime
  * Purpose: display the opening/closing time of a dining location in 12hr format
             if dining location is opening/closing soon, displays minutes left
@@ -192,75 +111,12 @@ function displayCurrentDayTime() {
     */
     return string;
 }
-</script>
-
-    <!-- Le fav and touch icons
-    <link rel="shortcut icon" href="../assets/ico/favicon.ico">
-    <link rel="apple-touch-icon-precomposed" sizes="144x144" href="../assets/ico/apple-touch-icon-144-precomposed.png">
-    <link rel="apple-touch-icon-precomposed" sizes="114x114" href="../assets/ico/apple-touch-icon-114-precomposed.png">
-    <link rel="apple-touch-icon-precomposed" sizes="72x72" href="../assets/ico/apple-touch-icon-72-precomposed.png">
-    <link rel="apple-touch-icon-precomposed" href="../assets/ico/apple-touch-icon-57-precomposed.png">
-    -->
-  </head>
 
 
-  <body>
-    <!-- Nav bar -->
-    <div class="navbar navbar-inverse navbar-fixed-top">
-      <div class="navbar-inner">
-        <div class="container">
-          <a class="btn btn-navbar" data-toggle="collapse" data-target=".nav-collapse">
-            <span class="icon-bar"></span>
-            <span class="icon-bar"></span>
-            <span class="icon-bar"></span>
-          </a>
-          <a class="brand" href="#">nuFood</a>
-          <div class="nav-collapse collapse">
-            <ul class="nav">
-              <li class="active"><a href="#">Home</a></li>
-              <!-- About and contact pages not built
-              <li><a href="/about">About</a></li>
-              <li><a href="/contact">Contact</a></li>-->
-            </ul>
-          </div><!--/.nav-collapse -->
-        </div>
-      </div>
-    </div>
 
-    <!-- Dining hall list -->
-    <div class="container">
+
     
-    Host hall: <br/>
-    Day:
-    Meal name:
-    Meal hours:
-    Menu/food items:
-
-        
-        <div id="test1"> test div 1</div>
-        <div id="test2"> test div 2</div> -->
-        <h5>
-        <script> document.write(displayCurrentDayTime());</script>
-        </h5>
-        <p>
-        <!-- {% for food in mealMenu %} -->
-        <div class="hall-listing"> 
-        <a class="btn btn-hall btn-large open"> 
-        <span class="hall-name">  </span>
-        <span class="hours-info"> </span>
-        </a>
-        </div> 
-        <!--{% endfor %}-->
-        </p>
-        
-
-
-        
-        
-        
-    </div> <!-- /container -->
-    
-        
+  /*      
 
     <!-- Javascript
     ================================================== -->
@@ -279,5 +135,4 @@ function displayCurrentDayTime() {
     <script src="/static/bootstrap/js/bootstrap-carousel.js"></script>
     <script src="/static/bootstrap/js/bootstrap-typeahead.js"></script>
 
-  </body>
-</html>
+*/
