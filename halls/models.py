@@ -39,33 +39,20 @@ class Hour(models.Model):
         return u'%s hours on %s for %s' % (self.host_hall, self.day, self.meal_type)
 
 
-'''
-class Food(models.Model):
-    MEAL_TYPES = (
-        ('BRK', 'Breakfast'),
-        ('BRU', 'Brunch'),
-        ('LUN', 'Lunch'),
-        ('DIN', 'Dinner'),
-        ('LAT', 'Late Night'),
-    )
+class MealMenu(models.Model):
+    meal_time = models.ForeignKey(Hour)
+    date = models.DateField()
+    food_items = models.ManyToManyField(FoodItem)
 
-    food_name = models.CharField(max_length=50)
-    meal_type = models.CharField(max_length=3, choices=MEAL_TYPES)
-    def __unicode__(self):
-        return u'%s' % self.food_name
+class FoodItem(models.Model):
+    meal_menu = models.ManyToManyField(MealMenu)
+    name = models.CharField(max_length=80)
+    category = models.ForeignKey(FoodCategory)
+    attributes = models.ManyToManyField(FoodAttribute)
 
-class Menu(models.Model):
-    DAY_CHOICES = (
-        (0, 'Monday'),
-        (1, 'Tuesday'),
-        (2, 'Wednesday'),
-        (3, 'Thursday'),
-        (4, 'Friday'),
-        (5, 'Saturday'),
-        (6, 'Sunday'),
-        )
-    meal_id = models.ForeignKey(Food)
-    host_hall = models.ForeignKey(Hall)
-    day = models.IntegerField(choices=DAY_CHOICES)
+class FoodCategory(models.Model):
+    name = models.CharField(max_length=40)
 
-'''
+class FoodAttribute(models.Model):
+    name = models.CharField(max_length=20)
+    food_items = models.ManyToManyField(FoodItem)
