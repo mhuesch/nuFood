@@ -32,7 +32,11 @@ def index(request):
     ).filter(
         Q(start_hour__lt=now_hour) | (Q(start_hour=now_hour) & Q(start_minute__lt=now_minute))
     )
-
+    
+    open_from_yesterday_halls = openFromYesterday.values_list('host_hall', flat=True)
+    
+    Open = openFromYesterday | Open.exclude(host_hall__in=list(open_from_yesterday_halls))
+    '''
     # Function which removes an item from a list if a given predicate evaluates to True
     def remove_if(coll, predicate):
         idx = len(coll) - 1
@@ -41,13 +45,13 @@ def index(request):
                 del coll[idx]
             idx = idx - 1
         return coll
-
+    
     # Use remove_if to remove open hour objects from the Open list if there is an hour object from
     # yesterday for the same hall.
     for yesterHour in openFromYesterday:
         hall_id = yesterHour.host_hall_id
         Open = [yesterHour] + remove_if(Open, lambda h: (h.host_hall_id == hall_id))
-
+        '''
     
     # values list returns list of tuples of selected values
     # flat makes it a list instead of tuples
