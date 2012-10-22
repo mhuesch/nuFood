@@ -114,7 +114,9 @@ function displayMealName() {
 function displayMenuTitle() {
     var returnStr = "Menu for ";
     returnStr += displayMealName();
-    returnStr += "in (Hall Name) for ";
+    returnStr += "in ";
+    returnStr += {{hall}};
+    returnStr += " for ";
     returnStr += displayDayName();
     returnStr += ", "+{{date}};
     
@@ -159,7 +161,7 @@ function displayMenuTitle() {
     <div class="container">
     
     <h5>
-    Menu for {{mealType}} in (Hall Name) for {{day}}, date (without time)
+        Menu for {{mealType}} in {{ hall }} for {{day}}, date (without time)
     <script>document.write(displayMenuTitle());</script>
     </h5>
     

@@ -78,9 +78,11 @@ def index(request):
 # Display the menu for a meal at a hall page
 #
 def hallmenu(request,hall_id):
+    hall_name = Hall.objects.get(id=hall_id).name
+        #note: get will only work when you want just one object
     d = datetime.now()
     weekday = d.weekday()
-    today = d.today()
+    today = datetime.today()
     
     meal_type = 'DIN'
     
@@ -90,6 +92,8 @@ def hallmenu(request,hall_id):
     t = loader.get_template('hall-menu.html')
     c = Context({
                 # lizz: I want the name of the hall... hall with hall_id --> name?? i dont know :(
+                # Andrew: added here + template
+                'hall': hall_name,
                 'foodItems': food_items,
                 'mealType': meal_type,
                 'date': d,
