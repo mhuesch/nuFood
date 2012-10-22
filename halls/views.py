@@ -86,7 +86,7 @@ def index(request):
     return HttpResponse(t.render(c))
 
 
-def hallmenu(request,hall_name):
+def hallmenu(request,hall_id):
     d = datetime.now()
     weekday = d.weekday()
     today = d.today()

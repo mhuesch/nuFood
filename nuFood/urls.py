@@ -7,7 +7,7 @@ admin.autodiscover()
 
 urlpatterns = patterns('',
     url(r'^$', 'halls.views.index'),
-    url(r'^menu/(\d+)/$', 'halls.views.hallmenu'),
+    url(r'^menu/(?P<hall_id>\d+)/$', 'halls.views.hallmenu'),
     # Admin
     url(r'^admin/', include(admin.site.urls)),
 
