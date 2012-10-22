@@ -84,12 +84,16 @@ def index(request):
                 'nowHr': now_hour,
                 })
     return HttpResponse(t.render(c))
-'''
-def menu(request, Hall, Day, Meal_type):
-	food_items = FoodItem.filter(meal_menu__meal_time__day=Day).filter(meal_menu__meal_time__host_hall=Hall).filter(meal_menu__meal_time__meal_type=Meal_type).filter(meal_menu.date=date.today())
-	t = loader.get_template('menu.html')
+
+
+def hallmenu(request,hall_name):
+    d = datetime.now()
+    weekday = d.weekday()
+    today = d.today()
+    meal_type = 'DIN'
+    food_items = FoodItem.objects.filter(meal_menu__meal_time__day=weekday).filter(meal_menu__meal_time__host_hall__id=hall_name).filter(meal_menu__meal_time__meal_type=meal_type).filter(meal_menu__date=today)
+    t = loader.get_template('hall-menu.html')
     c = Context({
                 'FoodItems': food_items,
                 })
-        return HttpResponse(t.render(c))
-'''
+    return HttpResponse(t.render(c))
