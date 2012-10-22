@@ -91,7 +91,7 @@ def hallmenu(request,hall_id):
     weekday = d.weekday()
     today = d.today()
     meal_type = 'DIN'
-    food_items = FoodItem.objects.filter(meal_menu__meal_time__day=weekday).filter(meal_menu__meal_time__host_hall__id=hall_name).filter(meal_menu__meal_time__meal_type=meal_type).filter(meal_menu__date=today)
+    food_items = FoodItem.objects.filter(meal_menu__meal_time__day=weekday).filter(meal_menu__meal_time__host_hall__id=hall_id).filter(meal_menu__meal_time__meal_type=meal_type).filter(meal_menu__date=today)
     t = loader.get_template('hall-menu.html')
     c = Context({
                 'FoodItems': food_items,
