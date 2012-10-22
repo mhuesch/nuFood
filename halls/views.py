@@ -74,14 +74,25 @@ def index(request):
     return HttpResponse(t.render(c))
 
 
+#
+# Display the menu for a meal at a hall page
+#
 def hallmenu(request,hall_id):
     d = datetime.now()
     weekday = d.weekday()
     today = d.today()
+    
     meal_type = 'DIN'
+    
     food_items = FoodItem.objects.filter(meal_menu__meal_time__day=weekday).filter(meal_menu__meal_time__host_hall__id=hall_id).filter(meal_menu__meal_time__meal_type=meal_type).filter(meal_menu__date=today)
+
+
     t = loader.get_template('hall-menu.html')
     c = Context({
-                'FoodItems': food_items,
+                # lizz: I want the name of the hall... hall with hall_id --> name?? i dont know :(
+                'foodItems': food_items,
+                'mealType': meal_type,
+                'date': d,
+                'day': weekday,
                 })
     return HttpResponse(t.render(c))

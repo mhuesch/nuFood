@@ -54,143 +54,71 @@ body { padding-top: 60px; /* 60px to make the container go all the way to the bo
 
 h1 {font-size: 18pt;}
 
-/*.hall-listing {padding: 2px; margin: 0 auto;}*/
+/*.food-listing {padding: 2px; margin: 0 auto;}*/
 
-.hall-name {
+.food-name {
     width: 60%;
     display:inline-block;
     text-align: left;
 }
 
-.hours-info {
+.food-info {
     text-align: right;
     font-size: 9pt;
 }      
 
-.open { 
-    background-color: green;
-}
+.well-balanced { background-color: blue; }
 
-.closed {
-    background-color: red;
-}
+.vegan { background-color: yellow; }
+
+.vegetarian { background-color: lime; }
 
 </style>
-    <link href="/static/bootstrap/css/bootstrap-responsive.css" rel="stylesheet">
+
+<link href="/static/bootstrap/css/bootstrap-responsive.css" rel="stylesheet">
     
 <script>
-/* Name:    displayTime
- * Purpose: display the opening/closing time of a dining location in 12hr format
-            if dining location is opening/closing soon, displays minutes left
- * Params:  an int hour and min, whether the dining location is open now
- * Returns: the time in string format
- */
-function displayTime(hour, min, isOpen) {
-    
-    // If time left open/close is less than this many minutes,
-    // the hall is deemed to be changing state "soon"
-    var soonLimit = 30;
-    
-    // getting this from .py file for testing for now
-    // var now = new Date(); 
-    
-    var hourNow = {{nowHr}}; // now.getHours();
-    var minNow ={{nowMin}};  // now.getMinutes();
-    
-    timeLabelStr = "closes at ";
-    if (!isOpen) timeLabelStr = "opens at ";
-    
-    // calculate difference between current time and given time
-    // diff = given-current  to calculate time left open
-    // diff = current-given  to calculate time until open (or x -1)
-    var timeDiff = (hour*60+min)-(hourNow*60+minNow);
-    
-    // dining location is closing soon
-    if( isOpen & timeDiff>0 & timeDiff<soonLimit )
-        return "closes in "+timeDiff+" min";
-        
-    timeDiff = timeDiff*-1;
 
-    // dining location is opening soon
-    if ( !isOpen & timeDiff>0 & timeDiff<soonLimit)
-        return "opens in "+timeDiff+" min";
-   
-    // Javascript allows you to change variable type, int to string here
-    if (min < 10) min = "0"+min;
-
-    // Modulo operator in case hour is 24 or above.
-    hour = hour % 24;
-
-    // Subtract 12 for 12 hour display, instead of 24hr 
-    if (hour > 12) {
-        hour = hour-12;
-        return  timeLabelStr+hour+":"+min+"pm";
-    }
-    
-    // Display midnight correctly
-    if (hour==0) { hour = 12; }
-    
-    return timeLabelStr+hour+":"+min+"am";
-}
-
-function displayCurrentDayTime() {
-    var string="Current Time: ";
-    var currMin = {{nowMin|stringformat:"02d"}};
+function displayDayName() {
     switch ({{day}}) 
     {
-        case 0: string += "Monday"; break;
-        case 1: string += "Tuesday"; break;
-        case 2: string += "Wednesday"; break;
-        case 3: string += "Thursday"; break;
-        case 4: string += "Friday"; break;
-        case 5: string += "Saturday"; break;
-        case 6: string += "Sunday"; break;
-        default: string += "Unknown day"; break;
+        case 0: return "Monday"; 
+        case 1: return "Tuesday"; 
+        case 2: return "Wednesday"; 
+        case 3: return "Thursday"; 
+        case 4: return "Friday"; 
+        case 5: return "Saturday"; 
+        case 6: return "Sunday"; 
+        default: return "Unknown weekday"; 
     }
+    return "Unknown weekday";
+}
 
-    string += " ";
+function displayMealName() {
 
-    if({{nowHr}}>12) {
-        string += ({{nowHr}}-12)+":"+currMin+"pm";
-    }
+// is there a way to acces the MEAL_TYPES AND DAY_CHOICES from models.py? ***
 
-    else if ({{nowHr}}==12) {
-        string += ({{nowHr}})+":"+currMin+"pm";
-    }
+    switch ({{mealType}}) 
+    {
+        case 'BRK': return 'Breakfast';
+        case 'BRU': return 'Brunch';
+        case 'LUN': return 'Lunch';
+        case 'DIN': return 'Dinner';
+        case 'LAT': return 'Late Night';
+        case 'RET': return 'Retail';
+        default: return "Other";
+    )
+    return "Other";
+}
 
-    else if ({{nowHr}} == 0) {
-        string += ({{nowHr}}+12)+":"+currMin+"am";
-    }
-
-        /*<!--{{nowHr}}:{{nowMin|stringformat:"02d"}}-->
-        {% if nowHr > 12 %}
-        {{nowHr|add:"-12"}}:{{nowMin|stringformat:"02d"}} pm
-        {% elif nowHr == 12 %}
-        {{nowHr}}:{{nowMin|stringformat:"02d"}} pm
-        {% elif nowHr == 0 %}
-        {{nowHr}}:{{nowMin|stringformat:"02d"}} am
-        {% else %}
-        {{ nowHr|stringformat:"02d" }}:{{ nowMin|stringformat:"02d"}} am
-        {% endif %}
-        */
+function displayMenuTitle() {
+    var returnStr = "Menu for ";
+    returnStr += displayMealName();
+    returnStr += "in (Hall Name) for ";
+    returnStr += displayDayName();
+    returnStr += ", "+{{date}};
     
-    /*  {% if day == 6 %}
-            return "Sunday";
-        {% elif day == 0 %}
-            return "Monday";
-        {% elif day == 1 %}
-            return "Tuesday";
-        {% elif day == 2 %}
-            return "Wednesday";
-        {% elif day == 3 %}
-            return "Thursday";
-        {% elif day == 4 %}
-            return "Friday"
-        {% elif day == 5 %}
-            return "Saturday"
-        {% endif %}
-    */
-    return string;
+    return returnStr;
 }
 </script>
 
@@ -227,30 +155,33 @@ function displayCurrentDayTime() {
       </div>
     </div>
 
-    <!-- Dining hall list -->
+    <!-- Hall Menu - list of food offerings -->
     <div class="container">
     
-    Host hall: <br/>
+    <h5>
+    Menu for {{mealType}} in (Hall Name) for {{day}}, date (without time)
+    <script>document.write(displayMenuTitle());</script>
+    </h5>
+    
+    Host hall:
     Day:
     Meal name:
     Meal hours:
     Menu/food items:
 
-        
+        <!--
         <div id="test1"> test div 1</div>
-        <div id="test2"> test div 2</div> -->
-        <h5>
-        <script> document.write(displayCurrentDayTime());</script>
-        </h5>
+        <div id="test2"> test div 2</div>
+        -->
         <p>
-        <!-- {% for food in mealMenu %} -->
-        <div class="hall-listing"> 
+        {% for food in foodItems %}
+        <div class="food-listing"> 
         <a class="btn btn-hall btn-large open"> 
-        <span class="hall-name">  </span>
-        <span class="hours-info"> </span>
+        <span class="food-name"> {{food}}.name </span>
+        <span class="food-info"> {{food}}.category </span>
         </a>
         </div> 
-        <!--{% endfor %}-->
+        {% endfor %}
         </p>
         
 
