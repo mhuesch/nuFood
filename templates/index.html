@@ -145,17 +145,15 @@ function displayCurrentDayTime() {
     var currMin = {{nowMin|stringformat:"02d"}};
     switch ({{day}}) 
     {
-        case 0: string += "Monday"; break;
-        case 1: string += "Tuesday"; break;
-        case 2: string += "Wednesday"; break;
-        case 3: string += "Thursday"; break;
-        case 4: string += "Friday"; break;
-        case 5: string += "Saturday"; break;
-        case 6: string += "Sunday"; break;
-        default: string += "Unknown day"; break;
+        case 0: string += "Monday "; break;
+        case 1: string += "Tuesday "; break;
+        case 2: string += "Wednesday "; break;
+        case 3: string += "Thursday "; break;
+        case 4: string += "Friday "; break;
+        case 5: string += "Saturday "; break;
+        case 6: string += "Sunday "; break;
+        default: string += "Unknown day "; break;
     }
-
-    string += " ";
 
     if({{nowHr}}>12) {
         string += ({{nowHr}}-12)+":"+currMin+"pm";
@@ -167,6 +165,11 @@ function displayCurrentDayTime() {
 
     else if ({{nowHr}} == 0) {
         string += ({{nowHr}}+12)+":"+currMin+"am";
+    }
+    else
+    {
+        string += ({{nowHr}})+":"+currMin+"am";
+        
     }
 
         /*<!--{{nowHr}}:{{nowMin|stringformat:"02d"}}-->
@@ -261,7 +264,7 @@ function displayCurrentDayTime() {
         </div> 
         {% endfor %}
         </p>
-        
+        {% if closedHalls %}<h5>Opening Later Today</h5>
         <p>
         {% for hour in closedHalls %}
         <div class="hall-listing">
@@ -275,8 +278,20 @@ function displayCurrentDayTime() {
         </a>
         </div> 
         {% endfor %}
+        {% endif %}
         </p>
         
+        {%if closedForDay %}<h5>Closed for the day</h5>
+        {% for hall in closedForDay %}
+        <div class="hall-listing">
+            <a class="btn btn-hall btn-large closed">
+                <span class="hall-name">
+                    {{ hall.name }}
+                </span>
+            </a>
+        </div>
+        {% endfor %}
+        {% endif %}
         
         
     </div> <!-- /container -->

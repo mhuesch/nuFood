@@ -10,7 +10,8 @@ def index(request):
     weekday = d.weekday()
     now_hour = d.hour       # put test hour here    example test times: 745, 1249
     now_minute = d.minute   # put test minute here
-
+    #now_hour = 23
+    #now_minute = 30
     halls = Hall.objects.all()
     
     # Select hour objects from halls previous day which might still be open
@@ -58,6 +59,9 @@ def index(request):
         host_hall__in=list(open_halls)
     )
     
+    closed_halls = Closed.values_list('host_hall', flat=True)
+    
+    closed_for_day = Hall.objects.exclude(id__in=list(closed_halls)).exclude(id__in=list(open_halls))
 
 
     
@@ -70,6 +74,7 @@ def index(request):
                 'day': weekday,
                 'nowMin': now_minute,
                 'nowHr': now_hour,
+                'closedForDay': closed_for_day
                 })
     return HttpResponse(t.render(c))
 
