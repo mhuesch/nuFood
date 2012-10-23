@@ -6,6 +6,7 @@
 from scrapy.item import Item, Field
 
 class Day(Item):
+    hall = Field()
     name = Field()
     absoluteWeek = Field()
     breakfast = Field()

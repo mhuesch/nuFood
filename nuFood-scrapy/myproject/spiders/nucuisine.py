@@ -9,7 +9,7 @@ class NucuisineSpider(CrawlSpider):
     start_urls = ["http://www.nucuisine.com/menus/"]
     
     rules = (
-             Rule(SgmlLinkExtractor(allow=r'1\.html'), callback='parse_item', follow=True),
+             Rule(SgmlLinkExtractor(allow=r'1\.html', deny=[r'willies',r'tech']), callback='parse_item', follow=True),
              )
     
     def parse_item(self, response):
@@ -18,13 +18,13 @@ class NucuisineSpider(CrawlSpider):
         items = []
         for day in dayOfWeek:
             tempWeek = hxs.select('//tr/td[@class="titlecell"]//text()').extract()[2]
-            sites = hxs.select('//tr//td[@id=' + day + ']')
-            for site in sites:
-                item = Day()
-                item['absoluteWeek'] = tempWeek
-                item['name'] = day
-                item['breakfast'] = site.select('//tr[@class="brk"]//td[@class="menuitem"]//div[@class="menuitem"]//span[@class="ul"]//text()').extract()
-                item['lunch'] = site.select('//tr[@class="lun"]//td[@class="menuitem"]//div[@class="menuitem"]//span[@class="ul"]//text()').extract()
-                item['dinner'] = site.select('//tr[@class="din"]//td[@class="menuitem"]//div[@class="menuitem"]//span[@class="ul"]//text()').extract()
-                items.append(item)
+            #site = hxs.select('//tr//td[@id=' + day + ']')
+            item = Day()
+            item['hall'] = hxs.select('//tr/td[@class="titlecell"]/span[1]//text()').extract()
+            item['absoluteWeek'] = tempWeek[15:]
+            item['name'] = day.strip('"')
+            item['breakfast'] = hxs.select('//tr//td[@id=' + day + ']//tr[@class="brk"]//td[@class="menuitem"]//div[@class="menuitem"]//span[@class="ul"]//text()').extract()
+            item['lunch'] = hxs.select('//tr//td[@id=' + day + ']//tr[@class="lun"]//td[@class="menuitem"]//div[@class="menuitem"]//span[@class="ul"]//text()').extract()
+            item['dinner'] = hxs.select('//tr//td[@id=' + day + ']//tr[@class="din"]//td[@class="menuitem"]//div[@class="menuitem"]//span[@class="ul"]//text()').extract()
+            items.append(item)
         return items
