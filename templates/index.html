@@ -142,8 +142,12 @@ function displayTime(hour, min, isOpen) {
 
 function displayCurrentDayTime() {
     var string="Current Time: ";
-    var currMin = {{nowMin|stringformat:"02d"}};
-    switch ({{day}}) 
+    if ({{nowMin}} < 10){
+        var currMin = "0"+{{nowMin}};
+    }else{
+    var currMin = {{nowMin}};
+    }
+    switch ({{day}})
     {
         case 0: string += "Monday "; break;
         case 1: string += "Tuesday "; break;
@@ -164,12 +168,11 @@ function displayCurrentDayTime() {
     }
 
     else if ({{nowHr}} == 0) {
-        string += ({{nowHr}}+12)+":"+currMin+"am";
+        string += "12:"+currMin+"am";
     }
     else
     {
         string += ({{nowHr}})+":"+currMin+"am";
-        
     }
 
         /*<!--{{nowHr}}:{{nowMin|stringformat:"02d"}}-->
