@@ -17,19 +17,20 @@ mmap = dict((v,k) for k,v in enumerate(calendar.month_abbr))
 hours = Hour.objects
 
 
-for line in read:
-    hall_name = line[u'hall']
-    day = line[u'name']
-    brk = line[u'breakfast']
-    lun = line[u'lunch']
-    din = line[u'dinner']
-    daylist = line[u'absoluteWeek'].split(' ')
+for element in read:
+    hall_name = element[u'hall']
+    day = element[u'name']
+    brk = element[u'breakfast']
+    lun = element[u'lunch']
+    din = element[u'dinner']
+    daylist = element[u'absoluteWeek'].split(' ')
     date_month = mmap[(daylist[0][:3])]
     date_day = int(daylist[1].strip(','))
     date_year = int(daylist[2])
     date_obj = date(date_year,date_month,date_day)
     try:
         print hall_dict[hall_name]
+        print date_month
     except KeyError:
         pass
     
