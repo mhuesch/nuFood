@@ -9,7 +9,7 @@ class NucuisineSpider(CrawlSpider):
     start_urls = ["http://www.nucuisine.com/menus/"]
     
     rules = (
-             Rule(SgmlLinkExtractor(allow=r'1\.html', deny=[r'willies',r'tech']), callback='parse_item', follow=True),
+             Rule(SgmlLinkExtractor(allow=r'[0-9]\.html', deny=[r'willies',r'tech']), callback='parse_item', follow=True),
              )
     
     def parse_item(self, response):
