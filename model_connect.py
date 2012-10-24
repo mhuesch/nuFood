@@ -18,14 +18,15 @@ hall_dict = { u'1835 Hinman Caf\xe9' : 4
             , u'Allison Caf\u00e9' : 5
             }
 
-day_dict = {
-    "monday" : 0
-    ,"tuesday" : 1
-    ,"wednesday" : 2
-    ,"thursday" : 3
-    ,"friday" : 4
-    ,"saturday" : 5
-    ,"sunday" : 6 }
+# Dictionary mappying from day strings to day ids
+day_dict = { "monday" : 0
+            ,"tuesday" : 1
+            ,"wednesday" : 2
+            ,"thursday" : 3
+            ,"friday" : 4
+            ,"saturday" : 5
+            ,"sunday" : 6
+            }
 
 
 # Dictionary mapping from month to month index.
