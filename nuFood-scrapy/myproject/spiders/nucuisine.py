@@ -20,7 +20,7 @@ class NucuisineSpider(CrawlSpider):
             tempWeek = hxs.select('//tr/td[@class="titlecell"]//text()').extract()[2]
             #site = hxs.select('//tr//td[@id=' + day + ']')
             item = Day()
-            item['hall'] = hxs.select('//tr/td[@class="titlecell"]/span[1]//text()').extract()
+            item['hall'] = hxs.select('//tr/td[@class="titlecell"]/span[1]//text()').extract()[0]
             item['absoluteWeek'] = tempWeek[15:]
             item['name'] = day.strip('"')
             item['breakfast'] = hxs.select('//tr//td[@id=' + day + ']//tr[@class="brk"]//td[@class="menuitem"]//div[@class="menuitem"]//span[@class="ul"]//text()').extract()
