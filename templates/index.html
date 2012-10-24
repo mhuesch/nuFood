@@ -10,11 +10,11 @@
     <!-- Styles -->
     <link href="/static/bootstrap/css/bootstrap.css" rel="stylesheet">
     
+    <!-- Scripts written by us for this app, not from/for boostrap -->
+    <script src="/static/nuFood.js"></script>
 
+    <!-- <link href="/static/nuFood.css" rel="stylesheet"> -->
     
-    <!-- <script src="nuFood.js" ></script> -->
-    
-    <!-- <link href="nuFood.css" rel="stylesheet"> -->
     <style>
     
 body { padding-top: 60px; /* 60px to make the container go all the way to the bottom of the topbar */ }
@@ -84,128 +84,6 @@ h1 {font-size: 18pt;}
 </style>
     <link href="/static/bootstrap/css/bootstrap-responsive.css" rel="stylesheet">
     
-<script>
-/* Name:    displayTime
- * Purpose: display the opening/closing time of a dining location in 12hr format
-            if dining location is opening/closing soon, displays minutes left
- * Params:  an int hour and min, whether the dining location is open now
- * Returns: the time in string format
- */
-function displayTime(hour, min, isOpen) {
-    
-    // If time left open/close is less than this many minutes,
-    // the hall is deemed to be changing state "soon"
-    var soonLimit = 30;
-    
-    // getting this from .py file for testing for now
-    // var now = new Date(); 
-    
-    var hourNow = {{nowHr}}; // now.getHours();
-    var minNow ={{nowMin}};  // now.getMinutes();
-    
-    timeLabelStr = "closes at ";
-    if (!isOpen) timeLabelStr = "opens at ";
-    
-    // calculate difference between current time and given time
-    // diff = given-current  to calculate time left open
-    // diff = current-given  to calculate time until open (or x -1)
-    var timeDiff = (hour*60+min)-(hourNow*60+minNow);
-    
-    // dining location is closing soon
-    if( isOpen & timeDiff>0 & timeDiff<soonLimit )
-        return "closes in "+timeDiff+" min";
-        
-    timeDiff = timeDiff*-1;
-
-    // dining location is opening soon
-    if ( !isOpen & timeDiff>0 & timeDiff<soonLimit)
-        return "opens in "+timeDiff+" min";
-   
-    // Javascript allows you to change variable type, int to string here
-    if (min < 10) min = "0"+min;
-
-    // Modulo operator in case hour is 24 or above.
-    hour = hour % 24;
-
-    // Subtract 12 for 12 hour display, instead of 24hr 
-    if (hour > 12) {
-        hour = hour-12;
-        return  timeLabelStr+hour+":"+min+"pm";
-    }
-    
-    // Display midnight correctly
-    if (hour==0) { hour = 12; }
-    
-    return timeLabelStr+hour+":"+min+"am";
-}
-
-
-function displayCurrentDayTime() {
-    var string="Current Time: ";
-    if ({{nowMin}} < 10){
-        var currMin = "0"+{{nowMin}};
-    }else{
-    var currMin = {{nowMin}};
-    }
-    switch ({{day}})
-    {
-        case 0: string += "Monday "; break;
-        case 1: string += "Tuesday "; break;
-        case 2: string += "Wednesday "; break;
-        case 3: string += "Thursday "; break;
-        case 4: string += "Friday "; break;
-        case 5: string += "Saturday "; break;
-        case 6: string += "Sunday "; break;
-        default: string += "Unknown day "; break;
-    }
-
-    if({{nowHr}}>12) {
-        string += ({{nowHr}}-12)+":"+currMin+"pm";
-    }
-
-    else if ({{nowHr}}==12) {
-        string += ({{nowHr}})+":"+currMin+"pm";
-    }
-
-    else if ({{nowHr}} == 0) {
-        string += "12:"+currMin+"am";
-    }
-    else
-    {
-        string += ({{nowHr}})+":"+currMin+"am";
-    }
-
-        /*<!--{{nowHr}}:{{nowMin|stringformat:"02d"}}-->
-        {% if nowHr > 12 %}
-        {{nowHr|add:"-12"}}:{{nowMin|stringformat:"02d"}} pm
-        {% elif nowHr == 12 %}
-        {{nowHr}}:{{nowMin|stringformat:"02d"}} pm
-        {% elif nowHr == 0 %}
-        {{nowHr}}:{{nowMin|stringformat:"02d"}} am
-        {% else %}
-        {{ nowHr|stringformat:"02d" }}:{{ nowMin|stringformat:"02d"}} am
-        {% endif %}
-        */
-    
-    /*  {% if day == 6 %}
-            return "Sunday";
-        {% elif day == 0 %}
-            return "Monday";
-        {% elif day == 1 %}
-            return "Tuesday";
-        {% elif day == 2 %}
-            return "Wednesday";
-        {% elif day == 3 %}
-            return "Thursday";
-        {% elif day == 4 %}
-            return "Friday"
-        {% elif day == 5 %}
-            return "Saturday"
-        {% endif %}
-    */
-    return string;
-}
-</script>
 
     <!-- Le fav and touch icons
     <link rel="shortcut icon" href="../assets/ico/favicon.ico">
@@ -243,12 +121,16 @@ function displayCurrentDayTime() {
     <!-- Dining hall list -->
     <div class="container">
     
-        <!-- <h1>Dining Locations</h1> 
-        
+        <!-- <h1>Dining Locations</h1> -->
+        <!--
         <div id="test1"> test div 1</div>
-        <div id="test2"> test div 2</div> -->
+        <div id="test2"> test div 2</div>
+        -->
+        
         <h5>
-        <script> document.write(displayCurrentDayTime());</script>
+        <script>
+        document.write(displayCurrentDayTime({{day}}, {{nowHr}}, {{nowMin}}));
+        </script>
         </h5>
         <p>
         {% for hour in openHalls %}
@@ -257,10 +139,13 @@ function displayCurrentDayTime() {
             <a class="btn btn-hall btn-large open" href={% url halls.views.hallmenu hall_id=hour.host_hall.id meal_id=hour.id %}>
         <!-- if hour.mealtype == ret, then add an id or something -->
         <span class="hall-name"> {{ hour.host_hall }} </span>
+        
         <span class="hours-info"> <!--id="hall+i"-->
-        <!-- i think this is poor form (embedding script inside the main html, but i don't know how to call this function properly… i think if we had unique id #'s for halls, we would have unique document id's to write to, and could do that in an initialize function onload…? -->
+       
+         <!-- i think this is poor form (embedding script inside the main html, but i don't know how to call this function properly… i think if we had unique id #'s for halls, we would have unique document id's to write to, and could do that in an initialize function onload…? -->
+         
         <script>
-        document.write(displayTime({{hour.end_hour}}, {{hour.end_minute}}, true));
+        document.write(displayOpenCloseTime({{hour.end_hour}}, {{hour.end_minute}}, true));
         </script>
         </span>
         </a>
@@ -275,7 +160,7 @@ function displayCurrentDayTime() {
         <span class="hall-name"> {{ hour.host_hall }} </span>
         <span class="hours-info">
         <script>
-        document.write(displayTime({{hour.start_hour}}, {{hour.start_minute}}, false));
+        document.write(displayOpenCloseTime({{hour.start_hour}}, {{hour.start_minute}}, false));
         </script>
         <!-- include a right icon if you can continue to view a menu -->
         <!-- <i class="icon-chevron-right"></i> -->
@@ -306,6 +191,8 @@ function displayCurrentDayTime() {
     <!-- Javascript
     ================================================== -->
     <!-- Placed at the end of the document so the pages load faster -->
+
+    
     <script src="/static/bootstrap/js/jquery.js"></script>
     <script src="/static/bootstrap/js/bootstrap-transition.js"></script>
     <script src="/static/bootstrap/js/bootstrap-alert.js"></script>

@@ -5,6 +5,9 @@ from halls.models import Hall, Hour, FoodItem, MealMenu
 from datetime import datetime
 
 
+#
+# Display the index page, the list of halls and their open/closed status
+#
 def index(request):
     d = datetime.now()
     weekday = d.weekday()
@@ -42,7 +45,8 @@ def index(request):
     # flat makes it a list instead of tuples
     open_halls = Open.values_list('host_hall', flat=True)
     
-    ##This query block will return the next time that a hall opens on a day.
+    #
+    # This query block will return the next time that a hall opens on a day.
     #---------
     #filter for blocks of time that haven't ended yet
     Closed = Hour.objects.filter(
@@ -69,11 +73,11 @@ def index(request):
     c = Context({
                 'Halls': halls,
                 'date': d,
+                'day': weekday,
+                'nowHr': now_hour,
+                'nowMin': now_minute,
                 'openHalls': Open,
                 'closedHalls': Closed,
-                'day': weekday,
-                'nowMin': now_minute,
-                'nowHr': now_hour,
                 'closedForDay': closed_for_day
                 })
     return HttpResponse(t.render(c))
@@ -98,10 +102,10 @@ def hallmenu(request,hall_id,meal_id):
     c = Context({
                 # lizz: I want the name of the hall... hall with hall_id --> name?? i dont know :(
                 # Andrew: added here + template
-                'hall': hall_name,
-                'foodItems': food_items,
-                'mealType': meal_type,
+                'hallName': hall_name,
                 'date': d,
                 'day': weekday,
+                'mealType': meal_type,
+                'foodItems': food_items,
                 })
     return HttpResponse(t.render(c))

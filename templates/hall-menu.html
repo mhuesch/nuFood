@@ -9,6 +9,11 @@
 
     <!-- Styles -->
     <link href="/static/bootstrap/css/bootstrap.css" rel="stylesheet">
+    
+    <!-- Scripts written by us for this app, not from/for boostrap -->
+    <script src="/static/nuFood.js"></script>
+    <!-- <link href="/static/nuFood.css" rel="stylesheet"> -->
+        
     <style>
     
 body { padding-top: 60px; /* 60px to make the container go all the way to the bottom of the topbar */ }
@@ -54,7 +59,12 @@ body { padding-top: 60px; /* 60px to make the container go all the way to the bo
 
 h1 {font-size: 18pt;}
 
-/*.food-listing {padding: 2px; margin: 0 auto;}*/
+.food-listing {
+    display: block;
+    width: 90%;
+    padding: 2px;
+    margin: 0 auto;
+    }
 
 .food-name {
     width: 60%;
@@ -64,7 +74,7 @@ h1 {font-size: 18pt;}
 
 .food-info {
     text-align: right;
-    font-size: 9pt;
+    /*font-size: 9pt;*/
 }      
 
 .well-balanced { background-color: blue; }
@@ -79,49 +89,12 @@ h1 {font-size: 18pt;}
     
 <script>
 
-function displayDayName() {
-    switch ({{day}}) 
-    {
-        case 0: return "Monday"; 
-        case 1: return "Tuesday"; 
-        case 2: return "Wednesday"; 
-        case 3: return "Thursday"; 
-        case 4: return "Friday"; 
-        case 5: return "Saturday"; 
-        case 6: return "Sunday"; 
-        default: return "Unknown weekday"; 
-    }
-    return "Unknown weekday";
-}
 
-function displayMealName() {
 
-// is there a way to acces the MEAL_TYPES AND DAY_CHOICES from models.py? ***
 
-    switch ({{mealType}}) 
-    {
-        case 'BRK': return 'Breakfast';
-        case 'BRU': return 'Brunch';
-        case 'LUN': return 'Lunch';
-        case 'DIN': return 'Dinner';
-        case 'LAT': return 'Late Night';
-        case 'RET': return 'Retail';
-        default: return "Other";
-    }
-    return "Other";
-}
 
-function displayMenuTitle() {
-    var returnStr = "Menu for ";
-    returnStr += displayMealName();
-    returnStr += "in ";
-    returnStr += {{hall}};
-    returnStr += " for ";
-    returnStr += displayDayName();
-    returnStr += ", "+{{date}};
-    
-    return returnStr;
-}
+
+
 </script>
 
     <!-- Le fav and touch icons
@@ -161,27 +134,32 @@ function displayMenuTitle() {
     <div class="container">
     
     <h5>
-        Menu for {{mealType}} in {{ hall }} for {{day}}, date (without time)
-    <script>document.write(displayMenuTitle());</script>
+    <script>
+    // Fix display of month and day - how to access these variables
+    // only want to display month and day, eg. October 23, rather than 
+    // entire date, which includes year and time
+    document.write(displayMenuTitle('{{hallName}}', '{{mealType}}', {{day}}, '{{date}}.date.month', '{{date}}.date.day'));
+    </script>
     </h5>
-    
-    Host hall:
-    Day:
-    Meal name:
-    Meal hours:
-    Menu/food items:
 
         <!--
         <div id="test1"> test div 1</div>
         <div id="test2"> test div 2</div>
         -->
         <p>
+        <a class="btn btn-hall btn-large open"> 
+            <span class="food-name"> Food Name </span>
+            <span class="food-info"> Food Category </span>
+        </a>
+        
         {% for food in foodItems %}
         <div class="food-listing"> 
-        <a class="btn btn-hall btn-large open"> 
+        <!--<a class="btn btn-hall btn-large open"> -->
+        <li>
             <span class="food-name"> {{food.name}} </span>
             <span class="food-info"> {{food.category}} </span>
-        </a>
+        </li>
+        <!--</a>-->
         </div> 
         {% endfor %}
         </p>
