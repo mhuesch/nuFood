@@ -59,8 +59,8 @@ class FoodAttribute(models.Model):
 class FoodItem(models.Model):
     meal_menu = models.ManyToManyField(MealMenu)
     name = models.CharField(max_length=80)
-    category = models.ForeignKey(FoodCategory, blank=True, null=True, default=null)
-    attributes = models.ManyToManyField(FoodAttribute, blank=True, null=True, default=null)
+    category = models.ForeignKey(FoodCategory, blank=True, null=True, default=None)
+    attributes = models.ManyToManyField(FoodAttribute, blank=True, null=True, default=None)
     def __unicode__(self):
         return u'Food item: %s' % (self.name)
 
