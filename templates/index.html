@@ -254,7 +254,7 @@ function displayCurrentDayTime() {
         {% for hour in openHalls %}
         <!-- somehow create int i = 0… or have a hall id? -->
         <div class="hall-listing"> 
-            <a class="btn btn-hall btn-large open" href={% url halls.views.hallmenu hall_id=hour.host_hall.id %}>
+            <a class="btn btn-hall btn-large open" href={% url halls.views.hallmenu hall_id=hour.host_hall.id meal_id=hour.id %}>
         <!-- if hour.mealtype == ret, then add an id or something -->
         <span class="hall-name"> {{ hour.host_hall }} </span>
         <span class="hours-info"> <!--id="hall+i"-->

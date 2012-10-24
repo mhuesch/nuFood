@@ -179,8 +179,8 @@ function displayMenuTitle() {
         {% for food in foodItems %}
         <div class="food-listing"> 
         <a class="btn btn-hall btn-large open"> 
-        <span class="food-name"> {{food}}.name </span>
-        <span class="food-info"> {{food}}.category </span>
+            <span class="food-name"> {{food.name}} </span>
+            <span class="food-info"> {{food.category}} </span>
         </a>
         </div> 
         {% endfor %}

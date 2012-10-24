@@ -82,16 +82,16 @@ def index(request):
 #
 # Display the menu for a meal at a hall page
 #
-def hallmenu(request,hall_id):
+def hallmenu(request,hall_id,meal_id):
     hall_name = Hall.objects.get(id=hall_id).name
         #note: get will only work when you want just one object
     d = datetime.now()
     weekday = d.weekday()
     today = datetime.today()
     
-    meal_type = 'DIN'
+    meal_type = Hour.objects.filter(id=meal_id)[0].meal_type
     
-    food_items = FoodItem.objects.filter(meal_menu__meal_time__day=weekday).filter(meal_menu__meal_time__host_hall__id=hall_id).filter(meal_menu__meal_time__meal_type=meal_type).filter(meal_menu__date=today)
+    food_items = FoodItem.objects.filter(meal_menu__meal_time__id=meal_id).filter(meal_menu__date=today)
 
 
     t = loader.get_template('hall-menu.html')
