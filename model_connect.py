@@ -8,11 +8,20 @@ with open('items.json') as f:
 
 read = json.loads(data)
 
-# Map from hall name in JSON data to hall names in database. Use assoc list
-hall_dict = { u'1835 Hinman Caf\xe9' : 4 }
+# Dictionary mapping from hall name in JSON data to hall ids.
+hall_dict = { u'1835 Hinman Caf\xe9' : 4
+            , u'Sargent Caf\u00e9' : 7
+            , u'Elder Caf\u00e9' : 6
+            , u'Foster Walker West Caf\u00e9' : 2
+            , u'Foster Walker East Caf\u00e9' : 1
+            , u'Willard Caf\u00e9' : 3
+            , u'Allison Caf\u00e9' : 5
+            }
 
-# Map from month to month index
-mmap = dict((v,k) for k,v in enumerate(calendar.month_abbr))
+# Dictionary mapping from month to month index.
+month_dict = dict((v,k) for k,v in enumerate(calendar.month_abbr))
+
+
 
 hours = Hour.objects
 
@@ -24,7 +33,7 @@ for element in read:
     lun = element[u'lunch']
     din = element[u'dinner']
     daylist = element[u'absoluteWeek'].split(' ')
-    date_month = mmap[(daylist[0][:3])]
+    date_month = month_dict[(daylist[0][:3])]
     date_day = int(daylist[1].strip(','))
     date_year = int(daylist[2])
     date_obj = date(date_year,date_month,date_day)
