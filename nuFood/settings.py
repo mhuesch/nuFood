@@ -1,5 +1,5 @@
 # Django settings for nuFood project.
-import yaml
+#import yaml
 import os
 
 DEBUG = True
