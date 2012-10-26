@@ -29,7 +29,10 @@ class NucuisineSpider(CrawlSpider):
             item['lateNight'] = hxs.select('//tr//td[@id=' + day + ']//tr[@class="lat"]//td[@class="menuitem"]//div[@class="menuitem"]//span[@class="ul"]//text()').extract()
             if day == '"sunday"':
                 item['brunch'] = item['lunch']
-                del item['lunch']
-                del item['breakfast']
+                item['lunch'] = []
+                item['breakfast'] = []
+            else:
+                item['brunch'] = []
+                
             items.append(item)
         return items
