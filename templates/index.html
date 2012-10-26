@@ -23,9 +23,9 @@ body { padding-top: 60px; /* 60px to make the container go all the way to the bo
     display: block;
     width: 90%;
     font-size: 14px;
-    padding-left: 7px;
+    /*padding-left: 7px;
     padding-right: 7px;
-   /* padding: 0px; */
+    padding: 0px; */
     
     color: #ffffff;
     text-shadow: 0 -1px 0 rgba(0, 0, 0, 0.25);
@@ -140,10 +140,11 @@ h1 {font-size: 18pt;}
         <a class="btn btn-hall btn-large open"
             href={% url halls.views.hallmenu hall_name=hour.host_hall.name meal_name=hour.meal_type day_num=hour.day %}>
         {% else %}
-         <a class="btn btn-hall btn-large open">   
+        <!-- if hour.mealtype == ret, disable link -->
+         <a class="btn btn-hall disabled btn-large open">   
         {% endif %}
         <!-- would be nice if we could display the 3 letter day instead of a day number 0-6 in the url - but low priority -->
-        <!-- if hour.mealtype == ret, then add an id or something -->
+
         <span class="hall-name"> {{ hour.host_hall }} </span>
         
         <span class="hours-info"> <!--id="hall+i"-->
