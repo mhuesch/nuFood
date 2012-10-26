@@ -136,7 +136,12 @@ h1 {font-size: 18pt;}
         {% for hour in openHalls %}
         <!-- somehow create int i = 0… or have a hall id? -->
         <div class="hall-listing"> 
-            <a class="btn btn-hall btn-large open" href={% url halls.views.hallmenu hall_name=hour.host_hall.name meal_name=hour.meal_type day_num=hour.day %}>
+        {% if hour.meal_type != 'RET' %}
+        <a class="btn btn-hall btn-large open"
+            href={% url halls.views.hallmenu hall_name=hour.host_hall.name meal_name=hour.meal_type day_num=hour.day %}>
+        {% else %}
+         <a class="btn btn-hall btn-large open">   
+        {% endif %}
         <!-- would be nice if we could display the 3 letter day instead of a day number 0-6 in the url - but low priority -->
         <!-- if hour.mealtype == ret, then add an id or something -->
         <span class="hall-name"> {{ hour.host_hall }} </span>
@@ -153,13 +158,17 @@ h1 {font-size: 18pt;}
         </div> 
         {% endfor %}
         </p>
-        {% if closedHalls %}<h5>Opening Later Today</h5>
+        
+        <!-- ------------------------------------------------ -->
+        {% if closedHalls %}
+        <h5>Opening Later Today</h5>
         <p>
         {% for hour in closedHalls %}
         <div class="hall-listing">
         <a class="btn btn-hall btn-large closed">
         <span class="hall-name"> {{ hour.host_hall }} </span>
         <span class="hours-info">
+        {{ hour.mealType }}
         <script>
         document.write(displayOpenCloseTime({{hour.start_hour}}, {{hour.start_minute}}, false));
         </script>
@@ -172,7 +181,10 @@ h1 {font-size: 18pt;}
         {% endif %}
         </p>
         
-        {%if closedForDay %}<h5>Closed for the day</h5>
+        
+        <!-- ------------------------------------------------ -->
+        {%if closedForDay %}
+        <h5>Closed for the day</h5>
         {% for hall in closedForDay %}
         <div class="hall-listing">
             <a class="btn btn-hall btn-large closed">
