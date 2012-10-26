@@ -1,4 +1,4 @@
-from halls.models import Hall, Hour, MealMenu, FoodCategory, FoodAttribute, FoodItem
+from halls.models import Hall, Hour, MealMenu, FoodAttribute, FoodItem
 import json
 import calendar
 from datetime import date, timedelta
@@ -33,10 +33,7 @@ day_dict = { "monday" : 0
 month_dict = dict((v,k) for k,v in enumerate(calendar.month_abbr))
 
 # Meal choices
-meal_choices = ["BRK","LUN","DIN"]
-
-
-
+meal_choices = ["BRK","BRU","LUN","DIN","LAT"]
 
 for element in read:
     hall_name = element[u'hall']
@@ -48,8 +45,10 @@ for element in read:
     # FoodItem lists
     food_dict = dict()
     food_dict["BRK"] = element[u'breakfast']
+    food_dict["BRU"] = element[u'brunch']
     food_dict["LUN"] = element[u'lunch']
     food_dict["DIN"] = element[u'dinner']
+    food_dict["LAT"] = element[u'lateNight']
 
     # Date
     daylist = element[u'absoluteWeek'].split(' ')
@@ -63,6 +62,8 @@ for element in read:
 
     for meal in meal_choices:
         food_items = food_dict[meal]
+
+
         h = Hour.objects.filter(host_hall_id=hall_id,day=weekday_index,meal_type=meal)
 
         if h:
@@ -71,9 +72,19 @@ for element in read:
             m.save()
 
             for item in food_items:
-                fi = FoodItem(name=item)
-                fi.save()
+                fiList = FoodItem.objects.filter(name=item)
+
+                if fiList:
+                    # Get food item from list
+                    fi = fiList[0]
+                else:
+                    # Create new food item
+                    fi = FoodItem(name=item)
+                    fi.save()
+
+                # Create relation between food item and mealmenu
                 fi.meal_menu.add(m)
+        
         else:
             # If no meal found, print helpful message
             print "No meal type " + meal + " on day " + weekday_index
