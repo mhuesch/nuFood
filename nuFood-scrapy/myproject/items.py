@@ -10,6 +10,7 @@ class Day(Item):
     name = Field()
     absoluteWeek = Field()
     breakfast = Field()
+    brunch = Field()
     lunch = Field()
     dinner = Field()
     lateNight = Field()
