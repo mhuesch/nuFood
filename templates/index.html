@@ -137,6 +137,7 @@ h1 {font-size: 18pt;}
         <!-- somehow create int i = 0… or have a hall id? -->
         <div class="hall-listing"> 
             <a class="btn btn-hall btn-large open" href={% url halls.views.hallmenu hall_name=hour.host_hall.name meal_name=hour.meal_type day_num=hour.day %}>
+        <!-- would be nice if we could display the 3 letter day instead of a day number 0-6 in the url - but low priority -->
         <!-- if hour.mealtype == ret, then add an id or something -->
         <span class="hall-name"> {{ hour.host_hall }} </span>
         

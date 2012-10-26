@@ -18,6 +18,27 @@ function displayDayName(day) {
     return "Unknown weekday";
 }
 
+/* Name:    displayDayName
+ * Purpose: display abbreviated day name (for url)
+ * Params:  the current day, an int 0-6 (from database)
+ * Returns: the day name in string form
+ */
+function getShortDayName(day) {
+    switch (day) 
+    {
+        case 0: return "mon";
+        case 1: return "tue"; 
+        case 2: return "wed"; 
+        case 3: return "thu"; 
+        case 4: return "fri"; 
+        case 5: return "sat"; 
+        case 6: return "sun"; 
+        default: return "unk"; 
+    }
+    return "unk";
+}
+
+
 /* Name:    displayMealName
  * Purpose: display friendly name of a meal
  * Params:  a mealType, a 3-letter identifier (from database)
