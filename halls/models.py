@@ -45,21 +45,14 @@ class MealMenu(models.Model):
     def __unicode__(self):
         return u'%s on day %s' % (self.meal_time, self.date)
 
-class FoodCategory(models.Model):
-    name = models.CharField(max_length=40)
-    def __unicode__(self):
-        return u'Food category: %s' % (self.name)
-
 class FoodAttribute(models.Model):
-    name = models.CharField(max_length=20)
+    name = models.CharField(max_length=20, unique=True)
     def __unicode__(self):
         return u'Food attribute: %s' % (self.name)
 
-
 class FoodItem(models.Model):
     meal_menu = models.ManyToManyField(MealMenu)
-    name = models.CharField(max_length=80)
-    category = models.ForeignKey(FoodCategory, blank=True, null=True, default=None)
+    name = models.CharField(max_length=80, unique=True)
     attributes = models.ManyToManyField(FoodAttribute, blank=True, null=True, default=None)
     def __unicode__(self):
         return u'Food item: %s' % (self.name)
