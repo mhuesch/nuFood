@@ -136,7 +136,7 @@ h1 {font-size: 18pt;}
         {% for hour in openHalls %}
         <!-- somehow create int i = 0… or have a hall id? -->
         <div class="hall-listing"> 
-            <a class="btn btn-hall btn-large open" href={% url halls.views.hallmenu hall_id=hour.host_hall.id meal_id=hour.id %}>
+            <a class="btn btn-hall btn-large open" href={% url halls.views.hallmenu hall_name=hour.host_hall.name meal_name=hour.meal_type day_num=hour.day %}>
         <!-- if hour.mealtype == ret, then add an id or something -->
         <span class="hall-name"> {{ hour.host_hall }} </span>
         

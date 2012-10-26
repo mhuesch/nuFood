@@ -86,17 +86,25 @@ def index(request):
 #
 # Display the menu for a meal at a hall page
 #
-def hallmenu(request,hall_id,meal_id):
-    hall_name = Hall.objects.get(id=hall_id).name
-        #note: get will only work when you want just one object
+def hallmenu(request,hall_name,meal_name,day_num):
     d = datetime.now()
-    weekday = d.weekday()
+    days = ["Monday","Tuesday","Wednesday","Thursday","Friday","Saturday","Sunday"]
+    meal_dict = { 'BRK': 'Breakfast'
+                    , 'BRU': 'Brunch'
+                    , 'LUN': 'Lunch'
+                    , 'DIN': 'Dinner'
+                    , 'LAT': 'Late Night'
+                    , 'RET': 'Retail'
+    }
+    weekday = days[int(day_num)]
+    meal_type = meal_dict[meal_name]
     today = datetime.today()
     
-    meal_type = Hour.objects.filter(id=meal_id)[0].meal_type
+    hour_id = Hour.objects.get(host_hall__name=hall_name,meal_type=meal_name,day=day_num).id
     
-    food_items = FoodItem.objects.filter(meal_menu__meal_time__id=meal_id).filter(meal_menu__date=today)
+    food_items = FoodItem.objects.filter(meal_menu__meal_time__id=hour_id).filter(meal_menu__date__gte=today)
 
+    meal_type = meal_dict[meal_name]
 
     t = loader.get_template('hall-menu.html')
     c = Context({
