@@ -87,7 +87,7 @@ for element in read:
         
         else:
             # If no meal found, print helpful message
-            print "No meal type " + meal + " on day " + weekday_index
+            print "No meal type " + str(meal) + " on day " + str(weekday_index) + " in hall " + hall_name
 
 
     
