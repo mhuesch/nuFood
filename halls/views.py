@@ -90,15 +90,7 @@ def index(request):
 def hallmenu(request,hall_name,meal_name,day_num):
     d = datetime.now()
     days = ["Monday","Tuesday","Wednesday","Thursday","Friday","Saturday","Sunday"]
-    meal_dict = { 'BRK': 'Breakfast'
-                    , 'BRU': 'Brunch'
-                    , 'LUN': 'Lunch'
-                    , 'DIN': 'Dinner'
-                    , 'LAT': 'Late Night'
-                    , 'RET': 'Retail'
-    }
     weekday = days[int(day_num)]
-    meal_type = meal_dict[meal_name]
     today = datetime.today()
 
     #get time period from hall+meal+day
@@ -120,7 +112,7 @@ def hallmenu(request,hall_name,meal_name,day_num):
                 'hallName': hall_name,
                 'date': d,
                 'day': weekday,
-                'mealType': meal_type,
+                'mealType': meal_name,
                 'foodItems': food_items,
                 })
     return HttpResponse(t.render(c))
