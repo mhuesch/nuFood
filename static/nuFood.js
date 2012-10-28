@@ -154,13 +154,9 @@ function displayOpenCloseTime(hour, min, isOpen) {
     // diff = current-given  to calculate time until open (or x -1)
     var timeDiff = (hour*60+min)-(hourNow*60+minNow);
     
-    // TODO: ADD STYLING FOR OPEN/CLOSE SOON
-    
     // -- dining location is closing soon --
     if( isOpen & timeDiff>0 & timeDiff<soonLimit )
-        return "<font color='red'>closes in " + timeDiff + " min</font>";
-        
-    timeDiff = timeDiff*-1;
+        return "<font color='mediumvioletred'>closes in " + timeDiff + " min</font>";
 
     // -- dining location is opening soon --
     if ( !isOpen & timeDiff>0 & timeDiff<soonLimit)
