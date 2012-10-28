@@ -242,10 +242,11 @@ h1 {font-size: 18pt;}
                 
         <span class="hall-name"> {{ hour.host_hall }} </span>
         <span class="hours-info">
-        {{ hour.mealType }}
+        <!--{{ hour.mealType }}-->
         <script>
         document.write(displayOpenCloseTime({{hour.start_hour}}, {{hour.start_minute}}, false));
         </script>
+
         <!-- include a right icon if you can continue to view a menu -->
         <!-- <i class="icon-chevron-right"></i> -->
         </span>
