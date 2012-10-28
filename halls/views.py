@@ -3,6 +3,8 @@ from django.http import HttpResponse
 from django.db.models import Q
 from halls.models import Hall, Hour, FoodItem, MealMenu
 from datetime import datetime, timedelta
+from numpy import array
+from numpy.linalg import norm
 
 
 #
@@ -16,6 +18,22 @@ def index(request):
     #now_hour = 23
     #now_minute = 30
     halls = Hall.objects.all()
+
+
+    # Get latitude and longitude query params
+    lat = float(request.GET.get('lat'))
+    lon = float(request.GET.get('lon'))
+    
+    # If both are defined, find distances to halls
+    if (lat and lon):
+        current_loc_array = array((lat,lon))
+        loc_assoc = map(lambda h: (h.id,(h.lat,h.lon)), halls)
+        dist_assoc = list()
+        for pair in loc_assoc:
+            hall_loc_array = array(pair[1])
+            dist_assoc.append((pair[0],norm(current_loc_array - hall_loc_array)))
+        dist_assoc.sort(key= lambda x: x[1])
+        sorted_hall_ids = map(lambda x: x[0], dist_assoc)
     
     # Select hour objects from halls previous day which might still be open
     now_hour_for_yesterday = now_hour + 24

@@ -1,6 +1,13 @@
 Django==1.4.1
 PyYAML==3.10
+Scrapy==0.16.0
 South==0.7.6
+Twisted==12.2.0
 gunicorn==0.14.6
+lxml==3.0.1
+numpy==1.6.2
 psycopg2==2.4.5
+pyOpenSSL==0.13
+w3lib==1.2
 wsgiref==0.1.2
+zope.interface==4.0.1
