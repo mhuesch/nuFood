@@ -2,7 +2,7 @@ from django.template import Context, loader
 from django.http import HttpResponse
 from django.db.models import Q
 from halls.models import Hall, Hour, FoodItem, MealMenu
-from datetime import datetime
+from datetime import datetime, timedelta
 
 
 #
@@ -41,6 +41,7 @@ def index(request):
     
     Open = openFromYesterday | Open.exclude(host_hall__in=list(open_from_yesterday_halls))
     
+    Open = Open.order_by('end_hour','end_minute', 'host_hall__name')
     # values list returns list of tuples of selected values
     # flat makes it a list instead of tuples
     open_halls = Open.values_list('host_hall', flat=True)
@@ -99,10 +100,16 @@ def hallmenu(request,hall_name,meal_name,day_num):
     weekday = days[int(day_num)]
     meal_type = meal_dict[meal_name]
     today = datetime.today()
-    
+
+    #get time period from hall+meal+day
     hour_id = Hour.objects.get(host_hall__name=hall_name,meal_type=meal_name,day=day_num).id
-    
-    food_items = FoodItem.objects.filter(meal_menu__meal_time__id=hour_id).filter(meal_menu__date__gte=today)
+
+    #get distinct food items from this day, assuming the day is now or in the near future
+    food_items = FoodItem.objects.filter(
+            meal_menu__meal_time__id=hour_id #time matches
+    ).filter( 
+            meal_menu__date=(today+timedelta((int(day_num)-d.weekday()) % 7)) #date matching
+    ).distinct('name')
 
     meal_type = meal_dict[meal_name]
 
