@@ -89,8 +89,7 @@ def index(request):
 #
 def hallmenu(request,hall_name,meal_name,day_num):
     d = datetime.now()
-    days = ["Monday","Tuesday","Wednesday","Thursday","Friday","Saturday","Sunday"]
-    weekday = days[int(day_num)]
+    weekday = d.weekday()
     today = datetime.today()
 
     #get time period from hall+meal+day
@@ -102,8 +101,6 @@ def hallmenu(request,hall_name,meal_name,day_num):
     ).filter( 
             meal_menu__date=(today+timedelta((int(day_num)-d.weekday()) % 7)) #date matching
     ).distinct('name')
-
-    meal_type = meal_dict[meal_name]
 
     t = loader.get_template('hall-menu.html')
     c = Context({
