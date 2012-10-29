@@ -3,6 +3,7 @@ PyYAML==3.10
 Scrapy==0.16.0
 South==0.7.6
 Twisted==12.2.0
+functional==0.4
 gunicorn==0.14.6
 lxml==3.0.1
 numpy==1.6.2
