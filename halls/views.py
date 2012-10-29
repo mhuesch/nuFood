@@ -34,8 +34,9 @@ def index(request):
         for pair in loc_assoc:
             hall_loc_array = array(pair[1])
             dist_assoc.append((pair[0],norm(current_loc_array - hall_loc_array)))
-        dist_assoc.sort(key= lambda x: x[1])
+        dist_assoc.sort(key=lambda x: x[1])
         sorted_hall_ids = map(lambda x: x[0], dist_assoc)
+        
     
     # Select hour objects from halls previous day which might still be open
     now_hour_for_yesterday = now_hour + 24
