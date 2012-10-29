@@ -117,7 +117,7 @@ def index(request):
                 'openHalls': Open,
                 'closedHalls': Closed,
                 'closedForDay': closed_for_day,
-                'distDict': dist_dict
+                #'distDict': dist_dict
                 })
     return HttpResponse(t.render(c))
 

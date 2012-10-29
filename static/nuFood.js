@@ -1,3 +1,27 @@
+/* from: location.js
+
+ * Name:    ...
+ * Purpose: ...
+ * Params:  ...
+ * Returns: ...
+ */
+var lat;
+var lon;
+
+if (navigator.geolocation) {
+  navigator.geolocation.getCurrentPosition(Start);
+}
+
+function Start(location) {
+  lat = location.coords.latitude;
+  lon = location.coords.longitude;
+}
+
+function ProximityRedirect(opinion) {
+  window.location = "/?lat=" + lat + "&lon=" + lon;
+}
+
+
 /* Name:    displayDayName
  * Purpose: display friendly name of a day, rather than a number
  * Params:  the current day, an int 0-6 (from database)
