@@ -203,7 +203,7 @@ h1 {font-size: 18pt;}
          <a class="btn btn-hall disabled btn-open">   
         {% endif %}
         <!-- would be nice if we could display the 3 letter day instead of a day number 0-6 in the url - but low priority -->
-
+            
         <span class="hall-name"> {{ hour.host_hall }} </span>
         
         <span class="hours-info"> <!--id="hall+i"-->
@@ -264,7 +264,10 @@ h1 {font-size: 18pt;}
         <h5>Closed for the day</h5>
         {% for hall in closedForDay %}
         <div class="hall-listing">
-            <a class="btn btn-hall btn-closed">
+            <!-- since closed for the day, disable link -->
+            <!-- we COULD show a link to see the next meal, but since some halls are closed
+             all weekend, not going to prioritize this potential feature -->
+            <a class="btn btn-hall btn-closed disabled">
                 <span class="hall-name">
                     {{ hall.name }}
                 </span>
