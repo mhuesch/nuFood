@@ -116,7 +116,8 @@ def index(request):
                 'nowMin': now_minute,
                 'openHalls': Open,
                 'closedHalls': Closed,
-                'closedForDay': closed_for_day
+                'closedForDay': closed_for_day,
+                'distDict': dist_dict
                 })
     return HttpResponse(t.render(c))
 
