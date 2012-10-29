@@ -67,6 +67,7 @@
         document.write(displayCurrentDayTime({{day}}, {{nowHr}}, {{nowMin}}));
         </script>
         </h5>
+        <button onclick="ProximityRedirect()">Sort by proximity</button>
         <p>
         {% for hour in openHalls %}
         <!-- somehow create int i = 0… or have a hall id? -->
@@ -177,6 +178,7 @@
     <script src="/static/bootstrap/js/bootstrap-collapse.js"></script>
     <script src="/static/bootstrap/js/bootstrap-carousel.js"></script>
     <script src="/static/bootstrap/js/bootstrap-typeahead.js"></script>
+    <script src="/static/location.js"></script>
 
   </body>
 </html>
