@@ -199,6 +199,7 @@ function displayOpenCloseTime(hour, min, isOpen) {
  */
 function displayCurrentDayTime(day, hour, min) {
     var string = "Current Time: ";
+    string +="<br/>"; // add line break to display location sort button inline nicely on iphone
     //<!--{{nowHr}}:{{nowMin|stringformat:"02d"}}-->
     
     string += displayDayName(day);

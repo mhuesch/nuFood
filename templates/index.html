@@ -15,7 +15,20 @@
 
     <!-- Style written by us for this app, some needed to override bootstrap -->
     <link href="/static/nuFood.css" rel="stylesheet">
+    <style>
     
+        .proximitySort {
+            display: inline-block;
+            font-size: 9pt;
+            width: 130px;
+            float: right;
+        }
+    
+        
+    </style>
+        
+        
+        
     <link href="/static/bootstrap/css/bootstrap-responsive.css" rel="stylesheet">
     
 
@@ -55,13 +68,16 @@
 
     <!-- Dining hall list -->
     <div class="container">
-    
-        <h5>
+        
+      <h5>
+          <button class='btn btn-inverse proximitySort' onclick="ProximityRedirect()">Sort by proximity</button>
         <script>
         document.write(displayCurrentDayTime({{day}}, {{nowHr}}, {{nowMin}}));
         </script>
+          
+          
         </h5>
-        <button onclick="ProximityRedirect()">Sort by proximity</button>
+        
         <p>
         {% for hour in openHalls %}
         <!-- somehow create int i = 0… or have a hall id? -->
