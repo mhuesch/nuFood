@@ -170,8 +170,8 @@ function displayOpenCloseTime(hour, min, isOpen) {
     
     */
     
-    timeLabelStr = "closes at ";
-    if (!isOpen) timeLabelStr = "opens at ";
+    timeLabelStr = "<font class='timeLabel'>closes at </font>";
+    if (!isOpen) timeLabelStr = "<font class='timeLabel'>opens at </font>";
     
     // calculate difference between current time and given time
     // diff = given-current  to calculate time left open
@@ -180,11 +180,11 @@ function displayOpenCloseTime(hour, min, isOpen) {
     
     // -- dining location is closing soon --
     if( isOpen & timeDiff>0 & timeDiff<soonLimit )
-        return "<font color='mediumvioletred'>closes in " + timeDiff + " min</font>";
+        return "<font class='timeLabel'><font color='mediumvioletred'>closes in </font>" + timeDiff + " min</font>";
 
     // -- dining location is opening soon --
     if ( !isOpen & timeDiff>0 & timeDiff<soonLimit)
-        return "<font color='green'>opens in " + timeDiff + " min</font>";
+        return "<font class='timeLabel'><font color='green'>opens in </font>" + timeDiff + " min</font>";
    
     // dining location is not opening or closing soon
     // so just display the time normally

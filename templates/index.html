@@ -23,6 +23,8 @@
             width: 130px;
             float: right;
         }
+
+        .timeLabel { font-size: 8pt;}
     
         
     </style>
@@ -80,21 +82,23 @@
         
         <p>
         {% for hour in openHalls %}
-        <!-- somehow create int i = 0… or have a hall id? -->
-        <div class="hall-listing">
-            
+        <!-- div id = hall-listing-hallID -->
+        <div id="hall-listing-{{ hour.host_hall.id }}" class="hall-listing">  
+
         {% if hour.meal_type != 'RET' %}
         <a class="btn btn-hall btn-open"
            href={% url halls.views.hallmenu hall_name=hour.host_hall.name meal_name=hour.meal_type day_num=hour.day %}
+         <!-- would be nice if we could display the 3 letter day instead of a day number 0-6 in the url - but low priority -->
         {% else %}
-        <!-- if hour.mealtype == ret, disable link -->
+        <!-- if hour.mealtype == ret, disable link, no menu to display -->
          <a class="btn btn-hall disabled btn-open">   
         {% endif %}
-        <!-- would be nice if we could display the 3 letter day instead of a day number 0-6 in the url - but low priority -->
             
         <span class="hall-name"> {{ hour.host_hall }} </span>
         
-        <span class="hours-info"> <!--id="hall+i"-->
+        <!--id="hall+i"-->
+        <span id="hours-info-{{ hour.host_hall.id }}" class="hours-info"> 
+
        
          <!-- i think this is poor form (embedding script inside the main html, but i don't know how to call this function properly… i think if we had unique id #'s for halls, we would have unique document id's to write to, and could do that in an initialize function onload…? -->
          
@@ -102,7 +106,11 @@
         document.write(displayOpenCloseTime({{hour.end_hour}}, {{hour.end_minute}}, true));
         </script>
         </span>
-        
+
+        <!-- if hour.mealtype == ret, disable down arrow, no menu to display-->
+        {% if hour.meal_type != 'RET' %}
+        <i class="icon-chevron-down icon-white"></i>
+        {% endif %}
         </a>
         </div>
         {% endfor %}
@@ -113,7 +121,7 @@
         <h5>Opening Later Today</h5>
         <p>
         {% for hour in closedHalls %}
-        <div class="hall-listing">
+        <div id="hall-listing-{{ hour.host_hall.id }}" class="hall-listing">  
             
         {% if hour.meal_type != 'RET' %}
         <a class="btn btn-hall btn-closed"
@@ -124,14 +132,17 @@
          {% endif %}
                 
         <span class="hall-name"> {{ hour.host_hall }} </span>
-        <span class="hours-info">
+        <span id="hours-info-{{ hour.host_hall.id }}" class="hours-info"> 
         <!--{{ hour.mealType }}-->
         <script>
         document.write(displayOpenCloseTime({{hour.start_hour}}, {{hour.start_minute}}, false));
         </script>
 
         <!-- include a right icon if you can continue to view a menu -->
-        <!-- <i class="icon-chevron-right"></i> -->
+        <!-- if hour.mealtype == ret, do not display down arrow, no menu to display-->
+        {% if hour.meal_type != 'RET' %}
+        <i class="icon-chevron-down icon-white"></i>
+        {% endif %}
         </span>
         </a>
         </div> 
@@ -144,7 +155,7 @@
         {%if closedForDay %}
         <h5>Closed for the day</h5>
         {% for hall in closedForDay %}
-        <div class="hall-listing">
+        <div id="hall-listing-{{ hour.host_hall.id }}" class="hall-listing"> 
             <!-- since closed for the day, disable link -->
             <!-- we COULD show a link to see the next meal, but since some halls are closed
              all weekend, not going to prioritize this potential feature -->
@@ -153,7 +164,7 @@
                     {{ hall.name }}
                 </span>
                <!-- dist: distDict[{{ hour.host_hall_id}}] -->
-                <span class="hours-info">
+                <span id="hours-info-{{ hour.host_hall.id }}" class="hours-info"> 
                     
                 <!-- empty but keeps formatting consistent -->
                 </span>

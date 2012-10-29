@@ -68,10 +68,15 @@ h1 {font-size: 18pt;}
 
 .hours-info {
     display: inline-block;
-    width: 40%; /*100px;*/
+    width: 35%; /*100px;*/
     text-align: right;
     font-size: 9pt;
     /*background-color: blue;*/
+}
+
+.expand-arrow {
+
+
 }
         
 /*
@@ -133,7 +138,7 @@ h1 {font-size: 18pt;}
     }
 
 .food-name {
-    width: 60%;
+    width: 90%;
     display:inline-block;
     text-align: left;
 }
