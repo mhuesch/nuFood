@@ -17,7 +17,17 @@
         
 <style>
 
-.well-balanced { background-color: blue; }
+food-attribute
+    {
+        display: inline-block;
+        width: 10px;
+        height: 10px;
+        padding: 0px;
+    }
+
+.well-balanced {
+    background-color: blue;
+}
 
 .vegan { background-color: yellow; }
 
@@ -28,7 +38,6 @@
 <link href="/static/bootstrap/css/bootstrap-responsive.css" rel="stylesheet">
     
 <script>
-
 
 </script>
 
@@ -64,7 +73,7 @@
 
     <!-- Hall Menu - list of food offerings -->
     <div class="container">
-    
+    <div class="food-attribute well-balanced"></div>
     <h5>
     <script>
     // Fix display of month and day - how to access these variables
@@ -88,6 +97,7 @@
         <!--<a class="btn btn-hall btn-large open"> -->
         <li>
             <span class="food-name"> {{food.name}} </span>
+            
             <!--<span class="food-info"> {{food.category}} </span>-->
             <!-- use for food attributes?? -->
         </li>
