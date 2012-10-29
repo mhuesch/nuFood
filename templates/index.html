@@ -85,7 +85,7 @@
             
         {% if hour.meal_type != 'RET' %}
         <a class="btn btn-hall btn-open"
-            href={% url halls.views.hallmenu hall_name=hour.host_hall.name meal_name=hour.meal_type day_num=hour.day %}>
+           href={% url halls.views.hallmenu hall_name=hour.host_hall.name meal_name=hour.meal_type day_num=hour.day %}
         {% else %}
         <!-- if hour.mealtype == ret, disable link -->
          <a class="btn btn-hall disabled btn-open">   
@@ -103,10 +103,8 @@
         </script>
         </span>
         
-
-             
         </a>
-        </div> 
+        </div>
         {% endfor %}
         </p>
         
@@ -163,6 +161,75 @@
         </div>
         {% endfor %}
         {% endif %}
+        
+        
+        
+        
+        <!-- TESTING accordion display of menu (rather than directing user to a new page
+         so close... just trying to get damn query right for the food items list loop
+        {% if closedHalls %}
+        <h5>Trial Accordion menus using closed but opening later halls</h5>
+        <p>
+        {% for hour in closedHalls %}
+        <div class="hall-listing">
+            
+            {% if hour.meal_type != 'RET' %}
+            <a class="btn btn-hall btn-closed accordion-toggle" data-toggle="collapse"
+                href="#menu-{{ hour.host_hall.id }}">
+            {% else %}
+                <!-- if hour.mealtype == ret, disable link --
+                <a class="btn btn-hall disabled btn-closed">
+            {% endif %}
+                    
+                <span class="hall-name"> {{ hour.host_hall }} </span>
+                
+                <span class="hours-info">
+                <script>
+                document.write(displayOpenCloseTime({{hour.start_hour}}, {{hour.start_minute}}, false));
+                </script>                
+                <!-- include a down icon if you can continue to view a menu -->
+                <!-- <i class="icon-chevron-right"></i> --
+                    
+                </span>
+            </a>
+        </div> <!-- end "hall-listing" div--
+        
+        <div id="menu-{{ hour.host_hall.id }}" class="collapse menu">
+           <!-- href= halls.views.hallmenu hall_name=hour.host_hall.name meal_name=hour.meal_type day_num=hour.day --
+            
+            <div> <!-- class="accordion-inner"--
+                <script>
+                document.write(displayMenuTitle('{{hallName}}', '{{mealType}}', {{day}}, '{{date}}.date.month', '{{date}}.date.day'));
+                </script>
+                
+                <!-- just for example testing
+                <div class="food-listing"> <li> <span class="food-name"> food 1 </span> </li> </div>
+                <div class="food-listing"> <li> <span class="food-name"> food 2 </span> </li> </div>
+                <div class="food-listing"> <li> <span class="food-name"> food 3 </span> </li> </div>
+                <div class="food-listing"> <li> <span class="food-name"> food 4 </span> </li> </div>
+                <div class="food-listing"> <li> <span class="food-name"> food 5 </span> </li> </div>
+                 --
+                
+                for
+                 FIX THE QUERY HERE but for some reason python is cranky so even though commented out have to delete my attempt...
+                <div class="food-listing">
+                    <li>
+                        <span class="food-name"> {{food.name}} </span>
+                    </li>
+                </div> 
+                endfor
+
+            </div> <!-- end "accordion-inner" div --
+        </div> <!-- end hall-id specific menu div --
+        
+        {% endfor %}
+        {% endif %}
+        </p> -->
+        
+      
+      
+      
+
         
     <br/><br/>
     </div> <!-- /container -->
