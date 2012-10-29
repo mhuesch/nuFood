@@ -21,11 +21,13 @@ def index(request):
 
 
     # Get latitude and longitude query params
-    lat = float(request.GET.get('lat'))
-    lon = float(request.GET.get('lon'))
+    lat_str = request.GET.get('lat')
+    lon_str = request.GET.get('lon')
     
     # If both are defined, find distances to halls
-    if (lat and lon):
+    if (lat_str and lon_str):
+        lat = float(lat_str)
+        lon = float(lon_str)
         current_loc_array = array((lat,lon))
         loc_assoc = map(lambda h: (h.id,(h.lat,h.lon)), halls)
         dist_assoc = list()
