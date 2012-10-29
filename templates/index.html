@@ -158,17 +158,18 @@ h1 {font-size: 18pt;}
       <div class="navbar-inner">
         <div class="container">
           <a class="btn btn-navbar" data-toggle="collapse" data-target=".nav-collapse">
-            <span class="icon-bar"></span>
-            <span class="icon-bar"></span>
-            <span class="icon-bar"></span>
+            <i class="icon-info-sign icon-white"></i>
           </a>
-          <a class="brand" href="">nuFood</a>
+          <a class="brand" href="/">nuFood</a>
           <div class="nav-collapse collapse">
             <ul class="nav">
-              <li class="active"><a href="#">Home</a></li>
-              <!-- About and contact pages not built
-              <li><a href="/about">About</a></li>
-              <li><a href="/contact">Contact</a></li>-->
+              <!--<li class="active"><a href="#">Home</a></li>-->
+              <li>
+                  <a> View nuCuisine menus and hours on the go.</a>
+              </li>
+            <!-- About and contact pages not built
+             <li><a href="/about">About</a></li>
+             <li><a href="/contact">Contact</a></li> -->
             </ul>
           </div><!--/.nav-collapse -->
         </div>
@@ -192,7 +193,8 @@ h1 {font-size: 18pt;}
         <p>
         {% for hour in openHalls %}
         <!-- somehow create int i = 0… or have a hall id? -->
-        <div class="hall-listing"> 
+        <div class="hall-listing">
+            
         {% if hour.meal_type != 'RET' %}
         <a class="btn btn-hall btn-open"
             href={% url halls.views.hallmenu hall_name=hour.host_hall.name meal_name=hour.meal_type day_num=hour.day %}>
