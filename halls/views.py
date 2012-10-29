@@ -5,6 +5,8 @@ from halls.models import Hall, Hour, FoodItem, MealMenu
 from datetime import datetime, timedelta
 from numpy import array
 from numpy.linalg import norm
+import operator
+from functional import compose
 
 
 #
@@ -23,21 +25,23 @@ def index(request):
     # Get latitude and longitude query params
     lat_str = request.GET.get('lat')
     lon_str = request.GET.get('lon')
+
+    prox = (lat_str and lon_str)
     
     # If both are defined, find distances to halls
-    if (lat_str and lon_str):
+    if prox:
         lat = float(lat_str)
         lon = float(lon_str)
         current_loc_array = array((lat,lon))
         loc_assoc = map(lambda h: (h.id,(h.lat,h.lon)), halls)
-        dist_assoc = list()
+        
+        one_degree_to_mile = 64.812936859
+
+        # Create dictionary from hall ids to distances in miles
+        dist_dict = dict()
         for pair in loc_assoc:
             hall_loc_array = array(pair[1])
-            dist_assoc.append((pair[0],norm(current_loc_array - hall_loc_array)))
-        dist_assoc.sort(key=lambda x: x[1])
-        one_degree_to_mile = 64.812936859
-        dist_assoc = map(lambda t: (t[0], one_degree_to_mile*t[1]), dist_assoc)
-        sorted_hall_ids = map(lambda x: x[0], dist_assoc)
+            dist_dict[pair[0]] = one_degree_to_mile * norm(current_loc_array - hall_loc_array)
 
     
     # Select hour objects from halls previous day which might still be open
@@ -64,10 +68,14 @@ def index(request):
     
     Open = openFromYesterday | Open.exclude(host_hall__in=list(open_from_yesterday_halls))
     
-    Open = Open.order_by('end_hour','end_minute', 'host_hall__name')
+    open_halls = Open.values_list('host_hall', flat=True)
+
+    if prox:
+        Open = sorted(Open,key=compose(lambda x: dist_dict[x], operator.attrgetter('host_hall_id')))
+    else:
+        Open = Open.order_by('end_hour','end_minute', 'host_hall__name')
     # values list returns list of tuples of selected values
     # flat makes it a list instead of tuples
-    open_halls = Open.values_list('host_hall', flat=True)
     
     #
     # This query block will return the next time that a hall opens on a day.
@@ -79,15 +87,21 @@ def index(request):
         Q(start_hour__lt=now_hour) | (Q(start_hour=now_hour) & Q(start_minute__lt=now_minute))
     ).filter(
         day=weekday
-    ).order_by(
-        'host_hall','start_hour','start_minute'
     ).distinct(
         'host_hall'
     ).exclude(
         host_hall__in=list(open_halls)
     )
-    
+
     closed_halls = Closed.values_list('host_hall', flat=True)
+
+    if prox:
+        Closed = sorted(Closed,key=compose(lambda x: dist_dict[x], operator.attrgetter('host_hall_id')))
+    else:
+        Closed = Closed.order_by(
+            'host_hall','start_hour','start_minute'
+        )
+    
     
     closed_for_day = Hall.objects.exclude(id__in=list(closed_halls)).exclude(id__in=list(open_halls))
 
