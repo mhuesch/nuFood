@@ -16,6 +16,142 @@
     <!-- Style written by us for this app, some needed to override bootstrap -->
     <link href="/static/nuFood.css" rel="stylesheet">
     <style>
+        
+    .btn {
+        margin-left: 0px;
+    }
+    
+    .btn-hall {
+        text-align: left;
+        display: block;
+        width: 90%;
+        font-size: 14px;
+        /*padding-left: 7px;
+         padding-right: 7px;
+         padding: 0px; */
+        
+        /* from btn-large */
+        padding: 7px 14px; /*9px 14px;*/
+        font-size: 14px; /*16px;*/
+        line-height: normal;
+        -webkit-border-radius: 5px;
+        -moz-border-radius: 5px;
+        border-radius: 5px;
+        
+        
+    }
+    
+    
+    .btn-open:hover,
+    .btn-open:active,
+    .btn-open.active,
+    .btn-open.disabled,
+    .btn-open[disabled] {
+        color: #ffffff;
+        background-color: #2f96b4;
+        *background-color: #2a85a0;
+    }
+    
+    
+    .btn-hall.active { background-color: #24748c \9; }
+    
+    
+    h1 {font-size: 18pt;}
+    
+    /*.hall-listing {padding: 2px; margin: 0 auto;}*/
+    
+    /*
+     spans ------------------------------
+     */
+    .hall-name {
+        width: 55%; /*395px;*/
+        display: inline-block;
+        text-align: left;
+        /*background-color: red;*/
+    }
+    
+    .hours-info {
+        display: inline-block;
+        width: 35%; /*100px;*/
+        text-align: right;
+        font-size: 9pt;
+        /*background-color: blue;*/
+    }
+    
+    .expand-arrow {
+        
+        
+    }
+    
+    /*
+     .open { background-color: #7cc817; }
+     
+     .closed { background-color: red; }
+     */
+    
+    /* grey button, pretty blue text */
+    .btn-closed {
+        /* grey button */
+        color: #2f96b4 !important;
+        
+        background-color: hsl(0, 0%, 88%) !important;
+        background-repeat: repeat-x;
+        filter: progid:DXImageTransform.Microsoft.gradient(startColorstr="#11d11d11d", endColorstr="#e0e0e0");
+        background-image: -khtml-gradient(linear, left top, left bottom, from(#11d11d11d), to(#e0e0e0));
+        background-image: -moz-linear-gradient(top, #11d11d11d, #e0e0e0);
+        background-image: -ms-linear-gradient(top, #11d11d11d, #e0e0e0);
+        background-image: -webkit-gradient(linear, left top, left bottom, color-stop(0%, #11d11d11d), color-stop(100%, #e0e0e0));
+        background-image: -webkit-linear-gradient(top, #11d11d11d, #e0e0e0);
+        background-image: -o-linear-gradient(top, #11d11d11d, #e0e0e0);
+        background-image: linear-gradient(#11d11d11d, #e0e0e0);
+        border-color: #e0e0e0 #e0e0e0 hsl(0, 0%, 82%);
+        text-shadow: 0 1px 1px rgba(255, 255, 255, 0.39);
+        -webkit-font-smoothing: antialiased;
+    }
+    
+    
+    /* pretty blue, white text */
+    .btn-open {
+        color: #ffffff;
+        
+        text-shadow: 0 -1px 0 rgba(0, 0, 0, 0.25);
+        background-color: #49afcd;
+        *background-color: #2f96b4;
+        background-image: -webkit-gradient(linear, 0 0, 0 100%, from(#5bc0de), to(#2f96b4));
+        background-image: -webkit-linear-gradient(top, #5bc0de, #2f96b4);
+        background-image: -o-linear-gradient(top, #5bc0de, #2f96b4);
+        background-image: linear-gradient(to bottom, #5bc0de, #2f96b4);
+        background-image: -moz-linear-gradient(top, #5bc0de, #2f96b4);
+        background-repeat: repeat-x;
+        border-color: #2f96b4 #2f96b4 #1f6377;
+        border-color: rgba(0, 0, 0, 0.1) rgba(0, 0, 0, 0.1) rgba(0, 0, 0, 0.25);
+        filter: progid:dximagetransform.microsoft.gradient(startColorstr='#ff5bc0de', endColorstr='#ff2f96b4', GradientType=0);
+        filter: progid:dximagetransform.microsoft.gradient(enabled=false);
+    }
+    
+    /*-------------------------- hall-menu css -------------------------------*/
+    
+    
+    h1 {font-size: 18pt;}
+    
+    .food-listing {
+        display: block;
+        width: 90%;
+        padding: 2px;
+        margin: 0 auto;
+    }
+    
+    .food-name {
+        width: 90%;
+        display:inline-block;
+        text-align: left;
+    }
+    
+    
+    .food-info {
+        text-align: right;
+        /*font-size: 9pt;*/
+    }
     
         .heading {width: 90%;}
         .proximitySort {
@@ -112,101 +248,183 @@
             <i class="icon-info-sign icon-white"></i>
           </a>
           <a class="brand" href="/">nuFood</a>
+            
           <div class="nav-collapse collapse">
             <ul class="nav">
-              <!--<li class="active"><a href="#">Home</a></li>-->
               <li>
                   <a> View nuCuisine menus and hours on the go.</a>
               </li>
-            <!-- About and contact pages not built
-             <li><a href="/about">About</a></li>
-             <li><a href="/contact">Contact</a></li> -->
             </ul>
-          </div><!--/.nav-collapse -->
-        </div>
-      </div>
-    </div>
+          </div> <!-- END nav-collapse collapse /.nav-collapse -->
+            
+        </div> <!-- END container-->
+      </div> <!-- END navbar-inner -->
+    </div> <!-- END navbar navbar-inverse navbar-fixed-top -->
+      
 
-    <!-- Dining hall list -->
+      
+    <!-- ----- ----- Dining hall list ----- ----- -->
+      
     <div class="container">
  
         <div class="heading">
-        <button class='btn btn-inverse proximitySort' onclick="ProximityRedirect()">
-            Sort by proximity
-        </button>
-      
-        <h5>
-        <script>
-        document.write(displayCurrentDayTime({{day}}, {{nowHr}}, {{nowMin}}));
-        </script>
-        </h5>
+            <button class='btn btn-inverse proximitySort' onclick="ProximityRedirect()">
+                Sort by proximity
+            </button>
+          
+            <h5>
+                
+              <!-- would be nice if we could display the 3 letter day instead of a day number 0-6 in the url - but low priority -->
+                
+         <!-- i think this is poor form (embedding script inside the main html, but i don't know how to call this function properly… i think if we had unique id #'s for halls, we would have unique document id's to write to, and could do that in an initialize function onload…? 
+          for each hour in openHalls
+          hallid = hour.host_hall.id
+          div id = hall-listing-hallID
+          
+          document.getelementbyid(hours-info-hallID).innerhtml = 
+          document.write(displayOpenCloseTime({{hour.end_hour}}, {{hour.end_minute}}, true));
+          
+          -->
+                         <!-- if hour.mealtype == ret, disable link, no menu to display -->
+                        <!-- if hour.mealtype == ret, disable down arrow, no menu to display-->
+                <script>
+                document.write(displayCurrentDayTime({{day}}, {{nowHr}}, {{nowMin}}));
+                </script>
+            </h5>
         </div>
+        
         <p>
         {% for hour in openHalls %}
-        <!-- div id = hall-listing-hallID -->
-        <div id="hall-listing-{{ hour.host_hall.id }}" class="hall-listing">  
-
-        {% if hour.meal_type != 'RET' %}
-        <a class="btn btn-hall btn-open"
-           href={% url halls.views.hallmenu hall_name=hour.host_hall.name meal_name=hour.meal_type day_num=hour.day %}
-         <!-- would be nice if we could display the 3 letter day instead of a day number 0-6 in the url - but low priority -->
-        {% else %}
-        <!-- if hour.mealtype == ret, disable link, no menu to display -->
-         <a class="btn btn-hall disabled btn-open">   
-        {% endif %}
+        <div id="hall-listing-{{ hour.host_hall.id }}"
+             class="hall-listing">
             
-        <span class="hall-name"> {{ hour.host_hall }} </span>
+            <!-- Only enable the button for clicking to see menu
+                 if it is not a retail locaiton -->
+            
+            {% if hour.meal_type != 'RET' %}
+            <a class="btn btn-hall btn-open accordion-toggle"
+               data-toggle="collapse" href="#menu-{{ hour.host_hall.id }}">
+                 <!-- href={% url halls.views.hallmenu hall_name=hour.host_hall.name meal_name=hour.meal_type day_num=hour.day %} -->
+            {% else %}
+            <a class="btn btn-hall btn-open disabled">
+            {% endif %}
+                
+            <span class="hall-name"> {{ hour.host_hall }} </span>
         
-        <!--id="hall+i"-->
-        <span id="hours-info-{{ hour.host_hall.id }}" class="hours-info"> 
+            <span id="hours-info-{{ hour.host_hall.id }}"
+                  class="hours-info">
+                <script>
+                document.write(displayOpenCloseTime({{hour.end_hour}}, {{hour.end_minute}}, true));
+                </script>
+            </span>
 
-       
-         <!-- i think this is poor form (embedding script inside the main html, but i don't know how to call this function properly… i think if we had unique id #'s for halls, we would have unique document id's to write to, and could do that in an initialize function onload…? -->
-         
-        <script>
-        document.write(displayOpenCloseTime({{hour.end_hour}}, {{hour.end_minute}}, true));
-        </script>
-        </span>
-
-        <!-- if hour.mealtype == ret, disable down arrow, no menu to display-->
-        {% if hour.meal_type != 'RET' %}
-        <i class="icon-chevron-down icon-white"></i>
-        {% endif %}
-        </a>
-        </div>
+            <!-- include a down icon if you can continue to view a menu
+                 (not a retail location) -->
+            {% if hour.meal_type != 'RET' %}
+            <i class="icon-chevron-down icon-white"></i>
+            {% endif %}
+            </a>
+        </div>  <!-- end "hall-listing" div-->
+        
+        
+        <!-- ----- Collapsed menu (accordion style) ----- -->
+        
+        <div id="menu-{{ hour.host_hall.id }}" class="collapse menu">
+            <div> <!-- class="accordion-inner"-->
+                <script>
+                    document.write(displayMenuTitle('{{hallName}}', '{{hour.meal_type}}', {{day}}, '{{date}}.date.month', '{{date}}.date.day'));
+                </script>
+                
+                <!-- Get the food items of the current/upcoming meal
+                 for this button's dining location -->
+                {% for key, value in food_items.items %}
+                    {% if key == hour.id %}
+                        {% for item in value %}
+                            <div class="food-listing">
+                                <li>
+                                    <span class="food-name"> {{item.name}} </span>
+                                    <!-- if item.name is vegetarian, add a badge/label -->
+                                    <!-- if item.name is vegan, add a badge/label -->
+                                    <!-- if item.name is well-balanced, add a badge/label -->
+                                    <!-- <span class="badge badge-warning">4</span> -->
+                                </li>
+                            </div>
+                        {% endfor %}
+                    {% endif %}
+                {% endfor %}
+                
+            </div> <!-- end "accordion-inner" div -->
+        </div> <!-- end hall-id specific menu div -->
+        
         {% endfor %}
         </p>
+
         
         <!-- ------------------------------------------------ -->
         {% if closedHalls %}
         <h5>Opening Later Today</h5>
         <p>
         {% for hour in closedHalls %}
-        <div id="hall-listing-{{ hour.host_hall.id }}" class="hall-listing">  
+        <div id="hall-listing-{{ hour.host_hall.id }}"
+             class="hall-listing">
             
-        {% if hour.meal_type != 'RET' %}
-        <a class="btn btn-hall btn-closed"
-            href={% url halls.views.hallmenu hall_name=hour.host_hall.name meal_name=hour.meal_type day_num=hour.day %}>
-        {% else %}
-            <!-- if hour.mealtype == ret, disable link -->
-            <a class="btn btn-hall disabled btn-closed">
-         {% endif %}
+            <!-- Only enable the button for clicking to see menu
+             if it is not a retail locaiton -->
+            
+            {% if hour.meal_type != 'RET' %}
+            <a class="btn btn-hall btn-closed accordion-toggle"
+                data-toggle="collapse" href="#menu-{{ hour.host_hall.id }}">
+            {% else %}
+            <a class="btn btn-hall btn-closed disabled">
+            {% endif %}
+            
+                <span class="hall-name"> {{ hour.host_hall }} </span>
                 
-        <span class="hall-name"> {{ hour.host_hall }} </span>
-        <span id="hours-info-{{ hour.host_hall.id }}" class="hours-info"> 
-        <!--{{ hour.mealType }}-->
-        <script>
-        document.write(displayOpenCloseTime({{hour.start_hour}}, {{hour.start_minute}}, false));
-        </script>
-
-        <!-- include a right icon if you can continue to view a menu -->
-        <!-- if hour.mealtype == ret, do not display down arrow, no menu to display-->
-        {% if hour.meal_type != 'RET' %}
-        <i class="icon-chevron-down"></i>
-        {% endif %}
-        </span>
-        </a>
-        </div> 
+                <span id="hours-info-{{ hour.host_hall.id }}"
+                    class="hours-info">
+                    <script>
+                        document.write(displayOpenCloseTime({{hour.end_hour}}, {{hour.end_minute}}, true));
+                        </script>
+                </span>
+                
+                <!-- include a down icon if you can continue to view a menu
+                 (not a retail location) -->
+                {% if hour.meal_type != 'RET' %}
+                <i class="icon-chevron-down icon-white"></i>
+                {% endif %}
+            </a>
+        </div>  <!-- end "hall-listing" div-->
+                    
+        
+        <!-- ----- Collapsed menu (accordion style) ----- -->
+        
+        <div id="menu-{{ hour.host_hall.id }}" class="collapse menu">
+            <div> <!-- class="accordion-inner"-->
+                <script>
+                    document.write(displayMenuTitle('{{hallName}}', '{{hour.meal_type}}', {{day}}, '{{date}}.date.month', '{{date}}.date.day'));
+                    </script>
+                
+                <!-- Get the food items of the current/upcoming meal
+                 for this button's dining location -->
+                {% for key, value in food_items.items %}
+                {% if key == hour.id %}
+                {% for item in value %}
+                <div class="food-listing">
+                    <li>
+                        <span class="food-name"> {{item.name}} </span>
+                        <!-- if item.name is vegetarian, add a badge/label -->
+                        <!-- if item.name is vegan, add a badge/label -->
+                        <!-- if item.name is well-balanced, add a badge/label -->
+                        <!-- <span class="badge badge-warning">4</span> -->
+                    </li>
+                </div>
+                {% endfor %}
+                {% endif %}
+                {% endfor %}
+                
+            </div> <!-- end "accordion-inner" div -->
+        </div> <!-- end hall-id specific menu div -->
+        
         {% endfor %}
         {% endif %}
         </p>
@@ -233,97 +451,8 @@
         </div>
         {% endfor %}
         {% endif %}
-        
-        
-        
-        
-        <!-- TESTING accordion display of menu (rather than directing user to a new page
-         so close... just trying to get damn query right for the food items list loop -->
-        {% if closedHalls %}
-        <h5>Trial Accordion menus using closed but opening later halls</h5>
-        <p>
-        {% for hour in closedHalls %}
-        <div class="hall-listing">
-            
-            {% if hour.meal_type != 'RET' %}
-            <a class="btn btn-hall btn-closed accordion-toggle" data-toggle="collapse"
-                href="#menu-{{ hour.host_hall.id }}">
-            {% else %}
-                <!-- if hour.mealtype == ret, disable link -->
-                <a class="btn btn-hall disabled btn-closed">
-            {% endif %}
-                    
-                <span class="hall-name"> {{ hour.host_hall }} </span>
-                
-                <span class="hours-info">
-                <script>
-                document.write(displayOpenCloseTime({{hour.start_hour}}, {{hour.start_minute}}, false));
-                </script>                
-                <!-- include a down icon if you can continue to view a menu -->
-                <!-- <i class="icon-chevron-right"></i> -->
-                {% if hour.meal_type != 'RET' %}
-                <i class="icon-chevron-down"></i>
-                {% endif %}    
-                </span>
-            </a>
-        </div> <!-- end "hall-listing" div-->
-        
-        <div id="menu-{{ hour.host_hall.id }}" class="collapse menu">
-           <!-- href= halls.views.hallmenu hall_name=hour.host_hall.name meal_name=hour.meal_type day_num=hour.day -->
-            
-            <div> <!-- class="accordion-inner"-->
-                <script>
-                document.write(displayMenuTitle('{{hallName}}', '{{mealType}}', {{day}}, '{{date}}.date.month', '{{date}}.date.day'));
-                </script>
-                
-                <!-- This will work in both openHalls and closedHalls -->
-                {% for key, value in food_items.items %}
-                    {% if key == hour.id %}
-                        {% for item in value %}
-                        <div class="food-listing"> <li> <span class="food-name"> {{item.name}} </span> </li> </div>
-                        {% endfor %}
-                    {% endif %}
-                {% endfor %}
-                <!-- end working block -->
-                
-                
-                <!-- just for example testing 
-                <div class="food-listing">
-                    
-                <li> <span class="badge badge-warning">4</span>
-                     <span class="food-name"> food 1 </span>
-                </li>
-                     
-                </div>
-                <div class="food-listing"> <li> <span class="food-name"> food 2 </span> </li> </div>
-                <div class="food-listing"> <li> <span class="food-name"> food 3 </span> </li> </div>
-                <div class="food-listing"> <li> <span class="food-name"> food 4 </span> </li> </div>
-                <div class="food-listing"> <li> <span class="food-name"> food 5 </span> </li> </div>
-                -->
-                
-             <!-- FIX THE QUERY HERE
-              but for some reason python is cranky so even though commented out
-              have to delete my attempt... 
-                
-                {% for food in FoodItems %}
-                <div class="food-listing">
-                    <li>
-                        <span class="food-name"> {{food.name}} </span>
-                    </li>
-                </div>
-                {% endfor %}-->
-
-            </div> <!-- end "accordion-inner" div -->
-        </div> <!-- end hall-id specific menu div -->
-        
-        {% endfor %}
-        {% endif %}
         </p>
         
-      
-      
-      
-
         
     <br/><br/>
     </div> <!-- /container -->
