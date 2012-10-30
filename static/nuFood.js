@@ -8,18 +8,20 @@
 var lat;
 var lon;
 
-if (navigator.geolocation) {
-    navigator.geolocation.getCurrentPosition(Start);
-}
+
 
 function Start(location) {
     lat = location.coords.latitude;
     lon = location.coords.longitude;
-}
 
-function ProximityRedirect(opinion) {
     if ((typeof(lat) == 'number') && (typeof(lon) == 'number')) {
         window.location = "/?lat=" + lat + "&lon=" + lon;
+    }
+}
+
+function ProximityRedirect() {
+    if (navigator.geolocation) {
+       navigator.geolocation.getCurrentPosition(Start);
     }
 }
 
