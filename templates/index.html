@@ -276,7 +276,18 @@
                 document.write(displayMenuTitle('{{hallName}}', '{{mealType}}', {{day}}, '{{date}}.date.month', '{{date}}.date.day'));
                 </script>
                 
-                <!-- just for example testing -->
+                <!-- This will work in both openHalls and closedHalls -->
+                {% for key, value in food_items.items %}
+                    {% if key == hour.id %}
+                        {% for item in value %}
+                        <div class="food-listing"> <li> <span class="food-name"> {{item.name}} </span> </li> </div>
+                        {% endfor %}
+                    {% endif %}
+                {% endfor %}
+                <!-- end working block -->
+                
+                
+                <!-- just for example testing 
                 <div class="food-listing">
                     
                 <li> <span class="badge badge-warning">4</span>
@@ -288,19 +299,19 @@
                 <div class="food-listing"> <li> <span class="food-name"> food 3 </span> </li> </div>
                 <div class="food-listing"> <li> <span class="food-name"> food 4 </span> </li> </div>
                 <div class="food-listing"> <li> <span class="food-name"> food 5 </span> </li> </div>
-                
+                -->
                 
              <!-- FIX THE QUERY HERE
               but for some reason python is cranky so even though commented out
-              have to delete my attempt... -->
+              have to delete my attempt... 
                 
                 {% for food in FoodItems %}
                 <div class="food-listing">
                     <li>
                         <span class="food-name"> {{food.name}} </span>
                     </li>
-                </div> 
-                {% endfor %}
+                </div>
+                {% endfor %}-->
 
             </div> <!-- end "accordion-inner" div -->
         </div> <!-- end hall-id specific menu div -->

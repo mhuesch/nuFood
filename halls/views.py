@@ -104,9 +104,21 @@ def index(request):
     
     
     closed_for_day = Hall.objects.exclude(id__in=list(closed_halls)).exclude(id__in=list(open_halls))
+            
+    #get the halls/hours that you will need to get food items for (those that are open or will soon be open, and are not retail)
+    menuhalls = list(Open.exclude(meal_type='RET').values_list('id', flat=True)) + list(Closed.exclude(meal_type='RET').values_list('id', flat=True))
+
+    #create a dictionary to lookup fooditems by hour
+    food_item_dict = dict()
+    for id in menuhalls:
+        items = FoodItem.objects.filter(
+                                        meal_menu__meal_time__id=id #time matches
+                                        ).filter(
+                                                 meal_menu__date=datetime.today() #date matching
+                                                 ).distinct('name')
+        food_item_dict[id]=items
 
 
-    
     t = loader.get_template('index.html')
     c = Context({
                 'Halls': halls,
@@ -117,6 +129,7 @@ def index(request):
                 'openHalls': Open,
                 'closedHalls': Closed,
                 'closedForDay': closed_for_day,
+                'food_items': food_item_dict,
                 #'distDict': dist_dict
                 })
     return HttpResponse(t.render(c))
