@@ -180,11 +180,11 @@ function displayOpenCloseTime(hour, min, isOpen) {
     
     // -- dining location is closing soon --
     if( isOpen & timeDiff>0 & timeDiff<soonLimit )
-        return "<font class='timeLabel'><font color='mediumvioletred'>closes in </font>" + timeDiff + " min</font>";
+        return "<font color='mediumvioletred'><font class='timeLabel'>closes in </font>" + timeDiff + " min</font>";
 
     // -- dining location is opening soon --
     if ( !isOpen & timeDiff>0 & timeDiff<soonLimit)
-        return "<font class='timeLabel'><font color='green'>opens in </font>" + timeDiff + " min</font>";
+        return "<font color='green'><font class='timeLabel'>opens in </font>" + timeDiff + " min</font>";
    
     // dining location is not opening or closing soon
     // so just display the time normally
