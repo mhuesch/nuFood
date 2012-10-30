@@ -70,10 +70,7 @@ def index(request):
     
     open_halls = Open.values_list('host_hall', flat=True)
 
-    if prox:
-        Open = sorted(Open,key=compose(lambda x: dist_dict[x], operator.attrgetter('host_hall_id')))
-    else:
-        Open = Open.order_by('end_hour','end_minute', 'host_hall__name')
+
     # values list returns list of tuples of selected values
     # flat makes it a list instead of tuples
     
@@ -95,13 +92,6 @@ def index(request):
 
     closed_halls = Closed.values_list('host_hall', flat=True)
 
-    if prox:
-        Closed = sorted(Closed,key=compose(lambda x: dist_dict[x], operator.attrgetter('host_hall_id')))
-    else:
-        Closed = Closed.order_by(
-            'host_hall','start_hour','start_minute'
-        )
-    
     
     closed_for_day = Hall.objects.exclude(id__in=list(closed_halls)).exclude(id__in=list(open_halls))
             
@@ -118,6 +108,18 @@ def index(request):
                                                  ).distinct('name')
         food_item_dict[id]=items
 
+
+    # Sort dining hall lists according to distance (if specified), or time and name
+    if prox:
+        Open = sorted(Open,key=compose(lambda x: dist_dict[x], operator.attrgetter('host_hall_id')))
+    else:
+        Open = Open.order_by('end_hour','end_minute', 'host_hall__name')
+
+    if prox:
+        Closed = sorted(Closed,key=compose(lambda x: dist_dict[x], operator.attrgetter('host_hall_id')))
+    else:
+        Closed = Closed.order_by('host_hall','start_hour','start_minute')
+    
 
     t = loader.get_template('index.html')
     c = Context({
