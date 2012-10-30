@@ -27,11 +27,17 @@ def index(request):
     lon_str = request.GET.get('lon')
 
     prox = (lat_str and lon_str)
-    
-    # If both are defined, find distances to halls
+
+    # Convert lat and lon query parameters to floats. If conversion fails, abort sort by proximity
     if prox:
-        lat = float(lat_str)
-        lon = float(lon_str)
+        try:
+            lat = float(lat_str)
+            lon = float(lon_str)
+        except ValueError:
+            prox = False
+    
+    # If conversion successful, generate distances to halls
+    if prox:
         current_loc_array = array((lat,lon))
         loc_assoc = map(lambda h: (h.id,(h.lat,h.lon)), halls)
         
