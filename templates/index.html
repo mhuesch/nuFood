@@ -243,7 +243,7 @@
             <span id="hours-info-{{ hour.host_hall.id }}"
                   class="hours-info">
                 <script>
-                document.write(displayOpenCloseTime({{hour.end_hour}}, {{hour.end_minute}}, true));
+                    document.write(displayOpenCloseTime({{hour.end_hour}}, {{hour.end_minute}}, true, {{nowHr}}, {{nowMin}}));
                 </script>
             </span>
 
@@ -261,7 +261,7 @@
         <div id="menu-{{ hour.host_hall.id }}" class="collapse menu">
             <div> <!-- class="accordion-inner"-->
                 <script>
-                    document.write(displayMenuTitle('{{hallName}}', '{{hour.meal_type}}', {{day}}, '{{date}}.date.month', '{{date}}.date.day'));
+                    document.write(displayMenuTitle('{{hour.host_hall}}', '{{hour.meal_type}}', {{day}}, '{{date}}.date.month', '{{date}}.date.day'));
                 </script>
                 
                 <!-- Get the food items of the current/upcoming meal
@@ -313,7 +313,7 @@
                 <span id="hours-info-{{ hour.host_hall.id }}"
                     class="hours-info">
                     <script>
-                        document.write(displayOpenCloseTime({{hour.end_hour}}, {{hour.end_minute}}, true));
+                        document.write(displayOpenCloseTime({{hour.start_hour}}, {{hour.start_minute}}, false, {{nowHr}}, {{nowMin}}));
                         </script>
                 </span>
                 
@@ -331,7 +331,7 @@
         <div id="menu-{{ hour.host_hall.id }}" class="collapse menu">
             <div> <!-- class="accordion-inner"-->
                 <script>
-                    document.write(displayMenuTitle('{{hallName}}', '{{hour.meal_type}}', {{day}}, '{{date}}.date.month', '{{date}}.date.day'));
+                    document.write(displayMenuTitle('{{ hour.host_hall }}', '{{hour.meal_type}}', {{day}}, '{{date}}.date.month', '{{date}}.date.day'));
                     </script>
                 
                 <!-- Get the food items of the current/upcoming meal

@@ -156,15 +156,15 @@ function displayTime(hour, min) {
             a boolean whether the dining location is open now
  * Returns: the time in string format
  */
-function displayOpenCloseTime(hour, min, isOpen) {
+function displayOpenCloseTime(hour, min, isOpen, hourNow, minNow) {
     
     // If time left open/close is less than this many minutes,
     // the hall is deemed to be changing state "soon"
     var soonLimit = 30;
     
-    var now = new Date();
-    var hourNow = now.getHours();
-    var minNow = now.getMinutes();
+    //var now = new Date();
+    //var hourNow = now.getHours();
+    //var minNow = now.getMinutes();
     
     /* 
     // use this block if the script is internal in the html,
