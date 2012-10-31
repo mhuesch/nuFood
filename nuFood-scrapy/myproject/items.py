@@ -15,4 +15,8 @@ class Day(Item):
     dinner = Field()
     lateNight = Field()
 
-
+class FoodItem(Item):
+    name = Field()
+    v = Field()
+    g = Field()
+    w = Field()
