@@ -17,53 +17,58 @@
     <link href="/static/nuFood.css" rel="stylesheet">
     <style>
         
-    h1 {font-size: 18pt;}
-
-
     
     .btn-hall.active { background-color: #24748c \9; }
     
     
-   
-    
     /*.hall-listing {padding: 2px; margin: 0 auto;}*/
-    
-    /*
-     spans ------------------------------
-     */
-    .hall-name {
-        width: 55%; /*395px;*/
-        display: inline-block;
-        text-align: left;
-        /*background-color: red;*/
-    }
-    
-    .hours-info {
-        display: inline-block;
-        width: 35%; 
-        text-align: right;
-        font-size: 9pt;
-        /*background-color: blue;*/
-    }
-
-    
-    /*-------------------------- hall-menu css -------------------------------*/
-    
-   
+        
+/*-------------------------- Header/Top css -------------------------------*/
 
     h1 {font-size: 18pt;}
     
     .heading {width: 90%;}
     
     .proximitySort {
-            display: inline-block;
-            font-size: 9pt;
-            line-height: 10pt;
-            width: 110px;
-            height: 40px;
-            float: right;
-        }
+        display: inline-block;
+        font-size: 9pt;
+        line-height: 10pt;
+        width: 110px;
+        height: 40px;
+        float: right;
+    }
+    
+    .filter-dropdown { float: right;}    
+        
+/*-------------------------- Hall listing css -------------------------------*/
 
+    
+/*-------------------------- Menu display css -------------------------------*/
+    
+    .inputs-list input[type=checkbox], .inputs-list input[type=dropdown-menu-form] {
+        margin-bottom: 0;
+        margin-left: -20px;
+        float: left;
+    }
+
+
+    /*-------- spans -------*/
+        
+    .hall-name {
+        width: 55%;
+        display: inline-block;
+        text-align: left;
+    }
+    
+    .hours-info {
+        width: 35%;
+        display: inline-block;
+        text-align: right;
+        font-size: 9pt;
+    }
+        
+    .timeLabel { font-size: 8pt;}
+        
 
     .food-listing {
         display: block;
@@ -87,7 +92,7 @@
         
         
 
-        .timeLabel { font-size: 8pt;}
+        
         
         /* alternate proximity sort button stuff?? 
          display: inline-block;
@@ -145,6 +150,55 @@
             font-weight: normal;
         }
         
+        
+        /*
+         GREEN
+         .label-success,
+         .badge-success {
+         background-color: #468847;
+         }
+         
+         .label-success[href],
+         .badge-success[href] {
+         background-color: #356635;
+         }
+         
+         ORANGEY
+         .label-warning,
+         .badge-warning {
+         background-color: #f89406;
+         }
+         
+         .label-warning[href],
+         .badge-warning[href] {
+         background-color: #c67605;
+         }
+         
+         RED
+         .label-important,
+         .badge-important {
+         background-color: #b94a48;
+         }
+         
+         .label-important[href],
+         .badge-important[href] {
+         background-color: #953b39;
+         }
+         
+         */
+        
+        /* not sure if these would be better as labels or badges */
+        .veggie {
+            background-color: #468847;
+        }
+        
+        .vegan {
+            background-color: #f89406;
+        }
+        
+        .wellbal {
+            background-color: #b94a48;
+        }
 
         
 
@@ -191,17 +245,100 @@
     </div> <!-- END navbar navbar-inverse navbar-fixed-top -->
       
 
+     <!--
+      <div class="btn-group filter-dropdown">
+          <button class="btn btn-inverse" style="width: 73px">Filter by...</button>
+          <button class="btn btn-inverse dropdown-toggle" data-toggle="dropdown" style="width: 26px">
+              <span class="caret"></span>
+          </button>
+          <ul class="dropdown-menu menu-dropdown inputs-list" data-checkbox-dropdown="checkbox-dropdown">
+              <li>
+                  <label>
+                      <input type="checkbox" name="optionsCheckboxes" value="option1"
+                          <span> Sample Option 1</span>
+                          </label>
+              </li>
+              <li>
+                  <label>
+                      <input type="checkbox" name="optionsCheckboxes" value="option2"
+                          <span> Sample Option 2</span>
+                          </label>
+              </li>
+              <li>
+                  <label>
+                      <input type="checkbox" name="optionsCheckboxes" value="option3"
+                          <span> Sample Option 3</span>
+                          </label>
+              </li>
+          </ul>
+      </div> -->
+      
       
     <!-- ----- ----- Dining hall list ----- ----- -->
       
     <div class="container">
  
         <div class="heading">
+          
+            <!--
+            <div class="btn-group filter-dropdown">
+                <button class="btn btn-inverse btn-small" style="width: 73px">Filter by...</button>
+                <button class="btn btn-inverse btn-small dropdown-toggle" data-toggle="dropdown" style="width: 26px">
+                    <span class="caret"></span>
+                </button>
+                <ul class="dropdown-menu dropdown-menu-form inputs-list">
+                    <!-- dropdown menu links -->
+            <!--
+                    <li>
+                        <input type="checkbox" value="vegetarian" id="VG"/>
+                        <a href="#">
+                            <span class="badge badge-success">VG</span>
+                            Vegetarian
+                        </a>
+                    </li>
+                    <li>
+                        <input type="checkbox" value="vegan" id="VE"/>
+                        <a href="#"> 
+                            <span class="badge badge-warning">VE</span>
+                            Vegan
+                        </a>
+                    </li>
+                    <li>
+                        <input type="checkbox" value="well-balanced" id="WB"/>
+                        <a href="#">
+                           <span class="badge badge-important">WB</span>
+                            Well-Balanced
+                        </a>
+                    </li>
+                    <li class="divider"</li>
+                        <li>
+                            <a href="#"> Show All </a>
+                        </li>
+                        </ul>
+            </div> -->
+            
+            <script>
+        $('.dropdown-menu').on('click', function(e){
+               if($(this).hasClass('dropdown-menu-form')){
+               e.stopPropagation();
+               }
+               });
+                
+                /*
+                 Try stopping the propagation of the click event on your dropdown like so:
+                 
+                 $('.dropdown-menu input, .dropdown-menu label').click(function(e) {
+                 e.stopPropagation();
+                 });/
+            </script>
+            
+            
             <button class='btn btn-inverse proximitySort' onclick="ProximityRedirect()">
                 Sort by proximity
             </button>
           
             <h5>
+
                 
               <!-- would be nice if we could display the 3 letter day instead of a day number 0-6 in the url - but low priority -->
                 
@@ -384,12 +521,18 @@
         {% endif %}
         </p>
         
+      
+
+        
+        
+        
+        
         
     <br/><br/>
     </div> <!-- /container -->
 
     
-        
+      
 
     <!-- Javascript
     ================================================== -->
