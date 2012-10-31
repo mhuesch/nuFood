@@ -92,7 +92,9 @@ function displayMealName(mealType) {
  * Returns: the menu title in string format
  */
 function displayMenuTitle(hallName, mealType, weekday, month, date) {
-    var returnStr = "Menu for ";
+    var returnStr = "<h5 class='menuTitle'>";
+
+    returnStr += "Menu for ";
     
     returnStr += displayMealName(mealType);
     
@@ -106,6 +108,8 @@ function displayMenuTitle(hallName, mealType, weekday, month, date) {
     // currently shows month day year + time
     // ex: Oct. 24, 2012, 3:40 p.m
     //returnStr += ", "+ month + " " + date; //"{{date}}";
+
+    returnStr += "</h5>";
     
     return returnStr;
 }
