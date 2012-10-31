@@ -15,56 +15,82 @@
 
     <!-- Style written by us for this app, some needed to override bootstrap -->
     <link href="/static/nuFood.css" rel="stylesheet">
+    
     <style>
-        
-    h1 {font-size: 18pt;}
 
-
-    
-    .btn-hall.active { background-color: #24748c \9; }
-    
-    
-   
     
     /*.hall-listing {padding: 2px; margin: 0 auto;}*/
     
-    /*
-     spans ------------------------------
-     */
-    .hall-name {
-        width: 55%; /*395px;*/
-        display: inline-block;
-        text-align: left;
-        /*background-color: red;*/
-    }
-    
-    .hours-info {
-        display: inline-block;
-        width: 35%; 
-        text-align: right;
-        font-size: 9pt;
-        /*background-color: blue;*/
-    }
-
-    
-    /*-------------------------- hall-menu css -------------------------------*/
-    
-   
-
+/*-------------------------- Header/Top css -------------------------------*/
+        
+        /*.navbar-inner {
+         background-color: indigo; /*#1B1B1B; }*/
+        
     h1 {font-size: 18pt;}
     
     .heading {width: 90%;}
     
     .proximitySort {
-            display: inline-block;
-            font-size: 9pt;
-            line-height: 10pt;
-            width: 110px;
-            height: 40px;
-            float: right;
-        }
+        display: inline-block;
+        font-size: 9pt;
+        line-height: 10pt;
+        width: 110px;
+        height: 40px;
+        float: right;
+    }
+        /* alternate proximity sort button stuff??
+         display: inline-block;
+         line-height: 10px;
+         margin-right: 30px;
+         font-size: 9px;
+         width: 80px;
+         height: 30px;
+         float: right;
+         
+         .proximitySort {
+         display: inline-block;
+         margin: auto+30px;
+         font-size: 9pt;
+         width: 150px;
+         float: right;
+         }---*/
+        
+  
+    .filter-dropdown { float: right;}
+        
+        
+    .inputs-list input[type=checkbox], .inputs-list input[type=dropdown-menu-form] {
+        margin-bottom: 0;
+        margin-left: -20px;
+        float: left;
+    }
+    
+        
+/*-------------------------- Hall listing css -------------------------------*/
 
-
+    /*-------- spans -------*/
+    
+    .hall-name {
+        width: 55%;
+        display: inline-block;
+        text-align: left;
+    }
+    
+    .hours-info {
+        width: 35%;
+        display: inline-block;
+        text-align: right;
+        font-size: 9pt;
+    }
+    
+    .timeLabel { font-size: 8pt;}
+        
+        
+        
+/*-------------------------- Menu display css -------------------------------*/        
+    
+    /*-------- spans -------*/
+    
     .food-listing {
         display: block;
         width: 90%;
@@ -84,34 +110,17 @@
         /*font-size: 9pt;*/
     }
     
-        
-        
-
-        .timeLabel { font-size: 8pt;}
-        
-        /* alternate proximity sort button stuff?? 
-         display: inline-block;
-         line-height: 10px;
-         margin-right: 30px;
-         font-size: 9px;
-         width: 80px;
-         height: 30px;
-         float: right;
-         
-         .proximitySort {
-         display: inline-block;
-         margin: auto+30px;
-         font-size: 9pt;
-         width: 150px;
-         float: right;
-         }---*/
-        
+    
+    .label, .badge {
+        font-weight: normal;
+    }
+    
         
         /* "primary" blue 006dcc */
         /* "success" green #5BB75B 
         "warning" orangeish FAA732 FBB450 (lighter)
-         <span class="label label-success">Success</span>
          
+         <span class="label label-success">Success</span>
          <span class="badge badge-warning">4</span>
          
          .label,
@@ -141,17 +150,42 @@
          }
          
          */
-        .label, .badge {
-            font-weight: normal;
+
+        
+        /*
+         GREEN
+         .label-success, .badge-success { background-color: #468847; }
+         .label-success[href], .badge-success[href] { background-color: #356635; }
+         
+         ORANGEY
+         .label-warning, .badge-warning { background-color: #f89406; }
+         .label-warning[href], .badge-warning[href] { background-color: #c67605; }
+         
+         RED
+         .label-important, .badge-important { background-color: #b94a48; }
+         .label-important[href], .badge-important[href] { background-color: #953b39; }
+         */
+        
+        /* -- not sure if these would be better as labels or badges -- */
+        .veggie {
+            background-color: #468847;
+        }
+        
+        .vegan {
+            /* same orangey color as "warning" label/badge */
+            background-color: #f89406; 
+        }
+        
+        .wellbal {
+            background-color: #b94a48;
         }
         
 
         
-
         
-
         
     </style>
+
         
         
         
@@ -189,7 +223,7 @@
         </div> <!-- END container-->
       </div> <!-- END navbar-inner -->
     </div> <!-- END navbar navbar-inverse navbar-fixed-top -->
-      
+  
 
       
     <!-- ----- ----- Dining hall list ----- ----- -->
@@ -197,6 +231,47 @@
     <div class="container">
  
         <div class="heading">
+            
+            <!-- Filter Dropdown (Vegetarian, Vegan, Well-Balanced) --
+             
+            <div class="btn-group filter-dropdown">
+                <button class="btn btn-inverse btn-small" style="width: 73px">Filter by...</button>
+                <button class="btn btn-inverse btn-small dropdown-toggle" data-toggle="dropdown" style="width: 26px">
+                    <span class="caret"></span>
+                </button>
+                <ul class="dropdown-menu dropdown-menu-form inputs-list"> -->
+                    <!-- dropdown menu links --
+                    <li>
+                        <input type="checkbox" value="vegetarian" id="VG"/>
+                        <a href="#">
+                            <span class="badge badge-success">VG</span>
+                            Vegetarian
+                        </a>
+                    </li>
+                    <li>
+                        <input type="checkbox" value="vegan" id="VE"/>
+                        <a href="#">
+                            <span class="badge badge-warning">VE</span>
+                            Vegan
+                        </a>
+                    </li>
+                    <li>
+                        <input type="checkbox" value="well-balanced" id="WB"/>
+                        <a href="#">
+                            <span class="badge badge-important">WB</span>
+                            Well-Balanced
+                        </a>
+                    </li>
+                    <li class="divider"</li>
+                        <li>
+                            <a href="#"> Show All </a>
+                        </li>
+                        </ul>
+            </div> -->
+            
+            
+            
+            
             <button class='btn btn-inverse proximitySort' onclick="ProximityRedirect()">
                 Sort by proximity
             </button>

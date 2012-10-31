@@ -41,6 +41,8 @@ container {
     border-radius: 5px;
 }
 
+.btn-hall.active { background-color: #24748c \9; }
+
 
 /* pretty blue button, white text */
 .btn-open {
