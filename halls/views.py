@@ -25,6 +25,7 @@ def index(request):
     # Get latitude and longitude query params
     lat_str = request.GET.get('lat')
     lon_str = request.GET.get('lon')
+    filter_type = request.GET.get('type')
 
     prox = (lat_str and lon_str)
 
@@ -106,12 +107,21 @@ def index(request):
 
     #create a dictionary to lookup fooditems by hour
     food_item_dict = dict()
+    filtered_ids = []
     for id in menuhalls:
         items = FoodItem.objects.filter(
                                         meal_menu__meal_time__id=id #time matches
                                         ).filter(
                                                  meal_menu__date=datetime.today() #date matching
                                                  ).distinct('name')
+        if filter_type: #if we're filtering by vegan/vegetarian
+            for fi in items:
+                if fi.attributes.filter(name=filter_type):
+                    filtered_ids.append(fi.id) #add to whitelist of food_items
+                else:
+                    pass
+            items = FoodItem.objects.filter(id__in=filtered_ids) #filter by whitelisted items
+    
         food_item_dict[id]=items
 
 
