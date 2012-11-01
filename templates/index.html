@@ -38,23 +38,6 @@
         height: 40px;
         float: right;
     }
-        /* alternate proximity sort button stuff??
-         display: inline-block;
-         line-height: 10px;
-         margin-right: 30px;
-         font-size: 9px;
-         width: 80px;
-         height: 30px;
-         float: right;
-         
-         .proximitySort {
-         display: inline-block;
-         margin: auto+30px;
-         font-size: 9pt;
-         width: 150px;
-         float: right;
-         }---*/
-        
   
     .filter-dropdown { float: right;}
         
@@ -113,42 +96,51 @@
     
     .label, .badge {
         font-weight: normal;
+        font-size: 10px;
+        padding: 1px 6px 2px;
+        /*padding: 1px 9px 2px;*/
+        /*font-size: 11.844px;
+        line-height: 14px;*/
+    }
+        
+    /* -- not sure if these would be better as labels or badges -- */
+    .veggie {
+        background-color: #5BB75B; /*#468847;*/
+    }
+    
+    .vegan {
+        /* same orangey color as "warning" label/badge */
+        background-color: #FBB450; /*#f89406;*/
+    }
+    
+    .wellb {
+        background-color: #b94a48;
     }
     
         
-        /* "primary" blue 006dcc */
-        /* "success" green #5BB75B 
+        input[type="checkbox"] {
+            float: right;
+            padding: 20px 20px;
+            margin-left: 50px;
+            min-height: 18px;
+            
+        }
+        
+        
+        /*.checkbox {
+            min-height: 18px;
+            padding-left: 18px;
+        }
+        
+        .radio input[type="radio"],
+        .checkbox input[type="checkbox"] {
+            float: right;
+            margin-left: 18px; /*-18px;
+        }*/
+        /*
+        "primary" blue 006dcc
+        "success" green #5BB75B 
         "warning" orangeish FAA732 FBB450 (lighter)
-         
-         <span class="label label-success">Success</span>
-         <span class="badge badge-warning">4</span>
-         
-         .label,
-         .badge {
-         font-size: 11.844px;
-         font-weight: bold;
-         line-height: 14px;
-         color: #ffffff;
-         text-shadow: 0 -1px 0 rgba(0, 0, 0, 0.25);
-         white-space: nowrap;
-         vertical-align: baseline;
-         background-color: #999999;
-         }
-         
-         .label {
-         padding: 1px 4px 2px;
-         -webkit-border-radius: 3px;
-         -moz-border-radius: 3px;
-         border-radius: 3px;
-         }
-         
-         .badge {
-         padding: 1px 9px 2px;
-         -webkit-border-radius: 9px;
-         -moz-border-radius: 9px;
-         border-radius: 9px;
-         }
-         
          */
 
         
@@ -158,30 +150,13 @@
          .label-success[href], .badge-success[href] { background-color: #356635; }
          
          ORANGEY
-         .label-warning, .badge-warning { background-color: #f89406; }
+         .lab/Users/lizz/git/nuFood/static/bootstrap/css/bootstrap.cssel-warning, .badge-warning { background-color: #f89406; }
          .label-warning[href], .badge-warning[href] { background-color: #c67605; }
          
          RED
          .label-important, .badge-important { background-color: #b94a48; }
          .label-important[href], .badge-important[href] { background-color: #953b39; }
          */
-        
-        /* -- not sure if these would be better as labels or badges -- */
-        .veggie {
-            background-color: #468847;
-        }
-        
-        .vegan {
-            /* same orangey color as "warning" label/badge */
-            background-color: #f89406; 
-        }
-        
-        .wellbal {
-            background-color: #b94a48;
-        }
-        
-
-        
         
         
     </style>
@@ -232,33 +207,34 @@
  
         <div class="heading">
             
-            <!-- Filter Dropdown (Vegetarian, Vegan, Well-Balanced) --
+            <!-- Filter Dropdown (Vegetarian, Vegan, Well-Balanced) -->
              
             <div class="btn-group filter-dropdown">
                 <button class="btn btn-inverse btn-small" style="width: 73px">Filter by...</button>
                 <button class="btn btn-inverse btn-small dropdown-toggle" data-toggle="dropdown" style="width: 26px">
                     <span class="caret"></span>
                 </button>
-                <ul class="dropdown-menu dropdown-menu-form inputs-list"> -->
-                    <!-- dropdown menu links --
+                <ul class="dropdown-menu dropdown-menu-form">
+                    <!-- dropdown menu links -->
                     <li>
-                        <input type="checkbox" value="vegetarian" id="VG"/>
                         <a href="?type=Vegetarian">
-                            <span class="badge badge-success">VG</span>
+                            <!--input type="checkbox" value="vegetarian" id="VG"/-->
+                            <span class="badge veggie">VG</span>
                             Vegetarian
+                            </input>
                         </a>
                     </li>
                     <li>
-                        <input type="checkbox" value="vegan" id="VE"/>
                         <a href="?type=Vegan">
-                            <span class="badge badge-warning">VE</span>
+                            <!--input type="checkbox" value="vegan" id="VE"/-->
+                            <span class="badge vegan">VE</span>
                             Vegan
                         </a>
                     </li>
                     <li>
-                        <input type="checkbox" value="well-balanced" id="WB"/>
                         <a href="?type=Well-Balanced">
-                            <span class="badge badge-important">WB</span>
+                        <!--input type="checkbox" value="well-balanced" id="WB"/-->
+                            <span class="badge wellb">WB</span>
                             Well-Balanced
                         </a>
                     </li>
@@ -267,9 +243,8 @@
                             <a href="#"> Show All </a>
                         </li>
                         </ul>
-            </div> -->
-            
-            
+            </div>
+
             
             
             <button class='btn btn-inverse proximitySort' onclick="ProximityRedirect()">
@@ -278,7 +253,6 @@
           
             <h5>
                 
-              <!-- would be nice if we could display the 3 letter day instead of a day number 0-6 in the url - but low priority -->
                 
          <!-- i think this is poor form (embedding script inside the main html, but i don't know how to call this function properly… i think if we had unique id #'s for halls, we would have unique document id's to write to, and could do that in an initialize function onload…? 
           for each hour in openHalls
@@ -289,8 +263,6 @@
           document.write(displayOpenCloseTime({{hour.end_hour}}, {{hour.end_minute}}, true));
           
           -->
-                         <!-- if hour.mealtype == ret, disable link, no menu to display -->
-                        <!-- if hour.mealtype == ret, disable down arrow, no menu to display-->
                 <script>
                 document.write(displayCurrentDayTime({{day}}, {{nowHr}}, {{nowMin}}));
                 </script>
@@ -302,13 +274,12 @@
         <div id="hall-listing-{{ hour.host_hall.id }}"
              class="hall-listing">
             
-            <!-- Only enable the button for clicking to see menu
-                 if it is not a retail locaiton -->
+            <!-- Only non-retail dining locations have menus to display
+                 disable the button otherwise -->
             
             {% if hour.meal_type != 'RET' %}
             <a class="btn btn-hall btn-open accordion-toggle"
                data-toggle="collapse" href="#menu-{{ hour.host_hall.id }}">
-                 <!-- href={% url halls.views.hallmenu hall_name=hour.host_hall.name meal_name=hour.meal_type day_num=hour.day %} -->
             {% else %}
             <a class="btn btn-hall btn-open disabled">
             {% endif %}
@@ -347,10 +318,24 @@
                             <div class="food-listing">
                                 <li>
                                     <span class="food-name"> {{item.name}} </span>
+                                    
+                                    {% for fa in item.attributes.all %}
+                                    {% if fa.name == "Vegetarian" %}
                                     <!-- if item.name is vegetarian, add a badge/label -->
+                                    <span class="badge veggie">VG</span>
+                                    {% endif %}
+                                    
                                     <!-- if item.name is vegan, add a badge/label -->
+                                    {% if fa.name == "Vegan" %}
+                                    <span class="badge vegan">VE</span>
+                                    {% endif %}
+                                    
                                     <!-- if item.name is well-balanced, add a badge/label -->
-                                    <!-- <span class="badge badge-warning">4</span> -->
+                                    {% if fa.name == "Well-Balanced" %}
+                                    <span class="badge wellb">WB</span>
+                                    {% endif %}
+                                    
+                                    {% endfor %}
                                 </li>
                             </div>
                         {% endfor %}
@@ -417,10 +402,24 @@
                 <div class="food-listing">
                     <li>
                         <span class="food-name"> {{item.name}} </span>
+                        
+                        {% for fa in item.attributes.all %}
+                        {% if fa.name == "Vegetarian" %}
                         <!-- if item.name is vegetarian, add a badge/label -->
+                        <span class="badge veggie">VG</span>
+                        {% endif %}
+                        
                         <!-- if item.name is vegan, add a badge/label -->
+                        {% if fa.name == "Vegan" %}
+                        <span class="badge vegan">VE</span>
+                        {% endif %}
+                        
                         <!-- if item.name is well-balanced, add a badge/label -->
-                        <!-- <span class="badge badge-warning">4</span> -->
+                        {% if fa.name == "Well-Balanced" %}
+                        <span class="badge wellb">WB</span>
+                        {% endif %}
+                        
+                        {% endfor %}
                     </li>
                 </div>
                 {% endfor %}
