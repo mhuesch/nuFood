@@ -22,8 +22,8 @@ class MenuItemSpider(CrawlSpider):
             item = FoodItem()
             itemname =  mi.select('.//span[@class="ul"]/text()')[0].extract()
             item['name'] = itemname
-            item['g'] = bool(mi.select('.//img[@alt="Vegan"]'))
             item['v'] = bool(mi.select('.//img[@alt="Vegetarian"]'))
+            item['g'] = bool(mi.select('.//img[@alt="Vegan"]')) | item['v']
             item['w'] = bool(mi.select('.//img[@alt="Well-Balanced"]'))
 
             if any(x for x in items if x['name'] == itemname):
