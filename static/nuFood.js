@@ -35,6 +35,11 @@ function TimeRedirect() {
     window.location = no_lat_lon;
 }
 
+function AttributeRedirect(attribute) {
+    var current_url = window.location.href;
+    var updated_attribute = UpdateQueryString("type",attribute,current_url);
+    window.location = updated_attribute;
+}
 
 
 
