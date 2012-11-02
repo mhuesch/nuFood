@@ -181,14 +181,14 @@
          */
         
 .sortGroup {
-    display: inline;
+    display: inline-block;
     float: right;
-    margin-right: 100px;
-    padding: 0px;
+    margin-right: 50px;
+    padding-top: 25px;
 }
 .filter-dropdown {
     float: right;
-    display: inline;
+    display: inline-block;
     padding: 0px;
     margin-right: -28px;
     /*padding-left: 10px;*/
@@ -218,9 +218,10 @@
       <div class="navbar-inner">
         <div class="container">
             
+            <!-- make this a select dropdown or something? or maybe by title?? 
             <a class="btn btn-inverse" style="float:right; display: inline;">
                 <i class="icon-calendar icon-white"></i>
-            </a>
+            </a> -->
             <!--div class="input-append date" id="dp3" data-date="11-02-2012" data-date-format="dd-mm-yyyy">
              <input class="span2" size="16" type="text" value="11-02-2012">
              <span class="add-on"><i class="icon-th"></i></span>
@@ -298,39 +299,37 @@
         
 
             
-            <!-- Btn-group buttons-checkbox a type = button --
+            <!-- Btn-group buttons-checkbox a type = button -->
             <div class="btn-group" data-toggle="buttons-checkbox"
-                style="width: 145px; margin: auto auto; /*display: inline-block;*/ ">
+                style="width: 145px; margin: auto auto; display: inline; ">
                 
-                <a type="button" class="btn btn-small"> <!-- href="?type=Vegetarian" --
+                <a type="button" class="btn btn-mini" href="?type=Vegetarian">
                     <span class="badge veggie">VG</span>
                     Vegetarian
                 </a>
-                <a type="button" class="btn btn-small"> <!-- href="?type=Vegan" --
+                <a type="button" class="btn btn-mini" href="?type=Vegan">
                     <span class="badge vegan">VE</span>
                     Vegan
                 </a>
-                <a type="button" class="btn btn-small"> <!-- href="?type=Well-Balanced" --
+                <a type="button" class="btn btn-mini" href="?type=Well-Balanced">
                     <span class="badge wellb">WB</span>
                     Well-Balanced
                 </a>
-            </div> -->
+            </div>
 
-            
-            
 
             
 
-            <!-- Filter Dropdown (Vegetarian, Vegan, Well-Balanced) -->
+            <!-- Filter Dropdown (Vegetarian, Vegan, Well-Balanced) --
             
             <div class="btn-group filter-dropdown" data-toggle="buttons-checkbox" >
-                <button class="btn btn-purple btn-small dropdown-toggle" data-toggle="dropdown" style="width: 73px">
+                <button class="btn btn-inverse btn-small dropdown-toggle" data-toggle="dropdown" style="width: 73px">
                     Filter by...</button>
-                <button class="btn btn-purple btn-small dropdown-toggle" data-toggle="dropdown" style="width: 26px">
+                <button class="btn btn-inverse btn-small dropdown-toggle" data-toggle="dropdown" style="width: 26px">
                     <span class="caret icon-white"></span>
                 </button>
                 <ul class="dropdown-menu dropdown-menu-form pull-right">
-                    <!-- dropdown menu links -->
+                    <!-- dropdown menu links --
                     <li>
                         <a href="" onclick="AttributeRedirect('Vegetarian'); return false;">
                             <span class="badge veggie">VG</span>
@@ -354,8 +353,10 @@
                             <a href="/"> Show All </a>
                         </li>
                         </ul>
-            </div>
-
+            </div> -->
+            
+            <br/>
+            
             <div class= "sortGroup">
                 <!--span style="display: inline">Sort by...</span-->
                 <div class="btn-group" data-toggle="buttons-radio"
@@ -363,12 +364,16 @@
                     <!-- <button class='btn btn-inverse proximitySort' onclick="ProximityRedirect()">
                      Sort by proximity
                      </button> -->
-                    <button type="button" class="btn btn-small btn-inverse"
+                    <button type="button" class="btn btn-small btn-purple"
                         onclick="ProximityRedirect()">Proximity</button>
-                    <button type="button" class="btn btn-small btn-inverse"
+                    
+                    <button type="button" class="btn btn-small btn-purple"
                         onclick="TimeRedirect()">Closing Time</button>
+
                 </div>
             </div> <!-- end sortGroup -->
+
+<br/>
             
             <h5 style="display: inline-block">
                 <script>
