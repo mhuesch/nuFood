@@ -39,7 +39,7 @@
         float: right;
     }
         
-        
+    /*.heading {width: 100%;}*/
 
         .btn-purple {
             background-color: hsl(269, 54%, 26%) !important;
@@ -59,7 +59,8 @@
             -webkit-font-smoothing: antialiased;
         }
   
-    .filter-dropdown { float: right;}
+
+        .filterOpt {text-align: left;}
    
     .caret { border-top: 4px solid #FFFFFF; }
         
@@ -179,7 +180,19 @@
          .label-important[href], .badge-important[href] { background-color: #953b39; }
          */
         
-        .heading {width: 100%;}
+.sortGroup {
+    display: inline;
+    float: right;
+    margin-right: 100px;
+    padding: 0px;
+}
+.filter-dropdown {
+    float: right;
+    display: inline;
+    padding: 0px;
+    margin-right: -28px;
+    /*padding-left: 10px;*/
+/*margin-right: 0px;*/}
         
     </style>
 
@@ -204,6 +217,15 @@
     <div class="navbar navbar-inverse navbar-fixed-top">
       <div class="navbar-inner">
         <div class="container">
+            
+            <a class="btn btn-inverse" style="float:right; display: inline;">
+                <i class="icon-calendar icon-white"></i>
+            </a>
+            <!--div class="input-append date" id="dp3" data-date="11-02-2012" data-date-format="dd-mm-yyyy">
+             <input class="span2" size="16" type="text" value="11-02-2012">
+             <span class="add-on"><i class="icon-th"></i></span>
+             </div-->
+            
           <a class="btn btn-navbar" data-toggle="collapse" data-target=".nav-collapse">
             <i class="icon-info-sign icon-white"></i>
           </a>
@@ -228,15 +250,81 @@
     <div class="container">
  
         <div class="heading">
+              
+            
+            <!-- This dropdown works for checkbox buttons! but isn't hooked up to links
+             also the depressed buttons display a little funkily
+             <!--
+             <div class="btn-group filter-dropdown" data-toggle="buttons-checkbox">
+             
+             <button class="btn btn-success btn-small dropdown-toggle" data-toggle="dropdown" style="width: 100px">
+             Filter by...&nbsp; &nbsp;&nbsp;
+             <span class="caret icon-white"></span>
+             </button>
+             
+             <ul class="dropdown-menu dropdown-menu-form pull-right">
+             <!-- dropdown menu links --
+             <li>
+             <a type="button" class="btn btn-small btn-link filterOpt">
+             <!-- href="?type=Vegetarian" --
+             <span class="badge veggie">VG</span> Vegetarian
+             </a>
+             </li>
+             <li>
+             <a type="button" class="btn btn-small btn-link filterOpt">
+             <!-- href="?type=Vegan"> --
+             <span class="badge vegan">VE</span> Vegan
+             </a>
+             </li>
+             <li>
+             <a type="button" class="btn btn-small btn-link filterOpt">
+             <!-- href="?type=Well-Balanced" --
+             <span class="badge wellb">WB</span> Well-Balanced
+             </a>
+             </li>
+             <li class="divider"</li>
+             <li>
+             <a href="/"> Show All </a>
+             </li>
+             
+             </ul>
+             </div>
+             
+             <br/>-->
+
+      
+
+
+        
+
+            
+            <!-- Btn-group buttons-checkbox a type = button --
+            <div class="btn-group" data-toggle="buttons-checkbox"
+                style="width: 145px; margin: auto auto; /*display: inline-block;*/ ">
+                
+                <a type="button" class="btn btn-small"> <!-- href="?type=Vegetarian" --
+                    <span class="badge veggie">VG</span>
+                    Vegetarian
+                </a>
+                <a type="button" class="btn btn-small"> <!-- href="?type=Vegan" --
+                    <span class="badge vegan">VE</span>
+                    Vegan
+                </a>
+                <a type="button" class="btn btn-small"> <!-- href="?type=Well-Balanced" --
+                    <span class="badge wellb">WB</span>
+                    Well-Balanced
+                </a>
+            </div> -->
+
+            
             
 
             
-           
-            
+
             <!-- Filter Dropdown (Vegetarian, Vegan, Well-Balanced) -->
-             
-            <div class="btn-group filter-dropdown" style="margin-right: 0px">
-                <button class="btn btn-purple btn-small" style="width: 73px">
+            
+            <div class="btn-group filter-dropdown" data-toggle="buttons-checkbox" >
+                <button class="btn btn-purple btn-small dropdown-toggle" data-toggle="dropdown" style="width: 73px">
                     Filter by...</button>
                 <button class="btn btn-purple btn-small dropdown-toggle" data-toggle="dropdown" style="width: 26px">
                     <span class="caret icon-white"></span>
@@ -245,58 +333,61 @@
                     <!-- dropdown menu links -->
                     <li>
                         <a href="?type=Vegetarian">
-                            <!--input type="checkbox" value="vegetarian" id="VG"/-->
                             <span class="badge veggie">VG</span>
                             Vegetarian
-                            </input>
                         </a>
                     </li>
                     <li>
                         <a href="?type=Vegan">
-                            <!--input type="checkbox" value="vegan" id="VE"/-->
                             <span class="badge vegan">VE</span>
                             Vegan
                         </a>
                     </li>
                     <li>
                         <a href="?type=Well-Balanced">
-                        <!--input type="checkbox" value="well-balanced" id="WB"/-->
                             <span class="badge wellb">WB</span>
                             Well-Balanced
                         </a>
                     </li>
                     <li class="divider"</li>
                         <li>
-                            <a href="#"> Show All </a>
+                            <a href="/"> Show All </a>
                         </li>
                         </ul>
             </div>
-            
-            <br/><br/>
-            <button class='btn btn-inverse proximitySort' onclick="ProximityRedirect()">
-                Sort by proximity
-            </button>
-            
-            
 
-          
-            <h5>
-                
-                
-         <!-- i think this is poor form (embedding script inside the main html, but i don't know how to call this function properly… i think if we had unique id #'s for halls, we would have unique document id's to write to, and could do that in an initialize function onload…? 
-          for each hour in openHalls
-          hallid = hour.host_hall.id
-          div id = hall-listing-hallID
-          
-          document.getelementbyid(hours-info-hallID).innerhtml = 
-          document.write(displayOpenCloseTime({{hour.end_hour}}, {{hour.end_minute}}, true));
-          
-          -->
+            <div class= "sortGroup">
+                <!--span style="display: inline">Sort by...</span-->
+                <div class="btn-group" data-toggle="buttons-radio"
+                    style="width: 100px;">
+                    <!-- <button class='btn btn-inverse proximitySort' onclick="ProximityRedirect()">
+                     Sort by proximity
+                     </button> -->
+                    <button type="button" class="btn btn-small btn-inverse"
+                        onclick="ProximityRedirect()">Proximity</button>
+                    <button type="button" class="btn btn-small btn-inverse">Closing Time</button>
+                </div>
+            </div> <!-- end sortGroup -->
+            
+            <h5 style="display: inline-block">
                 <script>
-                document.write(displayCurrentDayTime({{day}}, {{nowHr}}, {{nowMin}}));
-                </script>
+                    document.write(displayCurrentDayTime({{day}}, {{nowHr}}, {{nowMin}}));
+                    </script>
             </h5>
-        </div>
+            
+            
+          </div>
+        
+        <!-- i think this is poor form (embedding script inside the main html, but i don't know how to call this function properly… i think if we had unique id #'s for halls, we would have unique document id's to write to, and could do that in an initialize function onload…?
+         for each hour in openHalls
+         hallid = hour.host_hall.id
+         div id = hall-listing-hallID
+         
+         document.getelementbyid(hours-info-hallID).innerhtml =
+         document.write(displayOpenCloseTime({{hour.end_hour}}, {{hour.end_minute}}, true));
+         
+         -->
+        
         
         <p>
         {% for hour in openHalls %}
