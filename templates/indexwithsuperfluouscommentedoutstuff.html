@@ -7,14 +7,197 @@
     <meta name="description" content="Northwestern students: find dining hall food near you.">
     <meta name="author" content="">
 
-    <!-- Styles --> 
+    <!-- Styles -->
     <link href="/static/bootstrap/css/bootstrap.css" rel="stylesheet">
     
     <!-- Scripts written by us for this app, not from/for boostrap -->
     <script src="/static/nuFood.js"></script>
 
     <!-- Style written by us for this app, some needed to override bootstrap -->
-    <link href="/static/nuFood.css" rel="stylesheet">      
+    <link href="/static/nuFood.css" rel="stylesheet">
+    
+    <style>
+
+    
+    /*.hall-listing {padding: 2px; margin: 0 auto;}*/
+    
+/*-------------------------- Header/Top css -------------------------------*/
+        
+        /*.navbar-inner {
+         background-color: indigo; /*#1B1B1B; }*/
+        
+    h1 {font-size: 18pt;}
+    
+    .heading {width: 90%;}
+    
+    .proximitySort {
+        display: inline-block;
+        font-size: 9pt;
+        line-height: 10pt;
+        width: 110px;
+        height: 40px;
+        float: right;
+    }
+        
+    /*.heading {width: 100%;}*/
+
+        .btn-purple {
+            background-color: hsl(269, 54%, 26%) !important;
+            background-repeat: repeat-x;
+            filter: progid:DXImageTransform.Microsoft.gradient(startColorstr="#7838bc", endColorstr="#411e66");
+            background-image: -khtml-gradient(linear, left top, left bottom, from(#7838bc), to(#411e66));
+            background-image: -moz-linear-gradient(top, #7838bc, #411e66);
+            background-image: -ms-linear-gradient(top, #7838bc, #411e66);
+            background-image: -webkit-gradient(linear, left top, left bottom, color-stop(0%, #7838bc), color-stop(100%, #411e66));
+            background-image: -webkit-linear-gradient(top, #7838bc, #411e66);
+            background-image: -o-linear-gradient(top, #7838bc, #411e66);
+            background-image: linear-gradient(#7838bc, #411e66);
+            border-color: #411e66 #411e66 hsl(269, 54%, 20.5%);
+            color: #fff !important;
+            font-weight: bold;
+            text-shadow: 0 -1px 0 rgba(0, 0, 0, 0.36);
+            -webkit-font-smoothing: antialiased;
+        }
+  
+
+        .filterOpt {text-align: left;}
+   
+    .caret { border-top: 4px solid #FFFFFF; }
+        
+    .inputs-list input[type=checkbox], .inputs-list input[type=dropdown-menu-form] {
+        margin-bottom: 0;
+        margin-left: -20px;
+        float: left;
+    }
+    
+        
+/*-------------------------- Hall listing css -------------------------------*/
+
+    /*-------- spans -------*/
+    
+    .hall-name {
+        width: 55%;
+        display: inline-block;
+        text-align: left;
+    }
+    
+    .hours-info {
+        width: 35%;
+        display: inline-block;
+        text-align: right;
+        font-size: 9pt;
+    }
+    
+    .timeLabel { font-size: 8pt;}
+        
+        
+        
+/*-------------------------- Menu display css -------------------------------*/        
+    
+    /*-------- spans -------*/
+    
+    .food-listing {
+        display: block;
+        width: 90%;
+        padding: 2px;
+        margin: 0 auto;
+    }
+    
+    .food-name {
+        /*width: 90%;*/
+        display:inline-block;
+        text-align: left;
+        font-size: 8.5pt;
+    }
+    
+    
+    .food-info {
+        text-align: right;
+        /*font-size: 9pt;*/
+    }
+    
+    
+    .label, .badge {
+        font-weight: normal;
+        font-size: 6pt;
+        padding: 1px 6px 2px;
+        /*padding: 1px 9px 2px;*/
+        /*font-size: 11.844px;
+        line-height: 14px;*/
+    }
+        
+    /* -- not sure if these would be better as labels or badges -- */
+    .veggie {
+        background-color: #5BB75B; /*#468847;*/
+    }
+    
+    .vegan {
+        /* same orangey color as "warning" label/badge */
+        background-color: #FBB450; /*#f89406;*/
+    }
+    
+    .wellb {
+        background-color: #b94a48;
+    }
+    
+        
+        input[type="checkbox"] {
+            float: right;
+            padding: 20px 20px;
+            margin-left: 50px;
+            min-height: 18px;
+            
+        }
+        li {padding: 0px; margin: 0px;}
+        
+        /*.checkbox {
+            min-height: 18px;
+            padding-left: 18px;
+        }
+        
+        .radio input[type="radio"],
+        .checkbox input[type="checkbox"] {
+            float: right;
+            margin-left: 18px; /*-18px;
+        }*/
+        /*
+        "primary" blue 006dcc
+        "success" green #5BB75B 
+        "warning" orangeish FAA732 FBB450 (lighter)
+         */
+
+        
+        /*
+         GREEN
+         .label-success, .badge-success { background-color: #468847; }
+         .label-success[href], .badge-success[href] { background-color: #356635; }
+         
+         ORANGEY
+         .lab/Users/lizz/git/nuFood/static/bootstrap/css/bootstrap.cssel-warning, .badge-warning { background-color: #f89406; }
+         .label-warning[href], .badge-warning[href] { background-color: #c67605; }
+         
+         RED
+         .label-important, .badge-important { background-color: #b94a48; }
+         .label-important[href], .badge-important[href] { background-color: #953b39; }
+         */
+        
+.sortGroup {
+    display: inline-block;
+    float: right;
+    margin-right: 50px;
+    padding-top: 8px;
+}
+.filter-dropdown {
+    float: right;
+    display: inline-block;
+    padding: 0px;
+    margin-right: -28px;
+    /*padding-left: 10px;*/
+/*margin-right: 0px;*/}
+        
+    </style>
+
+        
         
         
     <link href="/static/bootstrap/css/bootstrap-responsive.css" rel="stylesheet">
@@ -36,11 +219,14 @@
       <div class="navbar-inner">
         <div class="container">
             
-            <!-- calendar button for choosing menu for different date/time - not implemented :[
-             make this a select dropdown or something? or maybe by title??
+            <!-- make this a select dropdown or something? or maybe by title?? 
             <a class="btn btn-inverse" style="float:right; display: inline;">
                 <i class="icon-calendar icon-white"></i>
             </a> -->
+            <!--div class="input-append date" id="dp3" data-date="11-02-2012" data-date-format="dd-mm-yyyy">
+             <input class="span2" size="16" type="text" value="11-02-2012">
+             <span class="add-on"><i class="icon-th"></i></span>
+             </div-->
             
           <a class="btn btn-navbar" data-toggle="collapse" data-target=".nav-collapse">
             <i class="icon-info-sign icon-white"></i>
@@ -61,18 +247,98 @@
   
 
       
-
+    <!-- ----- ----- Dining hall list ----- ----- -->
       
     <div class="container">
  
         <div class="heading">
+              
             
-            <!-- ----- ----- Sorting Options ----- ----- -->
-            <!-- 2 buttons: sort by proximity or closing time -->
+            <!-- This dropdown works for checkbox buttons! but isn't hooked up to links
+             also the depressed buttons display a little funkily
+             <!--
+             <div class="btn-group filter-dropdown" data-toggle="buttons-checkbox">
+             
+             <button class="btn btn-success btn-small dropdown-toggle" data-toggle="dropdown" style="width: 100px">
+             Filter by...&nbsp; &nbsp;&nbsp;
+             <span class="caret icon-white"></span>
+             </button>
+             
+             <ul class="dropdown-menu dropdown-menu-form pull-right">
+             <!-- dropdown menu links --
+             <li>
+             <a type="button" class="btn btn-small btn-link filterOpt">
+             <!-- href="?type=Vegetarian" --
+             <span class="badge veggie">VG</span> Vegetarian
+             </a>
+             </li>
+             <li>
+             <a type="button" class="btn btn-small btn-link filterOpt">
+             <!-- href="?type=Vegan"> --
+             <span class="badge vegan">VE</span> Vegan
+             </a>
+             </li>
+             <li>
+             <a type="button" class="btn btn-small btn-link filterOpt">
+             <!-- href="?type=Well-Balanced" --
+             <span class="badge wellb">WB</span> Well-Balanced
+             </a>
+             </li>
+             <li class="divider"</li>
+             <li>
+             <a href="/"> Show All </a>
+             </li>
+             
+             </ul>
+             </div>
+             
+             <br/>-->
+
+            
+            
+            <!-- Filter Dropdown (Vegetarian, Vegan, Well-Balanced) --
+            
+            <div class="btn-group filter-dropdown" data-toggle="buttons-checkbox" >
+                <button class="btn btn-inverse btn-small dropdown-toggle" data-toggle="dropdown" style="width: 73px">
+                    Filter by...</button>
+                <button class="btn btn-inverse btn-small dropdown-toggle" data-toggle="dropdown" style="width: 26px">
+                    <span class="caret icon-white"></span>
+                </button>
+                <ul class="dropdown-menu dropdown-menu-form pull-right">
+                    <!-- dropdown menu links --
+                    <li>
+                        <a href="" onclick="AttributeRedirect('Vegetarian'); return false;">
+                            <span class="badge veggie">VG</span>
+                            Vegetarian
+                        </a>
+                    </li>
+                    <li>
+                        <a href="" onclick="AttributeRedirect('Vegan'); return false;">
+                            <span class="badge vegan">VE</span>
+                            Vegan
+                        </a>
+                    </li>
+                    <li>
+                        <a href="" onclick="AttributeRedirect('Well-Balanced'); return false;">
+                            <span class="badge wellb">WB</span>
+                            Well-Balanced
+                        </a>
+                    </li>
+                    <li class="divider"</li>
+                        <li>
+                            <a href="/"> Show All </a>
+                        </li>
+                        </ul>
+            </div> -->
+            
+            
             <div class= "sortGroup">
                 <!--span style="display: inline">Sort by...</span-->
-                <div class="btn-group sort-btn-group" data-toggle="buttons-radio">
-
+                <div class="btn-group" data-toggle="buttons-radio"
+                    style="width: 100px;">
+                    <!-- <button class='btn btn-inverse proximitySort' onclick="ProximityRedirect()">
+                     Sort by proximity
+                     </button> -->
                     <button type="button" class="btn btn-small btn-purple"
                         onclick="ProximityRedirect()">Proximity</button>
                     
@@ -83,7 +349,7 @@
             </div> <!-- end sortGroup -->
 
 
-            <!-- ----- ----- Display Current weekday and Time ----- ----- -->
+            
             <h5 style="display: inline-block">
                 <script>
                     document.write(displayCurrentDayTime({{day}}, {{nowHr}}, {{nowMin}}));
@@ -91,11 +357,9 @@
             </h5>
             <br/>
             
-            
-            <!-- ----- ----- Food Attribute Filters ----- ----- -->
-            <!-- Radio buttons for filters (Vegetarian, Vegan, Well-Balanced) -->
-            
-            <div class="btn-group food-attributes" data-toggle="buttons-checkbox">
+            <!-- Btn-group buttons-checkbox a type = button -->
+            <div class="btn-group" data-toggle="buttons-checkbox"
+                style="width: 145px; margin: auto auto; display: inline; ">
                 
                 <a type="button" class="btn btn-mini"
                     href="" onclick="AttributeRedirect('Vegetarian'); return false;">
@@ -120,11 +384,11 @@
          for each hour in openHalls
          hallid = hour.host_hall.id
          div id = hall-listing-hallID
+         
          document.getelementbyid(hours-info-hallID).innerhtml =
          document.write(displayOpenCloseTime({{hour.end_hour}}, {{hour.end_minute}}, true));
+         
          -->
-        
-        <!-- ----- ----- Dining hall list ----- ----- -->
         {% load hall_tags %}
         
         <p>
