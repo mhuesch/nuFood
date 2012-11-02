@@ -107,6 +107,7 @@
         /*width: 90%;*/
         display:inline-block;
         text-align: left;
+        font-size: 8.5pt;
     }
     
     
@@ -118,7 +119,7 @@
     
     .label, .badge {
         font-weight: normal;
-        font-size: 10px;
+        font-size: 6pt;
         padding: 1px 6px 2px;
         /*padding: 1px 9px 2px;*/
         /*font-size: 11.844px;
@@ -147,7 +148,7 @@
             min-height: 18px;
             
         }
-        
+        li {padding: 0px; margin: 0px;}
         
         /*.checkbox {
             min-height: 18px;
@@ -388,21 +389,20 @@
          document.write(displayOpenCloseTime({{hour.end_hour}}, {{hour.end_minute}}, true));
          
          -->
-        
+        {% load hall_tags %}
         
         <p>
         {% for hour in openHalls %}
         <div id="hall-listing-{{ hour.host_hall.id }}"
              class="hall-listing">
             
-            <!-- Only non-retail dining locations have menus to display
-                 disable the button otherwise -->
-            
-            {% if hour.meal_type != 'RET' %}
-            <a class="btn btn-hall btn-open accordion-toggle"
-               data-toggle="collapse" href="#menu-{{ hour.host_hall.id }}">
-            {% else %}
+            <!-- Disable the dining hall button (to view menu) if it is a retail location
+             or if filters left no items to view in the menu-->
+            {% if hour.meal_type == 'RET' or not food_items|key:hour.id %}
             <a class="btn btn-hall btn-open disabled">
+            {% else %}
+            <a class="btn btn-hall btn-open accordion-toggle"
+                data-toggle="collapse" href="#menu-{{ hour.host_hall.id }}">
             {% endif %}
                 
             <span class="hall-name"> {{ hour.host_hall }} </span>
@@ -415,8 +415,8 @@
             </span>
 
             <!-- include a down icon if you can continue to view a menu
-                 (not a retail location) -->
-            {% if hour.meal_type != 'RET' %}
+                 (not a retail location, options left after filtering) -->
+            {% if hour.meal_type != 'RET' and food_items|key:hour.id %}
             <i class="icon-chevron-down icon-white"></i>
             {% endif %}
             </a>
@@ -479,14 +479,13 @@
         <div id="hall-listing-{{ hour.host_hall.id }}"
              class="hall-listing">
             
-            <!-- Only enable the button for clicking to see menu
-             if it is not a retail locaiton -->
-            
-            {% if hour.meal_type != 'RET' %}
-            <a class="btn btn-hall btn-closed accordion-toggle"
-                data-toggle="collapse" href="#menu-{{ hour.host_hall.id }}">
-            {% else %}
+            <!-- Disable the dining hall button (to view menu) if it is a retail location
+             or if filters left no items to view in the menu-->
+            {% if hour.meal_type == 'RET' or not food_items|key:hour.id %}
             <a class="btn btn-hall btn-closed disabled">
+            {% else %}
+                <a class="btn btn-hall btn-closed accordion-toggle"
+                    data-toggle="collapse" href="#menu-{{ hour.host_hall.id }}">
             {% endif %}
             
                 <span class="hall-name"> {{ hour.host_hall }} </span>
@@ -497,10 +496,10 @@
                         document.write(displayOpenCloseTime({{hour.start_hour}}, {{hour.start_minute}}, false, {{nowHr}}, {{nowMin}}));
                         </script>
                 </span>
-                
+                    
                 <!-- include a down icon if you can continue to view a menu
-                 (not a retail location) -->
-                {% if hour.meal_type != 'RET' %}
+                 (not a retail location, options left after filtering) -->
+                {% if hour.meal_type != 'RET' and food_items|key:hour.id %}
                 <i class="icon-chevron-down"></i>
                 {% endif %}
             </a>
