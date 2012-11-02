@@ -25,6 +25,39 @@ function ProximityRedirect() {
     }
 }
 
+function TimeRedirect() {
+    var current_url = window.location.href;
+    var no_lat = UpdateQueryString("lat",null,current_url);
+    var no_lat_lon = UpdateQueryString("lon",null,no_lat);
+    window.location = no_lat_lon;
+}
+
+
+
+
+function UpdateQueryString(key, value, url) {
+    if (!url) url = window.location.href;
+    var re = new RegExp("([?|&])" + key + "=.*?(&|#|$)", "gi");
+
+    if (url.match(re)) {
+        if (value)
+            return url.replace(re, '$1' + key + "=" + value + '$2');
+        else
+            return url.replace(re, '$2');
+    }
+    else {
+        if (value) {
+            var separator = url.indexOf('?') !== -1 ? '&' : '?',
+                hash = url.split('#');
+            url = hash[0] + separator + key + '=' + value;
+            if (hash[1]) url += '#' + hash[1];
+            return url;
+        }
+        else
+            return url;
+    }
+}
+
 
 /* Name:    displayDayName
  * Purpose: display friendly name of a day, rather than a number
