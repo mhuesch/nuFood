@@ -15,7 +15,10 @@ function Start(location) {
     lon = location.coords.longitude;
 
     if ((typeof(lat) == 'number') && (typeof(lon) == 'number')) {
-        window.location = "/?lat=" + lat + "&lon=" + lon;
+        var current_url = window.location.href;
+        var update_lat = UpdateQueryString("lat",lat,current_url);
+        var update_lat_lon = UpdateQueryString("lon",lon,update_lat);
+        window.location = update_lat_lon;
     }
 }
 
