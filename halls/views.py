@@ -111,9 +111,7 @@ def index(request):
     for id in menuhalls:
         items = FoodItem.objects.filter(
                                         meal_menu__meal_time__id=id #time matches
-                                        ).filter(
-                                                 meal_menu__date=datetime.today() #date matching
-                                                 ).distinct('name')
+                                        ).distinct('name')
         if filter_type: #if we're filtering by vegan/vegetarian
             items = items.filter(attributes__name=filter_type)
     
