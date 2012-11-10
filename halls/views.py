@@ -17,9 +17,9 @@ def index(request):
     weekday = d.weekday()
     now_hour = d.hour       # put test hour here    example test times: 745, 1249
     now_minute = d.minute   # put test minute here
-    now_hour = 14
-    now_minute = 30
-    weekday = 4
+    #now_hour = 14
+    #now_minute = 30
+    #weekday = 4
     halls = Hall.objects.all()
 
 
